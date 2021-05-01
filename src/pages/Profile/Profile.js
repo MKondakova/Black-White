@@ -10,14 +10,15 @@ const Wrapper = styled.div`
   height: 100vh;
   position: relative;
   justify-content: space-between;
-  flex-direction: column;
+  flex-direction: row;
   display: flex;
-  align-items: center;
+  align-items: start;
   width: 100%;
-  padding: 100px 0;
+  padding: 20px 0;
 `;
 const Info = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   max-width: 635px;
@@ -40,15 +41,18 @@ const GameHistory = styled.div`
   height: auto;
   min-height: 200px;
   overflow: hidden;
-  overflow-y: scroll;
   max-width: 635px;
   width: 100%;
   margin-bottom: 70px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Avatar = styled.img`
+  
   border-radius: 100px;
   width: 200px;
+  margin-bottom: 20px
 `;
 const Name = styled.p`
   font-weight: bold;
@@ -56,7 +60,7 @@ const Name = styled.p`
   line-height: 28px;
 `;
 const Pts = styled.p`
-  color: #c8d7b5;
+  color: #343a40;
   font-size: 12px;
   line-height: 14px;
 `;
@@ -64,24 +68,25 @@ const Span = styled.p`
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
-  color: ${(props) => (props.winner ? "#C8D7B5" : "#B69094")};
+  color: #343a40;
 `;
 const ScoreLeft = styled.p`
   font-size: 24px;
   line-height: 28px;
   font-weight: bold;
-  color: ${(props) => (props.winner ? "#C8D7B5" : "#DD3F65")};
+  color: #343a40;
   margin-right: 5px;
 `;
 const ScoreRight = styled.p`
   font-size: 24px;
   line-height: 28px;
   font-weight: bold;
-  color: ${(props) => (props.winner ? "#86C13A" : "#B69094")};
+  color: #343a40;
   margin-left: 5px;
   margin-right: 16px;
 `;
 const AvatarHistory = styled.img`
+  
   width: 90px;
   margin-right: 15px;
 `;
@@ -91,15 +96,16 @@ const ButtonDownloadFile = styled.div`
   font-weight: 400;
   text-align: center;
   font-family: "Roboto",sans-serif;
-  padding: 0;
+  heigth: 60px;
   height: 20px;
   display: block;
   outline: none;
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background-color: #FFE3BA;
-  color: #000;
+  background-color: #343a40;
+  border-radius: 5px;
+  color: white;
   cursor: pointer;
   font-size: 18px;
   border: none;
@@ -114,9 +120,15 @@ const ButtonRow = styled.div`
 `;
 
 const GameHistoryItem = styled.div`
-  height: 117px;
+  height: 120px;
   width: 100%;
-  background: ${(props) => (props.winner ? "#efffda" : "#FFDADE")};
+  background: transparent;
+  color: #343a40;
+  background-color: transparent;
+  background-image: none;
+  border-color: #343a40;
+  border-width: 1px;
+  outline: 1px solid #343a40;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -126,16 +138,7 @@ const GameHistoryItem = styled.div`
 
 const InfoHistory = styled.div``;
 
-const TriangleLeft = styled.div`
-  border: 20px solid transparent;
-  border-right: 20px solid ${(props) => (props.winner ? "#C8D7B5" : "#DD3F65")};
-  margin-right: 16px;
-`;
-const TriangleRight = styled.div`
-  border: 20px solid transparent;
-  border-left: 20px solid ${(props) => (props.winner ? "#86C13A" : "#B69094")};
-  margin-right: 16px;
-`;
+
 
 const Profile = ({ history }) => {
   const dispatch = useDispatch();
@@ -158,11 +161,8 @@ const Profile = ({ history }) => {
               </InfoHistory>
             </Left>
             <Right>
-              <TriangleLeft winner />
-              <ScoreLeft winner>{item.scoreOpponent}</ScoreLeft>
-              <Span winner>/</Span>
-              <ScoreRight winner>{item.score}</ScoreRight>
-              <TriangleRight winner />
+              <Span winner>Победа</Span>
+              <ScoreRight winner>{"+"+item.score}</ScoreRight>
             </Right>
             <ButtonRow>
               <ButtonDownloadFile onClick={()=>dispatch(getSgf(item.game_id))}>
@@ -182,11 +182,8 @@ const Profile = ({ history }) => {
               </InfoHistory>
             </Left>
             <Right>
-              <TriangleLeft />
-              <ScoreLeft>{item.scoreOpponent}</ScoreLeft>
-              <Span>/</Span>
+              <Span>Поражение</Span>
               <ScoreRight>{item.score}</ScoreRight>
-              <TriangleRight/>
             </Right>
             <ButtonRow>
               <ButtonDownloadFile onClick={()=>dispatch(getSgf(item.game_id))}>
@@ -203,6 +200,15 @@ const Profile = ({ history }) => {
   return (
     <Wrapper>
       <Info>
+        <ButtonCustom
+            width="400px"
+            mb="20"
+            onClick={() => {
+              history.push(MAIN_URL);
+            }}
+          >
+            В меню
+        </ButtonCustom>
         <Avatar alt="avatar" src={playerInfo?.avatar} />
         <InfoPlayer>
           <Input
@@ -217,20 +223,13 @@ const Profile = ({ history }) => {
             disabled
             value={playerInfo?.email}
           />
-          <Input mb={10} textAlign="center" disabled value={playerInfo?.pts} />
+          <Input mb={10} textAlign="center" disabled value={"Cчет: " + playerInfo?.pts} />
         </InfoPlayer>
       </Info>
       <GameHistory>
         {gameHistoryItems}
       </GameHistory>
-      <ButtonCustom
-        width="400px"
-        onClick={() => {
-          history.push(MAIN_URL);
-        }}
-      >
-        В меню
-      </ButtonCustom>
+      
     </Wrapper>
   );
 };
