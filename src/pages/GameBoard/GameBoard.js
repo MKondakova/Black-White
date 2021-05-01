@@ -252,12 +252,6 @@ const GameBoard = ({ history }) => {
       return [];
   }
   
-  
-  //let TOKEN = 'a0e0bffdcd1fb0fd9d8504c8fc900cf3ab38b18c';
-  //moves = get_last_moves(game_id, TOKEN);
-  //console.log(check_atari(moves, 1));
-  
-  
   client.onmessage = function (e) {
     setEnemyPass(false)
     if (typeof e.data === 'string') {
@@ -298,9 +292,9 @@ const GameBoard = ({ history }) => {
           setTurns(turns => [...turns, timeConverter(jsonData.time) + ': ' + jsonData.payload.move])
         }
         if (jsonData.payload.type === 'newTurn') {
-          if (window.PLAYING_COLOR === 1 && jsonData.payload.turn === 'black' || window.PLAYING_COLOR === -1 && jsonData.payload.turn === 'white') {
-            console.log('проверяю на атари!');
-          }
+          // if (window.PLAYING_COLOR === 1 && jsonData.payload.turn === 'black' || window.PLAYING_COLOR === -1 && jsonData.payload.turn === 'white') {
+          //   console.log('проверяю на атари!');
+          // }
           setLastMarkers({ [jsonData.payload.place]: 'circle' })
         }
         if (jsonData.payload.moveType === 'pass') {
