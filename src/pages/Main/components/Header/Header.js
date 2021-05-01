@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../../../../assets/img/logo.png";
 import AvatarImage from "../../../../assets/img/avatar.png";
 import { MAIN_URL, PROFILE_URL } from "../../../../constants/routes";
 import { ButtonCustom } from "../../../../components/ButtonCustom";
@@ -9,7 +8,6 @@ import { Input } from "../../../../components/InputCustom";
 const Wrapper = styled.div`
   max-width: 1300px;
   margin: 0 auto;
-  padding-top: 35px;
   display: flex;
   justify-content: flex-start;
   position: absolute;
@@ -21,7 +19,7 @@ const Right = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 `;
 const RightContent = styled.div`
   width: auto;
@@ -42,6 +40,7 @@ const RightSearch = styled.div`
 
 const Info = styled.div`
   display: flex;
+  margin: 10px;
   flex-direction: column;
   align-items: flex-end;
 `;
@@ -64,9 +63,11 @@ const Pts = styled.p`
 `;
 
 const Avatar = styled.img`
-  border-radius: 100px;
-  margin-left: 20px;
-  width: 115px;
+  border-radius: 25px;
+  margin: 20px;
+  width: 60px;
+
+  filter: grayscale(100%);
 `;
 
 const Search = styled.img`
@@ -95,14 +96,13 @@ export const Header = ({
             setSearchType("");
           }
         }}>
+
+          <Avatar alt="avatar" src={avatar} />
           <Info>
-            <Name>{nickname || ""}</Name>
             <ScoreWrapper>
-              <Pts style={{ marginRight: 16 }}>{pts || 0}pts</Pts>
-              <Pts>{winrate || ""}</Pts>
+              <Pts style={{ marginRight: 16 }}>{pts || 0} pts</Pts>
             </ScoreWrapper>
           </Info>
-          <Avatar alt="avatar" src={avatar} />
         </RightContent>
       </Right>
     ) : (

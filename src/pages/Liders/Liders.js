@@ -31,6 +31,7 @@ const Lider = styled.div`
 `;
 
 const LiderImg = styled.img`
+  filter: grayscale(100%);
   width: 53px;
   height: 53px;
   border-radius: 50%;
@@ -49,6 +50,15 @@ const Name = styled.div`
     left: 0;
     z-index: -1;
   }
+`;
+const Place = styled.div `
+  width: auto;
+  font-weight: bold;
+  padding: 0 10px;
+  font-size: 25px;
+  background-color: #FFF;
+  z-index: 10;
+  margin-end:5px;
 `;
 const SubName = styled.div`
   width: auto;
@@ -128,25 +138,26 @@ export const Liders = ({ history }) => {
           list.map((item, i) => {
             return (
               <Lider key={i}>
+                <Place>{item.position}.</Place>
                 <LiderImg src={item.avatar} />
                 <Name>
                   <SubName>
-                    {item.id} - {item.nickname}
+                    {item.nickname}
                   </SubName>
                 </Name>
                 <Rating>
                   <Rate>
-                    {item.pts}pts / {item?.position}th
+                    {item.pts}pts
                   </Rate>
                 </Rating>
                 <Scores>
-                  <Red>
-                    {item.winrate.split('/')[0]}
-                  </Red>
-                  &nbsp;/&nbsp;
                   <Green>
-                    {item.winrate.split('/')[1]}
+                    {item.winrate.split('/')[0]}
                   </Green>
+                  &nbsp;/&nbsp;
+                  <Red>
+                    {item.winrate.split('/')[1]}
+                  </Red>
                 </Scores>
               </Lider>
             )

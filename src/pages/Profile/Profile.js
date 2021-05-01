@@ -10,14 +10,15 @@ const Wrapper = styled.div`
   height: 100vh;
   position: relative;
   justify-content: space-between;
-  flex-direction: column;
+  flex-direction: row;
   display: flex;
-  align-items: center;
+  align-items: start;
   width: 100%;
-  padding: 100px 0;
+  padding: 20px 0;
 `;
 const Info = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   max-width: 635px;
@@ -49,6 +50,7 @@ const GameHistory = styled.div`
 const Avatar = styled.img`
   border-radius: 100px;
   width: 200px;
+  margin-bottom: 20px
 `;
 const Name = styled.p`
   font-weight: bold;
@@ -203,6 +205,15 @@ const Profile = ({ history }) => {
   return (
     <Wrapper>
       <Info>
+        <ButtonCustom
+            width="400px"
+            mb="20"
+            onClick={() => {
+              history.push(MAIN_URL);
+            }}
+          >
+            В меню
+        </ButtonCustom>
         <Avatar alt="avatar" src={playerInfo?.avatar} />
         <InfoPlayer>
           <Input
@@ -223,14 +234,7 @@ const Profile = ({ history }) => {
       <GameHistory>
         {gameHistoryItems}
       </GameHistory>
-      <ButtonCustom
-        width="400px"
-        onClick={() => {
-          history.push(MAIN_URL);
-        }}
-      >
-        В меню
-      </ButtonCustom>
+      
     </Wrapper>
   );
 };

@@ -15,19 +15,21 @@ const Btn = styled.button`
   margin-left: ${(props) => (props.ml ? `${props.ml}px` : "0")};
   margin-top: ${(props) => (props.mt ? `${props.mt}px` : "0")};
   margin-bottom: ${(props) => (props.mb ? `${props.mb}px` : "0")};
-  background-color: ${(props) =>
-    props.disabled
-      ? "#DEDEDE"
-      : props.backgroundColor
-      ? props.backgroundColor
-      : "#FFE3BA"};
-  color: ${(props) =>
-    props.disabled ? "#9b9b9b" : props.textColor ? props.textColor : "#000"};
+  border-radius: 5px;
+  color: #343a40;
+  background-color: transparent;
+  background-image: none;
+  border-color: #343a40;
+  border-width: 1px;
   cursor: pointer;
   font-size: ${(props) => (props.fontSize ? props.fontSize : "28px")};
-  border: none;
   &:hover {
-    background-color: ${(props) => (props.disabled ? "#DEDEDE" : "#FFC266")};
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
   }
 `;
 
