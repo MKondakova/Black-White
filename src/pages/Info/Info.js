@@ -337,7 +337,7 @@ const Info = ({history}) => {
           history.push(MAIN_URL);
         }}
       >
-        В меню
+        Назад
       </ButtonCustom>
     </Wrapper>
 );

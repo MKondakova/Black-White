@@ -7,7 +7,7 @@ import { Input } from "../../../../components/InputCustom";
 
 const Wrapper = styled.div`
   max-width: 1300px;
-  margin: 0 auto;
+  margin: 20px auto;
   display: flex;
   justify-content: flex-start;
   position: absolute;
@@ -107,6 +107,15 @@ export const Header = ({
       </Right>
     ) : (
       <RightSearch>
+        <ButtonCustom 
+        width="auto"
+        mr="20"
+        onClick={() => {
+          history.push(MAIN_URL)
+          setSearchType("")
+        }} padding="0 20px">
+          Меню
+        </ButtonCustom>
         <Input
           onChange={(e) => setNicknameFunc(e)}
           width="500px"
@@ -114,12 +123,6 @@ export const Header = ({
           textAlign="left"
           placeholder="Введите ник или номер игрока"
         />
-        <ButtonCustom width="auto" onClick={() => {
-          history.push(MAIN_URL)
-          setSearchType("")
-        }} padding="0 20px">
-          Меню
-        </ButtonCustom>
       </RightSearch>
     )}
   </Wrapper>

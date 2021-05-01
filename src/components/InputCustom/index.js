@@ -14,9 +14,10 @@ const InputCustom = styled.input`
   width: ${(props) => (props.width ? props.width : "100%")};
   height: ${(props) => (props.height ? props.height : "62px")};
   outline: ${(props) => (props.outline ? props.outline : "none")};
-  background: ${(props) => (props.background ? props.background : "#F3F3F3")};
+  background: ${(props) => (props.background ? props.background : "white")};
   border: ${(props) => (props.border ? props.border : "none")};
   z-index: 1;
+  border-bottom-style: solid;
   font-size: ${(props) => (props.fontSize ? props.fontSize : "28px")};
   text-align: ${(props) => (props.textAlign ? props.textAlign : "inherit")};
   padding: ${(props) => (props.padding ? props.padding : "0 27px")};
