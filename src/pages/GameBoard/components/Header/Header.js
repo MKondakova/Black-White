@@ -73,9 +73,6 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
     <Wrapper>
       <Content>
         <Left>
-          <LogoWrapper onClick={() => history.push(MAIN_URL)}>
-            <Logotype alt="logo" src={Logo} />
-          </LogoWrapper>
           <Menu>
             {viewPass && (
               <Text onClick={() => setPass()}>Пас</Text>

@@ -11,7 +11,8 @@ const Player = styled.div`
   display: flex;
   width: 50%;
   padding: 19px 10px;
-  background: ${(props) => (props.active ? "#008B8B	" : "#FF69B4")};
+  background: ${(props) => (props.active ? "#222233" : "#F5F5DC")};
+  color: ${(props) => (props.active ? "#F5F5DC" : "#222233")};
   border: ${(props) => (props.winner ? "4px solid green" : "0px")};
   position: relative;
 `;
@@ -22,32 +23,41 @@ const Avatar = styled.img`
   border-radius: 100px;
   width: 95px;
   margin-right: 15px;
-  border: 6px solid #000;
+  border: 6px solid #F5F5DC;
 `;
 const AvatarRight = styled.img`
   border-radius: 100px;
   width: 95px;
   margin-left: 15px;
-  border: 6px solid #FFF;
+  border: 6px solid #222233;
 `;
 const Info = styled.div``;
 const Name = styled.p`
-  color: #5b5b5b;
+  color: #F5F5DC;
   font-size: 24px;
 `;
+
+const NameRight = styled.p`
+  color: #222233;
+  font-size: 24px;
+`;
+const PtsRight = styled.p`
+  color: #222233;
+  font-size: 18px;
+`;
 const Pts = styled.p`
-  color: #5b5b5b;
+  color: #F5F5DC;
   font-size: 18px;
 `;
 const Score = styled.p`
-  color: #aaaaaa;
+  color: #F5F5DC;
   font-size: 18px;
   position: absolute;
   bottom: 10px;
   right: 10px;
 `;
 const ScoreRight = styled.p`
-  color: #aaaaaa;
+  color: #222233;
   font-size: 18px;
   position: absolute;
   bottom: 10px;
@@ -184,8 +194,8 @@ const Players = ({ yourColor, enemyPass, stepColor, you, opponent, stepMain, ste
       </Player>
       <PlayerRight active={yourColor === "white"} winner={winner && (winner.winner === 'W')}>
         <Info>
-          <Name>{yourColor !== 'white' ? opponent.nickname : you.nickname}</Name>
-          <Pts>{yourColor !== 'white' ? opponent.pts : you.pts}/{yourColor !== 'white' ? opponent.position+'th' : you.position+'th'}</Pts>
+          <NameRight>{yourColor !== 'white' ? opponent.nickname : you.nickname}</NameRight>
+          <PtsRight>{yourColor !== 'white' ? opponent.pts : you.pts}/{yourColor !== 'white' ? opponent.position+'th' : you.position+'th'}</PtsRight>
           {scores && (scores.winner === 'W') && (
             <Scores>
               + {scores.score}

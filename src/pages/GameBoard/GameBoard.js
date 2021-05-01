@@ -124,6 +124,7 @@ const GameBoard = ({ history }) => {
           setStepColor(jsonData.payload.turn)
         }
         if (jsonData.payload.move) {
+          console.log(jsonData.payload);
           setTurns(turns => [...turns, timeConverter(jsonData.time)+': '+jsonData.payload.move])
         }
         if (jsonData.payload.type === 'newTurn') {

@@ -93,7 +93,7 @@ export const Content = ({ history, searchType, setSearchType }) => {
     if (searchType === "WithAi") await dispatch(createGameWithAi())
   }, [searchType])
   
-  if (gameId !== null) {
+  if (gameId !== null && !searchType) {
     history.push('/gameBoard')
   }
   return (

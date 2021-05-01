@@ -7,19 +7,41 @@ const Wrapper = styled.div`
   overflow-y: scroll;
 `;
 const TextBlock = styled.div`
-  background: #FF69B4	;
+  background: transparent;
   padding: 20px 40px;
 `;
-const Text = styled.p`
+const TextWhite = styled.p`
   font-size: 18px;
+  background: #F5F5DC;
+  border-radius:10px;
+  margin:5px;
+  padding: 10px;
+  color: #222233;
 `;
+
+const TextBlack = styled.p`
+  font-size: 18px;
+  background: #222233;
+  border-radius:10px;
+  margin:5px;
+  padding: 10px;
+  color: #FFFAFA;
+`;
+
 
 const Info = ({turns}) => {
   return (
     <Wrapper>
       <TextBlock>
         {turns.map((item)=>{
-          return <Text>{item}</Text>
+          let colorIndex=item.lastIndexOf('(')
+          if (item[colorIndex+1]==='ч'){
+            const text = item.slice(0,colorIndex)+item.slice(colorIndex+'черные) '.length)
+            return <TextBlack>{text}</TextBlack>
+          } else {
+            const text = item.slice(0,colorIndex)+item.slice(colorIndex+'белые) '.length)
+            return <TextWhite>{text}</TextWhite>
+          }
         })}
       </TextBlock>
     </Wrapper>
