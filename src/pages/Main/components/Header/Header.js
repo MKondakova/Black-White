@@ -46,12 +46,6 @@ const Info = styled.div`
   align-items: flex-end;
 `;
 
-const Logotype = styled.img`
-  display: none;
-  width: 405px;
-  height: auto;
-  margin-right: 14px;
-`;
 
 const Name = styled.p`
   font-size: 48px;
