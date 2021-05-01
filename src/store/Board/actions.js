@@ -6,6 +6,9 @@ import {
   LOSER_USER,
   GET_HINT_BEST_MOVES,
   GET_HINT_SHOW_BEST,
+  ATARI_HELP,
+  GET_HINT_7x7,
+  _7x7_HELP,
   GET_HINT_HEATMAP_FULL,
   GET_HINT_HEATMAP,
   GET_HINT_HEATMAP_ZONE,
@@ -16,6 +19,15 @@ import {
 
 export const hintHeatmapFull = (game_id) => ({
   type: GET_HINT_HEATMAP_FULL,
+  payload: {game_id: game_id}
+});
+
+export const atariHelp = () => ({
+  type: ATARI_HELP,
+});
+
+export const _7x7Help = (game_id) => ({
+  type: GET_HINT_7x7,
   payload: {game_id: game_id}
 });
 
