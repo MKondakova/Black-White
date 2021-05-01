@@ -50,9 +50,9 @@ const TextSdf = styled.p`
   font-size: 24px;
   line-height: 28px;
   cursor: pointer;
-  color: #aaaaaa;
+  color: #FFD700	;
   &:hover {
-    color: #000000;
+    color: #FFD700	;
   }
 `;
 const GameId = styled.p`
@@ -62,7 +62,7 @@ const GameId = styled.p`
 const Timer = styled.p`
   font-size: 24px;
   line-height: 28px;
-  color: #767676;
+  color: #191970	;
 `;
 
 let timesCal = null;
@@ -73,9 +73,6 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
     <Wrapper>
       <Content>
         <Left>
-          <LogoWrapper onClick={() => history.push(MAIN_URL)}>
-            <Logotype alt="logo" src={Logo} />
-          </LogoWrapper>
           <Menu>
             {viewPass && (
               <Text onClick={() => setPass()}>Пас</Text>

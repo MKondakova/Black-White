@@ -92,9 +92,8 @@ const GameBoard = ({ history }) => {
   if (game_id === null) {
     history.push('/')
   }
-
   useEffect(() => {
-    if (game_id) {
+    if (game_id && client.readyState === 1) {
       client.send(JSON.stringify([5, 'go/game']));
       client.send(JSON.stringify([7, "go/game", { command: "auth", token: localStorage.getItem('GoGameToken'), game_id: game_id }]));
     }

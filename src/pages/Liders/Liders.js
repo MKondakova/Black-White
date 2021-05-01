@@ -17,38 +17,48 @@ const Wrapper = styled.div`
 const LidersCont = styled.div`
   width: 100%;
   max-height: 590px;
-  overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
 `;
 
 const Lider = styled.div`
-  width: 50%;
+  width: 100%;
   display: flex;
+  justify-content: center;
   margin-bottom: 30px;
   align-items: center;
   padding: 0 20px;
 `;
 
 const LiderImg = styled.img`
+  filter: grayscale(100%);
   width: 53px;
   height: 53px;
   border-radius: 50%;
 `;
 const Name = styled.div`
-  width: 50%;
+  width: 30%;
   position: relative;
   display: flex;
   align-items: center;
   :after{
     content: '';
     width: 100%;
-    height: 1px;
-    background: #C4C4C4;
+    height: 0.5px;
+    background: #000000;
     position: absolute;
     left: 0;
     z-index: -1;
   }
+`;
+const Place = styled.div `
+  width: auto;
+  font-weight: bold;
+  padding: 0 10px;
+  font-size: 25px;
+  background-color: #FFF;
+  z-index: 10;
+  margin-end:5px;
 `;
 const SubName = styled.div`
   width: auto;
@@ -59,7 +69,7 @@ const SubName = styled.div`
   z-index: 10;
 `;
 const Rating = styled.div`
-  width: 30%;
+  width: 20%;
   font-size: 20px;
   position: relative;
   display: flex;
@@ -67,7 +77,7 @@ const Rating = styled.div`
   :after{
     content: '';
     width: 100%;
-    height: 1px;
+    height: 0.5px;
     background: #000000;
     position: absolute;
     left: 0;
@@ -83,7 +93,7 @@ const Rate = styled.div`
   padding: 0 10px;
 `;
 const Scores = styled.div`
-  width: 20%;
+  width: 8%;
   font-size: 22px;
   padding-left: 10px;
   display: flex;
@@ -128,25 +138,26 @@ export const Liders = ({ history }) => {
           list.map((item, i) => {
             return (
               <Lider key={i}>
+                <Place>{item.position}.</Place>
                 <LiderImg src={item.avatar} />
                 <Name>
                   <SubName>
-                    {item.id} - {item.nickname}
+                    {item.nickname}
                   </SubName>
                 </Name>
                 <Rating>
                   <Rate>
-                    {item.pts}pts / {item?.position}th
+                    {item.pts}pts
                   </Rate>
                 </Rating>
                 <Scores>
-                  <Red>
-                    {item.winrate.split('/')[0]}
-                  </Red>
-                  &nbsp;/&nbsp;
                   <Green>
-                    {item.winrate.split('/')[1]}
+                    {item.winrate.split('/')[0]}
                   </Green>
+                  &nbsp;/&nbsp;
+                  <Red>
+                    {item.winrate.split('/')[1]}
+                  </Red>
                 </Scores>
               </Lider>
             )
