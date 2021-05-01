@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 120px;
+  justify-content: center;
 `;
 
 const Main = ({ history, location }) => {
@@ -33,15 +33,6 @@ const Main = ({ history, location }) => {
 
   return (
     <Wrapper>
-      <Header
-        history={history}
-        setSearchType={setSearchType}
-        searchType={searchType}
-        nickname={playerInfo.nickname}
-        pts={playerInfo.pts}
-        avatar={playerInfo.avatar}
-        winrate={playerInfo.winrate}
-      />
       <Content
         history={history}
         searchType={searchType}

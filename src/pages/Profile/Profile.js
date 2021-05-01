@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { ButtonCustom } from "../../components/ButtonCustom";
-import { Input } from "../../components/InputCustom";
+import { removeToken } from "../../helpers/session.js"
 import { MAIN_URL } from "../../constants/routes";
 import { getProfile, getSgf, getFullLog } from "../../store/Profile/actions";
 
@@ -230,6 +230,7 @@ const Profile = ({ history }) => {
             textAlign="center"
             mb="20"
             onClick={() => {
+              removeToken()
               history.push(MAIN_URL);
             }}
           >

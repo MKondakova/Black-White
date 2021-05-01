@@ -31,7 +31,6 @@ const Lider = styled.div`
 `;
 
 const LiderImg = styled.img`
-  filter: grayscale(100%);
   width: 53px;
   height: 53px;
   border-radius: 50%;

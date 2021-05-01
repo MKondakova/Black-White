@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { client, token } from '../../../../Socket.js'
 import { clearGameId } from "../../../../store/GameCreate/actions";
 import { Input } from "../../../../components/InputCustom";
+import { siteUrl } from "../../../../constants/siteUrl";
 
 const Text = styled.p`
   font-size: 36px;
@@ -22,7 +23,7 @@ const Spinner = styled.div`
   margin-bottom: 46px;
 `;
 
-export const LoadingGame = ({ text, setSearchType, setOpponent, searchType, gameId }) => {
+export const LoadingGame = ({ text, setSearchType, setOpponent, searchType, gameId, countText=null }) => {
   const dispatch = useDispatch();
   const user_id = useSelector((state) => state.profile.userProfile.user.id);
   const codeGame = useSelector(state => state.createGame.code);
@@ -63,13 +64,31 @@ export const LoadingGame = ({ text, setSearchType, setOpponent, searchType, game
       return <Input value={codeGame || 'Ожидайте'} textAlign="center" disabled mt={40} mb={30} />
     }
   }
+  const isWaiting = () => {
+    if (countText) {
+      fetch(siteUrl + '/user/statistics').then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        const counter = document.getElementById('counter')
+        if (counter) {
+          counter.innerHTML = "Вместе с Вами готовы сыграть: " + data.searching;
+        }
+      });
+      return <Text id='counter'>{countText}</Text> 
+    } else {
+      return "";
+    }
+  }
 
   return (
     <>
       <Spinner>
-        <Loader type="Grid" color="#3b3b3b" height={126} width={126} />
+        <Loader type="Grid" color="black" height={126} width={126} />
       </Spinner>
       <Text>{text}</Text>
+      {isWaiting()}
       {codeBlock()}
       <ButtonCustom onClick={() => cancelGame()}>
         Отмена
