@@ -85,39 +85,31 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
 };
 
 export const Content = ({ history, searchType, setSearchType }) => {
-  const dispatch = useDispatch();
   const gameId = useSelector(state => state.createGame.id);
-
+  const dispatch = useDispatch();
+  
   useEffect(async ()=>{
     if (searchType === "Random") await dispatch(createRandomGame())
     if (searchType === "WithAi") await dispatch(createGameWithAi())
   }, [searchType])
-
+  
+  if (gameId !== null && !searchType) {
+    history.push('/gameBoard')
+  }
   return (
     <Wrapper>
       {!searchType ? (
         <>
-          <ButtonCustom mb={30} onClick={() => history.push('/gameBoard')} disabled={gameId === null}>
-            Продолжить игру
-          </ButtonCustom>
-          <ButtonCustom mb={30} onClick={() => setSearchType("Random")} disabled={gameId !== null}>
+          <ButtonCustom mb={30} onClick={() => setSearchType("Random")} >
             Игра со случайным соперником
           </ButtonCustom>
-          <ButtonCustom mb={30} onClick={() => setSearchType("WithAi")} disabled={gameId !== null}>
+          <ButtonCustom mb={30} onClick={() => setSearchType("WithAi")} >
             Игра с ИИ
           </ButtonCustom>
-          <ButtonCustom onClick={() => setSearchType("Code")} mb={30} disabled={gameId !== null}>
+          <ButtonCustom onClick={() => setSearchType("Code")} mb={30} >
             Закрытая игра
           </ButtonCustom>
           <ButtonCustom mb={30} onClick={() => history.push('/liders')}>Рейтинг игроков</ButtonCustom>{" "}
-          <ButtonCustom
-            onClick={() => {
-              history.push(INFO_URL);
-              setSearchType("");
-            }}
-          >
-            Информация для участников
-          </ButtonCustom>{" "}
         </>
       ) : null}
       {ContentMainBoard(setSearchType, searchType, history, gameId)}

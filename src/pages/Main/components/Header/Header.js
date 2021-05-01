@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Logo from "../../../../assets/img/logo.png";
 import AvatarImage from "../../../../assets/img/avatar.png";
 import { MAIN_URL, PROFILE_URL } from "../../../../constants/routes";
 import { ButtonCustom } from "../../../../components/ButtonCustom";
@@ -8,8 +7,7 @@ import { Input } from "../../../../components/InputCustom";
 
 const Wrapper = styled.div`
   max-width: 1300px;
-  margin: 0 auto;
-  padding-top: 35px;
+  margin: 20px auto;
   display: flex;
   justify-content: flex-start;
   position: absolute;
@@ -17,18 +15,11 @@ const Wrapper = styled.div`
   top: 0;
 `;
 
-const Left = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  width: auto;
-  flex-shrink: 1;
-`;
 const Right = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 `;
 const RightContent = styled.div`
   width: auto;
@@ -41,7 +32,7 @@ const RightContent = styled.div`
 const RightSearch = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   flex-wrap: no-wrap;
   cursor: pointer;
   width: 100%;
@@ -49,15 +40,11 @@ const RightSearch = styled.div`
 
 const Info = styled.div`
   display: flex;
+  margin: 10px;
   flex-direction: column;
   align-items: flex-end;
 `;
 
-const Logotype = styled.img`
-  width: 405px;
-  height: auto;
-  margin-right: 14px;
-`;
 
 const Name = styled.p`
   font-size: 48px;
@@ -66,7 +53,7 @@ const Name = styled.p`
 `;
 
 const ScoreWrapper = styled.div`
-  display: flex;
+  display: center;
 `;
 
 const Pts = styled.p`
@@ -76,9 +63,11 @@ const Pts = styled.p`
 `;
 
 const Avatar = styled.img`
-  border-radius: 100px;
-  margin-left: 20px;
-  width: 115px;
+  border-radius: 25px;
+  margin: 20px;
+  width: 60px;
+
+  filter: grayscale(100%);
 `;
 
 const Search = styled.img`
@@ -99,16 +88,6 @@ export const Header = ({
   setNicknameFunc
 }) => (
   <Wrapper>
-    <Left
-      onClick={() => {
-        if (searchType !== "ConnectRandom" && searchType !== "ConnectCode") {
-          history.push(MAIN_URL);
-          setSearchType("");
-        }
-      }}
-    >
-      <Logotype alt="logo" src={Logo} />
-    </Left>
     {!profile ? (
       <Right>
         <RightContent onClick={() => {
@@ -117,18 +96,26 @@ export const Header = ({
             setSearchType("");
           }
         }}>
+
+          <Avatar alt="avatar" src={avatar} />
           <Info>
-            <Name>{nickname || ""}</Name>
             <ScoreWrapper>
-              <Pts style={{ marginRight: 16 }}>{pts || 0}pts</Pts>
-              <Pts>{winrate || ""}</Pts>
+              <Pts style={{ marginRight: 16 }}>{pts || 0} pts</Pts>
             </ScoreWrapper>
           </Info>
-          <Avatar alt="avatar" src={avatar} />
         </RightContent>
       </Right>
     ) : (
       <RightSearch>
+        <ButtonCustom 
+        width="auto"
+        mr="20"
+        onClick={() => {
+          history.push(MAIN_URL)
+          setSearchType("")
+        }} padding="0 20px">
+          Меню
+        </ButtonCustom>
         <Input
           onChange={(e) => setNicknameFunc(e)}
           width="500px"
@@ -136,12 +123,6 @@ export const Header = ({
           textAlign="left"
           placeholder="Введите ник или номер игрока"
         />
-        <ButtonCustom width="auto" onClick={() => {
-          history.push(MAIN_URL)
-          setSearchType("")
-        }} padding="0 20px">
-          Меню
-        </ButtonCustom>
       </RightSearch>
     )}
   </Wrapper>

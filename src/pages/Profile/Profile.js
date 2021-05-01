@@ -207,7 +207,7 @@ const Profile = ({ history }) => {
               history.push(MAIN_URL);
             }}
           >
-            В меню
+            Назад
         </ButtonCustom>
         <Avatar alt="avatar" src={playerInfo?.avatar} />
         <InfoPlayer>
@@ -225,6 +225,16 @@ const Profile = ({ history }) => {
           />
           <Input mb={10} textAlign="center" disabled value={"Cчет: " + playerInfo?.pts} />
         </InfoPlayer>
+        <ButtonCustom
+            width="400px"
+            textAlign="center"
+            mb="20"
+            onClick={() => {
+              history.push(MAIN_URL);
+            }}
+          >
+            Выход
+        </ButtonCustom>
       </Info>
       <GameHistory>
         {gameHistoryItems}

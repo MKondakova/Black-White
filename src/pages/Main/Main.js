@@ -12,8 +12,9 @@ const Wrapper = styled.div`
   height: 100vh;
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding-top: 170px;
+  padding-top: 120px;
 `;
 
 const Main = ({ history, location }) => {
