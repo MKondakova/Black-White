@@ -19,6 +19,7 @@ import {
   setScoresWinner,
   hintBestMoves,
   _7x7Help,
+  hintBattleRoyale
 } from "../../store/Board/actions";
 
 import { clearGameId } from "../../store/GameCreate/actions";
@@ -282,6 +283,8 @@ const GameBoard = ({ history }) => {
           }
           // dispatch(_7x7Help(game_id));
           // handleHelp({ type: "map", id: _7x7Help });
+          dispatch(hintBattleRoyale(game_id));
+
         }
         if (jsonData.payload.player) {
           if (typeof jsonData.payload.player === 'string') {
