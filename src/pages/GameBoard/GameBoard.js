@@ -18,6 +18,7 @@ import {
   hintShowBest,
   setScoresWinner,
   hintBestMoves,
+  _7x7Help,
 } from "../../store/Board/actions";
 
 import { clearGameId } from "../../store/GameCreate/actions";
@@ -27,7 +28,7 @@ import {
   HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
 } from "./components/Help/types";
-import { ATARI_HELP } from "../../store/Board/types";
+import { ATARI_HELP, _7x7_HELP } from "../../store/Board/types";
 
 const Wrapper = styled.div`
   max-width: 1377px;
@@ -272,13 +273,15 @@ const GameBoard = ({ history }) => {
           console.log('проверяю на атари!');
           setCoordinates(mapMap(jsonData.payload.currentMap));
           try {
-            let moves = get_last_moves(window.GAME_ID, token);
+            let moves = get_last_moves(game_id, token);
             window.ATARI = check_atari(moves, window.PLAYING_COLOR);
             dispatch(atariHelp());
           } catch (e) {
             window.ATARI = null;
             console.log(e);
           }
+          // dispatch(_7x7Help(game_id));
+          // handleHelp({ type: "map", id: _7x7Help });
         }
         if (jsonData.payload.player) {
           if (typeof jsonData.payload.player === 'string') {
@@ -392,6 +395,9 @@ const GameBoard = ({ history }) => {
           break;
         case HEATMAP_ZONE_QUARTER:
           dispatch(hintHeatmapZone(game_id, true));
+          break;
+        case _7x7Help:
+          dispatch(_7x7Help(game_id));
           break;
       }
     }

@@ -4,6 +4,7 @@ export const MULTIPLE_HELP = "MULTIPLE_HELP";
 export const MARKERS_CLEAR = "MARKERS_CLEAR";
 export const MAP_HELP = "MAP_HELP";
 export const ATARI_HELP = "ATARI_HELP";
+export const _7x7_HELP = "_7x7_HELP";
 export const WINNER_USER = "WINNER_USER";
 export const LOSER_USER = "LOSER_USER";
 export const SET_BLOCKED = "SET_BLOCKED";
@@ -13,6 +14,7 @@ export const GET_SCORES_WINNER = "GET_SCORES_WINNER";
 
 export const GET_HINT_BEST_MOVES = "GET_HINT_BEST_MOVES";
 export const GET_HINT_ATARI = "GET_HINT_ATARI";
+export const GET_HINT_7x7 = "GET_HINT_7x7";
 export const GET_HINT_SHOW_BEST = "GET_HINT_SHOW_BEST";
 export const GET_HINT_HEATMAP_FULL = "GET_HINT_HEATMAP_FULL";
 

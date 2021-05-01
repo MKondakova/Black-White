@@ -8,6 +8,8 @@ import {
   GET_HINT_HEATMAP_FULL,
   MAP_HELP,
   ATARI_HELP,
+  _7x7_HELP,
+  GET_HINT_7x7,
   GET_HINT_HEATMAP_ZONE,
   SCORES_WINNER,
   GET_SCORES_WINNER
@@ -16,7 +18,7 @@ import {
   helpBestMoves,
   helpShowBest,
   helpHeatmapFull,
-  
+  help7x7,
   helpHeatmapZone,
   scoresWinner
 } from "../../api/board";
@@ -55,6 +57,7 @@ function* fetchGetHintHeatmapFull_saga(action) {
   const { payload } = action;
   try {
     const res = yield call(helpHeatmapFull, getToken(), payload.game_id);
+    console.log('heatmap', res);
     if (res.hint) {
       yield put({ type: MAP_HELP, payload: res.hint })
     }
@@ -78,10 +81,20 @@ function* fetchGetHintHeatmapZone_saga(action) {
 function* fetchGetHintAtari_saga(action) {
   const { payload } = action;
   try {
-    console.log('Я тут!!!');
     yield put({ type: ATARI_HELP })
   } catch (e) {
-    console.log('Ешё ошибка(');
+    //throw e;
+  }
+}
+
+function* fetchGetHint_7x7_saga(action) {
+  const { payload } = action;
+  try {
+    const res = yield call(help7x7, getToken(), payload.game_id);
+    if (res.hint) {
+      yield put({ type: _7x7_HELP, payload: res.hint })
+    }
+  } catch (e) {
     //throw e;
   }
 }
@@ -102,7 +115,8 @@ export function* boardSaga() {
   yield all([
     takeLatest(GET_HINT_BEST_MOVES, fetchGetHintBestMoves_saga),
     takeLatest(GET_HINT_SHOW_BEST, fetchGetHintShowBest_saga),
-    takeLatest(GET_HINT_ATARI, fetchGetHintShowBest_saga),
+    takeLatest(GET_HINT_ATARI, fetchGetHintAtari_saga),
+    takeLatest(GET_HINT_7x7, fetchGetHint_7x7_saga),
     takeLatest(GET_HINT_HEATMAP_FULL, fetchGetHintHeatmapFull_saga),
     takeLatest(GET_HINT_HEATMAP_ZONE, fetchGetHintHeatmapZone_saga),
     takeLatest(GET_SCORES_WINNER, fetchGetHintScoresWinner_saga),
