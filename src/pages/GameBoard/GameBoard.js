@@ -1,4 +1,3 @@
-import { put } from 'redux-saga/effects';
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Board from "./components/Board/Board";
@@ -366,8 +365,12 @@ const GameBoard = ({ history }) => {
   }
 
   const resign = () => {
-    dispatch(setBlocked(true))
-    client.send(JSON.stringify([7, "go/game", { command: "resign", token: token, game_id: game_id }]));
+    let isResign = window.confirm("Ты уверен? Дорогу осилит идущий...");
+
+    if (isResign){
+      dispatch(setBlocked(true));
+      client.send(JSON.stringify([7, "go/game", { command: "resign", token: token, game_id: game_id }]));
+    }
   }
 
   const handleHelp = ({ type, multipleHandleCount, id, count }) => {

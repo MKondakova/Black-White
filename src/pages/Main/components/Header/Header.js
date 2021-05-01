@@ -113,7 +113,7 @@ export const Header = ({
         onClick={() => {
           history.push(MAIN_URL)
           setSearchType("")
-        }} padding="0 20px">
+        }} padding="10px 20px">
           Меню
         </ButtonCustom>
         <Input
