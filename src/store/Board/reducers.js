@@ -11,7 +11,8 @@ import {
   SET_BLOCKED,
   MAP_STONES,
   SCORES,
-  SCORES_WINNER } from "./types";
+  SCORES_WINNER
+} from "./types";
 import { MAP_HALF, MAP_QUARTERS } from "../../pages/GameBoard/components/Help/types";
 
 const initialState = {
@@ -35,10 +36,45 @@ export const boardReducer = (state = initialState, action) => {
       };
     case BATTLE_ROYALE_HELP:
       let best_move = action.payload[0].move;
-      let j_c = 'ABCDEFGHJKLMNOPQRSTUV'.search(best_move[0]);
-      let i_c = 0; 
+      console.log(best_move);
+      let j_c = 'ABCDEFGHJKLMNOPQRSTUV'.search(best_move[0]) - 1;
+      let i_c = parseInt(best_move.replace(best_move[0], '')) - 1;
+      console.log(i_c, j_c);
+
+      window.BEST_MOVE = [i_c, j_c];
+
+      var mapStones = {};
+      var classNamesMapStones = {};
+
+      if (window.BEST_MOVE_GRID_SIZE_I !== null) {
+        window.BEST_MOVE_GRID_SIZE_I = 7;
+        window.BEST_MOVE_GRID_SIZE_J = 7;
+        let possible_i_j = [];
+
+        for (let i = 0; i < 6; i++)
+          for (let j = 0; j < 6; j++)
+            if (j <= j_c < j + 7 && i <= i_c < i + 7)
+              possible_i_j.push([i, j]);
+        let best_possible_move = possible_i_j[Math.floor(Math.random() * possible_i_j.length)];
+        window.BEST_MOVE_GRID_I = best_possible_move[0];
+        window.BEST_MOVE_GRID_J = best_possible_move[1];
+      } else {
+        
+        /* if (window.ATARI !== null) {
+          let alpha = 'ABCDEFGHJKLMNOPQRSTUV'
+          window.ATARI.forEach(function (c) {
+            let sign = alpha[c[0]];
+            let coord = `${sign}${(c[1] + 1)}`;
+            mapStones[coord] = "circle";
+            classNamesMapStones[coord] = `bluestone size-80`;
+          });
+        }*/
+      }
+
       return {
         ...state,
+        mapStones,
+        classNamesMapStones,
         blocked: false
       };
     case SET_BLOCKED:
@@ -123,7 +159,7 @@ export const boardReducer = (state = initialState, action) => {
       var classNamesMapStones = {};
       if (window.ATARI !== null) {
         let alpha = 'ABCDEFGHJKLMNOPQRSTUV'
-        window.ATARI.forEach(function(c) {
+        window.ATARI.forEach(function (c) {
           let sign = alpha[c[0]];
           let coord = `${sign}${(c[1] + 1)}`;
           mapStones[coord] = "circle";
@@ -166,7 +202,7 @@ export const boardReducer = (state = initialState, action) => {
       let alpha = 'ABCDEFGHJKLMNOPQRSTUV';
       var mapStones = {};
       var classNamesMapStones = {};
-      
+
       for (let _i = max_i; _i < max_i + 7; _i++)
         for (let _j = max_j; _j < max_j + 7; _j++) {
           let sign = alpha[_i];
@@ -174,7 +210,7 @@ export const boardReducer = (state = initialState, action) => {
           mapStones[coord] = "circle";
           classNamesMapStones[coord] = `redstone size-60`;
         }
-      
+
       return {
         ...state,
         mapStones,
@@ -182,6 +218,6 @@ export const boardReducer = (state = initialState, action) => {
         blocked: false
       };
     default:
-      return {...state};
+      return { ...state };
   }
 };

@@ -1,5 +1,6 @@
 export const HEATMAP_FULL = 13;
-export const HEATMAP_ZONE_QUARTER = 23
+export const HEATMAP_ZONE_QUARTER = 23;
+export const _7X7_HELP = 230;
 
 const defaultMapClass = 'redstone';
 const defaultMapSize = 'size-70';

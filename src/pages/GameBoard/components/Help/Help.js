@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { ATARI_HELP, BATTLE_ROYALE_HELP } from "../../../../store/Board/types";
 import Players from "../GameInfo/components/Players/Players";
 import {
   HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
+  _7X7_HELP
 } from "./types";
 
 const Wrapper = styled.div`
@@ -94,6 +96,24 @@ const Help = ({
           onClick={() => scores && handleHelp({ type: "score", id: 34 })}
         >
           Кто побеждает на данный момент?
+        </HelpItem>
+        <HelpItem
+          // active={activeHelpId === 34}
+          onClick={() => scores && handleHelp({ type: "atari", id: ATARI_HELP })}
+        >
+          Атари
+        </HelpItem>
+        <HelpItem
+          // active={activeHelpId === 34}
+          onClick={() => scores && handleHelp({ type: "map", id: _7X7_HELP })}
+        >
+          В какой области хороший ход?
+        </HelpItem>
+        <HelpItem
+          // active={activeHelpId === 34}
+          onClick={() => scores && handleHelp({ type: "battle", id: BATTLE_ROYALE_HELP })}
+        >
+          Королевская битва!
         </HelpItem>
       </HelpWrapper>
     </Wrapper>

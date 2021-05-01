@@ -28,6 +28,7 @@ import { client, token } from '../../Socket.js'
 import {
   HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
+  _7X7_HELP
 } from "./components/Help/types";
 import { ATARI_HELP, _7x7_HELP } from "../../store/Board/types";
 
@@ -270,7 +271,7 @@ const GameBoard = ({ history }) => {
           setOpponent(jsonData.payload.opponent)
         }
         if (jsonData.payload.currentMap) {
-          console.log('проверяю на атари!');
+
           setCoordinates(mapMap(jsonData.payload.currentMap));
           try {
             let moves = get_last_moves(game_id, token);
@@ -282,8 +283,6 @@ const GameBoard = ({ history }) => {
           }
           // dispatch(_7x7Help(game_id));
           // handleHelp({ type: "map", id: _7x7Help });
-          dispatch(hintBattleRoyale(game_id));
-
         }
         if (jsonData.payload.player) {
           if (typeof jsonData.payload.player === 'string') {
@@ -398,7 +397,7 @@ const GameBoard = ({ history }) => {
         case HEATMAP_ZONE_QUARTER:
           dispatch(hintHeatmapZone(game_id, true));
           break;
-        case _7x7Help:
+        case _7X7_HELP:
           dispatch(_7x7Help(game_id));
           break;
       }
@@ -406,6 +405,18 @@ const GameBoard = ({ history }) => {
     if (type === "score") {
       dispatch(setBlocked(true))
       dispatch(setScoresWinner(game_id))
+    }
+    if (type === "atari") {
+      dispatch(setBlocked(true));
+      setHelpType("map");
+      setMapType("map");
+      dispatch(atariHelp(game_id));
+    }
+    if (type === "battle") {
+      dispatch(setBlocked(true));
+      setHelpType("map");
+      setMapType("map");
+      dispatch(hintBattleRoyale(game_id));
     }
   };
 
