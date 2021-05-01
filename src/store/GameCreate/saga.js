@@ -16,6 +16,7 @@ function* fetchCreateGameCode_saga() {
     const res = yield call(createCode, getToken());
     if (res.code) {
       yield put({ type: CREATE_GAME_ERROR, error: {} });
+      window.GAME_ID = res.gameId;
       yield put({ type: CREATE_GAME_SUCCESS, payload: {code: res.code, gameId: res.gameId}})
     }
   } catch (e) {
@@ -31,6 +32,7 @@ function* fetchJoinGameWithCode_saga(action) {
     const res = yield call(joinGameWithCode, payload.code, getToken());
     if (res.id) {
       yield put({ type: JOIN_GAME_WITH_CODE_ERROR, error: {} });
+      window.GAME_ID = res.gameId;
       yield put({ type: JOIN_GAME_WITH_CODE_SUCCESS, payload: res.id})
       history.push('/gameBoard')
     } else {
@@ -48,6 +50,7 @@ function* fetchCreateRandomGame_saga() {
     const res = yield call(createRandomGame, getToken());
     if (res.gameId) {
       yield put({ type: CREATE_RANDOM_GAME_ERROR, error: {} });
+      window.GAME_ID = res.gameId;
       yield put({ type: CREATE_RANDOM_GAME_SUCCESS, payload: res.gameId})
     }
   } catch (e) {
@@ -62,6 +65,7 @@ function* fetchCreateGameWithAi_saga() {
     const res = yield call(createGameWithAi, getToken());
     if (res.gameId) {
       yield put({ type: CREATE_GAME_WITH_AI_ERROR, error: {} });
+      window.GAME_ID = res.gameId;
       yield put({ type: CREATE_GAME_WITH_AI_SUCCESS, payload: res.gameId})
       history.push('/gameBoard')
     }
@@ -75,6 +79,7 @@ function* fetchGetCurrentGame_saga() {
   try {
     const res = yield call(getCurrentGame, getToken());
     if (res.gameId) {
+      window.GAME_ID = res.gameId;
       yield put({ type: JOIN_GAME_WITH_CODE_SUCCESS, payload: res.gameId})
     }
   } catch (e) {

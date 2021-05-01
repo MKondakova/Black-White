@@ -72,8 +72,8 @@ const GameBoard = ({ history }) => {
   const [stepColor, setStepColor] = useState('white')
   const [classNames, setClassNames] = useState({})
   const dispatch = useDispatch();
-  const [times, setTimes] = useState({playerOne: 0, playerTwo: 0})
-  
+  const [times, setTimes] = useState({ playerOne: 0, playerTwo: 0 })
+
 
   useEffect(() => {
     if (Object.keys(multipleHint).length === multipleCount) {
@@ -91,24 +91,194 @@ const GameBoard = ({ history }) => {
   useEffect(() => {
     if (game_id) {
       client.send(JSON.stringify([5, 'go/game']));
-      client.send(JSON.stringify([7, "go/game", {command: "auth", token: localStorage.getItem('GoGameToken'), game_id: game_id}]));
+      client.send(JSON.stringify([7, "go/game", { command: "auth", token: localStorage.getItem('GoGameToken'), game_id: game_id }]));
     }
-  },[])
+  }, [])
 
-  client.onmessage = function(e) {
+  let size = 13;
+
+
+  function check_atari(moves, color) { // тот, кто ходит сейчас
+    if (moves.length < 2)
+      return [];
+  
+    let set = moves[1];
+    let last_set = moves[0];
+  
+    function get_group(_set, x, y) {
+      let color = _set[y][x];
+      let checked = [];
+  
+      for (let i = 0; i < size; i++) {
+        checked.push([]);
+        for (let j = 0; j < size; j++)
+          checked[i].push(false)
+      }
+  
+      checked[y][x] = true;
+  
+      function recursion(_set, x, y, checked, color) {
+        checked[y][x] = true;
+        let coords = [[y - 1, x], [y + 1, x], [y, x - 1], [y, x + 1]];
+  
+        coords.forEach(function (c) {
+          if (c[0] >= 0 && c[0] < size && c[1] >= 0 && c[1] < size)
+            if (checked[c[0]][c[1]] === false)
+              if (color === _set[c[0]][c[1]]) {
+                checked[c[0]][c[1]] = true;
+                recursion(_set, c[1], c[0], checked, color);
+              }
+        });
+      }
+  
+      recursion(_set, x, y, checked, color);
+  
+      let stones = [];
+      for (let i = 0; i < size; i++)
+        for (let j = 0; j < size; j++)
+          if (checked[i][j])
+            stones.push([j, i]);
+      return stones;
+    }
+  
+    function can_breathe(_set, group) {
+      let finished = false;
+      for (let i = 0; i < group.length; i++) {
+        let coords = [[group[i][1] - 1, group[i][0]], [group[i][1] + 1, group[i][0]], [group[i][1], group[i][0] - 1], [group[i][1], group[i][0] + 1]];
+        coords.forEach(function (c) {
+          if (c[0] >= 0 && c[0] < size && c[1] >= 0 && c[1] < size && !finished)
+            if (_set[c[0]][c[1]] === 0)
+              finished = true;
+        });
+  
+      }
+  
+      return finished;
+    }
+  
+    function can_place(_set, _last_set, x, y, color) {
+      if (_set[y][x] != 0)
+        return false;
+  
+      let set_copy = [];
+  
+      for (let i = 0; i < size; i++) {
+        set_copy.push([]);
+        for (let j = 0; j < size; j++)
+          set_copy[i].push(_set[i][j])
+      }
+  
+      set_copy[y][x] = color;
+      let group = get_group(_set, x, y);
+      let group_can_breathe = can_breathe(_set, group);
+      if (group_can_breathe)
+        return true;
+      else {
+        // мы не можем дышать, надо проверить, получится ли подышать вообще
+        let coords = [[y - 1, x], [y + 1, x], [y, x - 1], [y, x + 1]];
+        coords.forEach(function (c) {
+          if (c[0] >= 0 && c[0] < size && c[1] >= 0 && c[1] < size)
+            if (set_copy[c[1]][c[0]] === -color) {
+              let new_group = get_group(set_copy, c[0], c[1]);
+              if (!can_breathe(set_copy, new_group))
+                new_group.forEach(function (_c) {
+                  set_copy[_c[1]][_c[0]] = 0;
+                });
+            }
+        });
+  
+        group = get_group(set_copy, x, y);
+        group_can_breathe = can_breathe(set_copy, group);
+        if (!group_can_breathe)
+          return false; // вокруг ничего не удалось объесть и мы всё ещё совершаем суицидальный ход
+        else {
+          for (let i = 0; i < size; i++)
+            for (let j = 0; j < size; j++)
+              if (set_copy[i][j] !== last_set[i][j])
+                return true;
+  
+          return false;
+        }
+      }
+    }
+  
+    function atari_at_coords(_set, _last_set, x, y, color) {
+      let set_copy = [];
+  
+      for (let i = 0; i < size; i++) {
+        set_copy.push([]);
+        for (let j = 0; j < size; j++)
+          set_copy[i].push(_set[i][j])
+      }
+  
+      set_copy[y][x] = color;
+      let coords = [[y - 1, x], [y + 1, x], [y, x - 1], [y, x + 1]];
+      let atari = false;
+      coords.forEach(function (c) {
+        if (c[0] >= 0 && c[0] < size && c[1] >= 0 && c[1] < size)
+          if (set_copy[c[0]][c[1]] === -color) {
+            let new_group = get_group(set_copy, c[1], c[0]);
+            if (!can_breathe(set_copy, new_group))
+              atari = true;
+          }
+      });
+  
+      return atari;
+    }
+  
+    let atari_coords = [];
+  
+    for (let i = 0; i < size; i++)
+      for (let j = 0; j < size; j++)
+        if (can_place(set, last_set, j, i, -color))
+          if (atari_at_coords(set, last_set, j, i, -color)) // вот в этих координатах атари!!!
+            atari_coords.push([i, j]);
+  
+    return atari_coords;
+  }
+    
+  function get_last_moves(game_id, TOKEN) {
+    let req = new XMLHttpRequest();
+  
+    req.open('GET', 'https://go-backend-denis.ambersoft.llc/game/info/' + game_id.toString() + '?token=' + TOKEN, false);
+    req.send();
+    let moves = JSON.parse(JSON.parse(req.response).log);
+  
+    if (moves.length >= 2)
+      return [moves[moves.length - 2], moves[moves.length - 1]];
+    else if (moves.length === 1)
+      return [moves[0]];
+    else
+      return [];
+  }
+  
+  
+  //let TOKEN = 'a0e0bffdcd1fb0fd9d8504c8fc900cf3ab38b18c';
+  //moves = get_last_moves(game_id, TOKEN);
+  //console.log(check_atari(moves, 1));
+  
+  
+  client.onmessage = function (e) {
     setEnemyPass(false)
     if (typeof e.data === 'string') {
       let jsonData = JSON.parse(e.data);
       if (jsonData.payload) {
-        if (jsonData.payload.currentMap) {
-          setCoordinates(mapMap(jsonData.payload.currentMap))
-        }
         if (jsonData.payload.type === "currentMap") {
+          if (jsonData.payload.player === 'b')
+            window.PLAYING_COLOR = 1;
+          else
+            window.PLAYING_COLOR = -1;
           setYou(jsonData.payload.you)
           setOpponent(jsonData.payload.opponent)
         }
+        if (jsonData.payload.currentMap) {
+          console.log('проверяю на атари!');
+          setCoordinates(mapMap(jsonData.payload.currentMap))
+          let moves = get_last_moves(window.GAME_ID, token);
+          console.log(check_atari(moves, window.PLAYING_COLOR));
+        }
         if (jsonData.payload.player) {
-          if(typeof jsonData.payload.player === 'string') {
+          if (typeof jsonData.payload.player === 'string') {
             setYourColor(jsonData.payload.player === 'w' ? 'white' : 'black')
           }
         }
@@ -125,10 +295,13 @@ const GameBoard = ({ history }) => {
           setStepColor(jsonData.payload.turn)
         }
         if (jsonData.payload.move) {
-          setTurns(turns => [...turns, timeConverter(jsonData.time)+': '+jsonData.payload.move])
+          setTurns(turns => [...turns, timeConverter(jsonData.time) + ': ' + jsonData.payload.move])
         }
         if (jsonData.payload.type === 'newTurn') {
-          setLastMarkers({[jsonData.payload.place]:'circle'})
+          if (window.PLAYING_COLOR === 1 && jsonData.payload.turn === 'black' || window.PLAYING_COLOR === -1 && jsonData.payload.turn === 'white') {
+            console.log('проверяю на атари!');
+          }
+          setLastMarkers({ [jsonData.payload.place]: 'circle' })
         }
         if (jsonData.payload.moveType === 'pass') {
           if (stepColor !== yourColor) {
@@ -137,8 +310,8 @@ const GameBoard = ({ history }) => {
         }
         if (jsonData.payload.turnBlackEndedAt && jsonData.payload.turnWhiteEndedAt) {
           setTimes({
-            playerOne: Math.floor((Number(jsonData.payload.turnBlackEndedAt)  - new Date().getTime()) / 1000),
-            playerTwo: Math.floor((Number(jsonData.payload.turnWhiteEndedAt)  - new Date().getTime()) / 1000)
+            playerOne: Math.floor((Number(jsonData.payload.turnBlackEndedAt) - new Date().getTime()) / 1000),
+            playerTwo: Math.floor((Number(jsonData.payload.turnWhiteEndedAt) - new Date().getTime()) / 1000)
           })
         }
       }
@@ -150,8 +323,7 @@ const GameBoard = ({ history }) => {
     let coords = {};
     let alpha = 'ABCDEFGHJKLMNOPQRSTUV'
     map.map((row, rowId) => row.map((cell, colId) => {
-      if(cell !== 0)
-      {
+      if (cell !== 0) {
         let sign = alpha[rowId];
         coords[`${sign}${(colId + 1)}`] = cell === -1 ? 'white' : 'black';
       }
@@ -176,7 +348,7 @@ const GameBoard = ({ history }) => {
       setActiveHelpId(null);
       setHelpType('')
       dispatch(setBlocked(true))
-      client.send(JSON.stringify([7, "go/game", {command: "move", token: token, place: coord.toString().toLowerCase(), game_id: game_id}]));
+      client.send(JSON.stringify([7, "go/game", { command: "move", token: token, place: coord.toString().toLowerCase(), game_id: game_id }]));
     }
   }
 
@@ -185,15 +357,15 @@ const GameBoard = ({ history }) => {
     setActiveHelpId(null);
     setHelpType('')
     dispatch(setBlocked(true))
-    client.send(JSON.stringify([7, "go/game", {command: "pass", token: token, game_id: game_id}]));
+    client.send(JSON.stringify([7, "go/game", { command: "pass", token: token, game_id: game_id }]));
   }
 
   const resign = () => {
     dispatch(setBlocked(true))
-    client.send(JSON.stringify([7, "go/game", {command: "resign", token: token, game_id: game_id}]));
+    client.send(JSON.stringify([7, "go/game", { command: "resign", token: token, game_id: game_id }]));
   }
 
-  const handleHelp = ({type, multipleHandleCount, id, count} ) => {
+  const handleHelp = ({ type, multipleHandleCount, id, count }) => {
     dispatch(markersClear());
     setMultipleHint({});
     setActiveHelpId(id);
@@ -211,8 +383,7 @@ const GameBoard = ({ history }) => {
       dispatch(setBlocked(true))
       setHelpType("map");
       setMapType("map");
-      switch (id)
-      {
+      switch (id) {
         case HEATMAP_FULL:
           dispatch(hintHeatmapFull(game_id));
           break;
@@ -230,7 +401,7 @@ const GameBoard = ({ history }) => {
   const deleteCoordinates = (hints) => {
     for (const key in coordinates) {
       for (const keyHint in hints) {
-        if(key === keyHint) {
+        if (key === keyHint) {
           delete coordinates[key];
         }
       }
@@ -240,7 +411,7 @@ const GameBoard = ({ history }) => {
   const timeConverter = (UNIX_timestamp) => {
     let a = new Date(UNIX_timestamp);
     let year = a.getFullYear().toString().substr(-2);
-    let month = ('0' + (a.getMonth()+1)).slice(-2);
+    let month = ('0' + (a.getMonth() + 1)).slice(-2);
     let date = ('0' + a.getDate()).slice(-2);
     let hour = ('0' + a.getHours()).slice(-2);
     let min = ('0' + a.getMinutes()).slice(-2);
@@ -255,7 +426,7 @@ const GameBoard = ({ history }) => {
       setMultipleHint({})
       setHelpType('');
       dispatch(setBlocked(true))
-      dispatch(hintShowBest(game_id, Object.keys({...mapStones, [val]: 'circle'})))
+      dispatch(hintShowBest(game_id, Object.keys({ ...mapStones, [val]: 'circle' })))
     } else {
       setMultipleHint(mapStones)
     }
