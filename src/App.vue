@@ -11,13 +11,14 @@
             <b-nav-item :to="{ name: 'Home' }" active-class="active" exact
               >Игра</b-nav-item
             >
-            <b-nav-item :to="{ name: 'Settings' }" active-class="active"
+            <b-nav-item :to="{ name: 'Rating' }" active-class="active"
               >Рейтинг</b-nav-item
             >
           </b-navbar-nav>
 
           <b-navbar-nav class="ml-auto">
-            <b-nav-item href="#">Вход</b-nav-item>
+            <b-nav-item :to="{ name: 'Login' }" active-class="active"
+            >Вход</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-container>
