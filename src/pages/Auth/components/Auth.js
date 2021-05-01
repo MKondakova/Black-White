@@ -21,20 +21,6 @@ const Container = styled.div`
 
 const Form = styled.form``;
 
-const Top = styled.div`
-  display: flex;
-  align-self: flex-start;
-  margin-bottom: 49px;
-  margin-left: 50px;
-  position: absolute;
-  top: 50px;
-`;
-
-const Logotype = styled.img`
-  height: auto;
-  width: 405px;
-  margin-right: 94px;
-`;
 
 const Tabs = styled.div`
   display: flex;
@@ -87,9 +73,6 @@ const Auth = () => {
 
   return (
     <Wrapper>
-      <Top>
-        <Logotype alt="logo" src={Logo} />
-      </Top>
       <Container>
         <Form onSubmit={handleAuth}>
           <Tabs>
