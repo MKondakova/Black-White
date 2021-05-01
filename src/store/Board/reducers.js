@@ -118,7 +118,7 @@ export const boardReducer = (state = initialState, action) => {
           let sign = alpha[c[0]];
           let coord = `${sign}${(c[1] + 1)}`;
           mapStones[coord] = "circle";
-          classNamesMapStones[coord] = `redstone size-100`;
+          classNamesMapStones[coord] = `bluestone size-80`;
         });
       }
 

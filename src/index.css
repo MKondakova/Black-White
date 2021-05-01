@@ -531,6 +531,12 @@ code {
     r: 5% !important;
 }
 
+.bluestone {
+    fill: linear-gradient(90deg, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%) !important;
+    stroke: none !important;
+    opacity: 0.5;
+}
+
 .grid_layer path{
   stroke-width: 1!important;
   shape-rendering: auto!important;
