@@ -9,7 +9,7 @@ import { getProfile, getSgf, getFullLog } from "../../store/Profile/actions";
 const Wrapper = styled.div`
   height: 100vh;
   position: relative;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
   display: flex;
   align-items: start;
@@ -38,9 +38,10 @@ const Right = styled.div`
 `;
 
 const GameHistory = styled.div`
-  height: auto;
+  height: 90vh;
   min-height: 200px;
   overflow: hidden;
+  overflow-y: scroll;
   max-width: 635px;
   width: 100%;
   margin-bottom: 70px;
@@ -96,8 +97,6 @@ const ButtonDownloadFile = styled.div`
   font-weight: 400;
   text-align: center;
   font-family: "Roboto",sans-serif;
-  heigth: 60px;
-  height: 20px;
   display: block;
   outline: none;
   -webkit-flex-shrink: 0;
@@ -106,6 +105,7 @@ const ButtonDownloadFile = styled.div`
   background-color: #343a40;
   border-radius: 5px;
   color: white;
+  padding: 5px;
   cursor: pointer;
   font-size: 18px;
   border: none;
@@ -119,21 +119,25 @@ const ButtonRow = styled.div`
   flex-direction: column;
 `;
 
+const InfoText = styled.div `
+  margin-bottom: 10px;
+  font-size: 28px;
+  margin: 15px;
+`
+
 const GameHistoryItem = styled.div`
   height: 120px;
   width: 100%;
-  background: transparent;
   color: #343a40;
-  background-color: transparent;
-  background-image: none;
   border-color: #343a40;
+  border-radius: 5px;
+  border-style: solid;
   border-width: 1px;
-  outline: 1px solid #343a40;
-  margin-bottom: 10px;
+  margin: 10px 20px 0px 0px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
 `;
 
 const InfoHistory = styled.div``;
@@ -211,19 +215,15 @@ const Profile = ({ history }) => {
         </ButtonCustom>
         <Avatar alt="avatar" src={playerInfo?.avatar} />
         <InfoPlayer>
-          <Input
-            mb={10}
-            textAlign="center"
-            disabled
-            value={playerInfo?.nickname}
-          />
-          <Input
-            mb={10}
-            textAlign="center"
-            disabled
-            value={playerInfo?.email}
-          />
-          <Input mb={10} textAlign="center" disabled value={"Cчет: " + playerInfo?.pts} />
+          <InfoText>
+              {playerInfo?.nickname}
+            </InfoText>
+          <InfoText>
+            { playerInfo?.email }
+          </InfoText>
+          <InfoText>
+            Cчет: { playerInfo?.pts }
+          </InfoText>
         </InfoPlayer>
         <ButtonCustom
             width="400px"
