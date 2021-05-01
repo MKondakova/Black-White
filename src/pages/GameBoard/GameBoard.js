@@ -1,3 +1,4 @@
+import {put} from 'redux-saga/effects';
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Board from "./components/Board/Board";
@@ -8,6 +9,7 @@ import Help from "./components/Help/Help";
 import {
   hintHeatmapFull,
   hintHeatmapZone,
+  atariHelp,
   markersClear,
   multipleHelp,
   setWinnerUser,
@@ -25,6 +27,7 @@ import {
   HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
 } from "./components/Help/types";
+import { ATARI_HELP } from "../../store/Board/types";
 
 const Wrapper = styled.div`
   max-width: 1377px;
@@ -267,9 +270,18 @@ const GameBoard = ({ history }) => {
         }
         if (jsonData.payload.currentMap) {
           console.log('проверяю на атари!');
-          setCoordinates(mapMap(jsonData.payload.currentMap))
-          let moves = get_last_moves(window.GAME_ID, token);
-          console.log(check_atari(moves, window.PLAYING_COLOR));
+          setCoordinates(mapMap(jsonData.payload.currentMap));
+          try {
+            let moves = get_last_moves(window.GAME_ID, token);
+            window.ATARI = check_atari(moves, window.PLAYING_COLOR);
+            console.log(window.ATARI);
+            console.log('Вызываю функцию');
+            dispatch(atariHelp());
+          } catch (e) {
+            console.log('Ошибка(');
+            window.ATARI = null;
+            console.log(e);
+          }
         }
         if (jsonData.payload.player) {
           if (typeof jsonData.payload.player === 'string') {

@@ -3,6 +3,7 @@ import {
   MARKERS_CLEAR,
   MULTIPLE_HELP,
   MAP_HELP,
+  ATARI_HELP,
   WINNER_USER,
   LOSER_USER,
   SET_BLOCKED,
@@ -105,6 +106,26 @@ export const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         scoresWinner: action.payload,
+        blocked: false
+      };
+    case ATARI_HELP:
+      console.log('Меня вызвали, значит я нужен!');
+      var mapStones = {};
+      var classNamesMapStones = {};
+      if (window.ATARI !== null) {
+        let alpha = 'ABCDEFGHJKLMNOPQRSTUV'
+        window.ATARI.forEach(function(c) {
+          let sign = alpha[c[0]];
+          let coord = `${sign}${(c[1] + 1)}`;
+          mapStones[coord] = "circle";
+          classNamesMapStones[coord] = `redstone size-100`;
+        });
+      }
+
+      return {
+        ...state,
+        mapStones,
+        classNamesMapStones,
         blocked: false
       };
     default:
