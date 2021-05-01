@@ -226,7 +226,7 @@ const Info = ({history}) => {
           <pre>{`
           payload: {
           currentMap: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],…]
-          move: "Dock(черные) сделал ход L6" //Сообщение в лог на фронте
+          move: "Dock(ые) сделал ход L6" //Сообщение в лог на фронте
           place: "L6" //ход
           turn: "white" //чей ход сейчас
           turnBlackEndedAt: 1619727100000
@@ -337,7 +337,7 @@ const Info = ({history}) => {
           history.push(MAIN_URL);
         }}
       >
-        В меню
+        Назад
       </ButtonCustom>
     </Wrapper>
 );
