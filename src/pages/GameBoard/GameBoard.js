@@ -1,4 +1,4 @@
-import {put} from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Board from "./components/Board/Board";
@@ -104,26 +104,26 @@ const GameBoard = ({ history }) => {
   function check_atari(moves, color) { // тот, кто ходит сейчас
     if (moves.length < 2)
       return [];
-  
+
     let set = moves[1];
     let last_set = moves[0];
-  
+
     function get_group(_set, x, y) {
       let color = _set[y][x];
       let checked = [];
-  
+
       for (let i = 0; i < size; i++) {
         checked.push([]);
         for (let j = 0; j < size; j++)
           checked[i].push(false)
       }
-  
+
       checked[y][x] = true;
-  
+
       function recursion(_set, x, y, checked, color) {
         checked[y][x] = true;
         let coords = [[y - 1, x], [y + 1, x], [y, x - 1], [y, x + 1]];
-  
+
         coords.forEach(function (c) {
           if (c[0] >= 0 && c[0] < size && c[1] >= 0 && c[1] < size)
             if (checked[c[0]][c[1]] === false)
@@ -133,9 +133,9 @@ const GameBoard = ({ history }) => {
               }
         });
       }
-  
+
       recursion(_set, x, y, checked, color);
-  
+
       let stones = [];
       for (let i = 0; i < size; i++)
         for (let j = 0; j < size; j++)
@@ -143,7 +143,7 @@ const GameBoard = ({ history }) => {
             stones.push([j, i]);
       return stones;
     }
-  
+
     function can_breathe(_set, group) {
       let finished = false;
       for (let i = 0; i < group.length; i++) {
@@ -153,24 +153,24 @@ const GameBoard = ({ history }) => {
             if (_set[c[0]][c[1]] === 0)
               finished = true;
         });
-  
+
       }
-  
+
       return finished;
     }
-  
+
     function can_place(_set, _last_set, x, y, color) {
       if (_set[y][x] != 0)
         return false;
-  
+
       let set_copy = [];
-  
+
       for (let i = 0; i < size; i++) {
         set_copy.push([]);
         for (let j = 0; j < size; j++)
           set_copy[i].push(_set[i][j])
       }
-  
+
       set_copy[y][x] = color;
       let group = get_group(_set, x, y);
       let group_can_breathe = can_breathe(_set, group);
@@ -189,7 +189,7 @@ const GameBoard = ({ history }) => {
                 });
             }
         });
-  
+
         group = get_group(set_copy, x, y);
         group_can_breathe = can_breathe(set_copy, group);
         if (!group_can_breathe)
@@ -199,21 +199,21 @@ const GameBoard = ({ history }) => {
             for (let j = 0; j < size; j++)
               if (set_copy[i][j] !== last_set[i][j])
                 return true;
-  
+
           return false;
         }
       }
     }
-  
+
     function atari_at_coords(_set, _last_set, x, y, color) {
       let set_copy = [];
-  
+
       for (let i = 0; i < size; i++) {
         set_copy.push([]);
         for (let j = 0; j < size; j++)
           set_copy[i].push(_set[i][j])
       }
-  
+
       set_copy[y][x] = color;
       let coords = [[y - 1, x], [y + 1, x], [y, x - 1], [y, x + 1]];
       let atari = false;
@@ -225,28 +225,28 @@ const GameBoard = ({ history }) => {
               atari = true;
           }
       });
-  
+
       return atari;
     }
-  
+
     let atari_coords = [];
-  
+
     for (let i = 0; i < size; i++)
       for (let j = 0; j < size; j++)
         if (can_place(set, last_set, j, i, -color))
           if (atari_at_coords(set, last_set, j, i, -color)) // вот в этих координатах атари!!!
             atari_coords.push([i, j]);
-  
+
     return atari_coords;
   }
-    
+
   function get_last_moves(game_id, TOKEN) {
     let req = new XMLHttpRequest();
-  
+
     req.open('GET', 'https://go-backend-denis.ambersoft.llc/game/info/' + game_id.toString() + '?token=' + TOKEN, false);
     req.send();
     let moves = JSON.parse(JSON.parse(req.response).log);
-  
+
     if (moves.length >= 2)
       return [moves[moves.length - 2], moves[moves.length - 1]];
     else if (moves.length === 1)
@@ -254,7 +254,7 @@ const GameBoard = ({ history }) => {
     else
       return [];
   }
-  
+
   client.onmessage = function (e) {
     setEnemyPass(false)
     if (typeof e.data === 'string') {
@@ -274,11 +274,8 @@ const GameBoard = ({ history }) => {
           try {
             let moves = get_last_moves(window.GAME_ID, token);
             window.ATARI = check_atari(moves, window.PLAYING_COLOR);
-            console.log(window.ATARI);
-            console.log('Вызываю функцию');
             dispatch(atariHelp());
           } catch (e) {
-            console.log('Ошибка(');
             window.ATARI = null;
             console.log(e);
           }
