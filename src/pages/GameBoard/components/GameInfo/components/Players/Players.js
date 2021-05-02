@@ -12,8 +12,8 @@ const Player = styled.div`
   display: flex;
   width: 50%;
   padding: 20px 10px;
-  background: ${(props) => (props.active ? "#222233" : "white")};
-  color: ${(props) => (props.active ? "white" : "#222233")};
+  background:#222233;
+  color: white;
   border: 2px solid #222233;
   margin-top:40px;
   position: relative;
@@ -23,6 +23,8 @@ const Player = styled.div`
   border-bottom-left-radius: 5px;
 `;
 const PlayerRight = styled(Player)`
+  background: white;
+  color: #222233;
   justify-content: flex-end;
   border-top-left-radius: 0;
   border-top-right-radius: 5px;

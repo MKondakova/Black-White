@@ -224,6 +224,9 @@ const Profile = ({ history }) => {
           <InfoText>
             Cчет: { playerInfo?.pts }
           </InfoText>
+          <InfoText>
+            Рейтинг: { playerInfo?.position }
+          </InfoText>
         </InfoPlayer>
         <ButtonCustom
             width="400px"
