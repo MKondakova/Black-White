@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Avatar1 from "../../../../../../assets/img/avatar.png";
-import Avatar2 from "../../../../../../assets/img/avatar-2.png";
-import { useSelector, useStore } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   display: flex;
+  grid-area: players;
 `;
 const Player = styled.div`
   display: flex;
   width: 50%;
-  padding: 19px 10px;
+  padding: 20px 10px;
   background: ${(props) => (props.active ? "#222233" : "#F5F5DC")};
   color: ${(props) => (props.active ? "#F5F5DC" : "#222233")};
   border: ${(props) => (props.winner ? "4px solid green" : "0px")};
-  margin-top:30px;
+  margin-top:40px;
   position: relative;
 `;
 const PlayerRight = styled(Player)`

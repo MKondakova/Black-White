@@ -21,8 +21,8 @@ const Info = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  max-width: 635px;
-  width: 100%;
+  min-width: 150px;
+  width: 50%;
   margin-bottom: 70px;
 `;
 const InfoPlayer = styled.div``;
@@ -42,8 +42,8 @@ const GameHistory = styled.div`
   min-height: 200px;
   overflow: hidden;
   overflow-y: scroll;
-  max-width: 635px;
-  width: 100%;
+  min-width: 150px;
+  width: 50%;
   margin-bottom: 70px;
   display: flex;
   flex-direction: column;

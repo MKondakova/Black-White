@@ -6,18 +6,8 @@ import { markersClear, setMapStones } from "../../../../store/Board/actions";
 import { client } from "../../../../Socket";
 
 const Wrapper = styled.div`
-  width: 50%;
-  position: relative;
-  & > div {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-  }
-  & svg {
-    width: 100%;
-    height: 100%;
-  }
+  grid-area: board;
+  width: 100%;
 `;
 
 const Board = ({
@@ -91,7 +81,6 @@ const Board = ({
   return (
     <Wrapper className={className}>
         <Goban
-          style={{ position: "absolute" }}
           stones={coordinates}
           markers={markers}
           lastMarkers={lastMarkers}

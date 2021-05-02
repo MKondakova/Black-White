@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+  grid-area: info;
   margin-top: 23px;
   min-height: 508px;
   overflow-y: scroll;

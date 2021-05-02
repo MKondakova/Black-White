@@ -29,22 +29,34 @@ import {
 } from "./components/Help/types";
 import { ATARI_HELP, _7x7_HELP } from "../../store/Board/types";
 import Loader from "react-loader-spinner";
+import Players from "./components/GameInfo/components/Players/Players";
+
 
 const Wrapper = styled.div`
-  min-width: 800px;
+  display: grid;
+  @media (max-width: 1000px) {
+    grid-template-areas:
+    "header"
+    "board"
+    "players"  
+    "help"
+    "info";
+  }
+  @media (min-width: 1000px) {
+    grid-template-columns: 3fr 2fr;
+    grid-template-areas:
+      "header     header"
+      "board      players"
+      "board      help"
+      "board      info";
+    }
   max-width: 1377px;
   margin: 0 auto;
 `;
-const Flex = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: stretch;
-  height: calc(100vh - 129px);
-`;
+
 const Wrap = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   position: absolute;
   left: 0;
   top: 0;
@@ -465,7 +477,6 @@ const GameBoard = ({ history }) => {
         timeOut={() => alert('End Time')}
         timer={stepColor === yourColor}
       />
-      <Flex>
         {blocked && (
           <Wrap>
             <Spinner>
@@ -493,39 +504,27 @@ const GameBoard = ({ history }) => {
           classNames={classNames}
           mapStones={mapStones}
         />
+        <Players
+          enemyPass={enemyPass} 
+          opponent={opponent} 
+          you={you} 
+          stepColor={stepColor} 
+          yourColor={yourColor} 
+          stepMain={stepMain} 
+          stepTwo={stepTwo} 
+          times={times}
+        />
+        
         {!hint ? (
           <GameInfo
-            you={you}
-            opponent={opponent}
-            stepColor={stepColor}
-            yourColor={yourColor}
-            turns={turns}
-            enemyPass={enemyPass}
-            stepMain={stepMain}
-            times={times}
-            stepTwo={stepTwo} />
+            turns={turns} />
         ) : (
           <Help
-            you={you}
-            opponent={opponent}
-            stepColor={stepColor}
-            yourColor={yourColor}
-            turns={turns}
-            enemyPass={enemyPass}
-            stepMain={stepMain}
-            stepTwo={stepTwo}
-            currentColor={yourColor}
-            setHint={setHint}
             handleHelp={handleHelp}
-            helpType={helpType}
-            multipleType={multipleType}
-            mapType={mapType}
             activeHelpId={activeHelpId}
-            times={times}
             scores={stepColor !== yourColor ? false : true}
           />
         )}
-      </Flex>
     </Wrapper>
   );
 };
