@@ -294,7 +294,8 @@ const GameBoard = ({ history }) => {
           try {
             let moves = get_last_moves(game_id, token);
             window.ATARI = check_atari(moves, window.PLAYING_COLOR);
-            dispatch(atariHelp());
+            if (window.ATARI_DISABLED)
+              handleHelp({ type: "atari" });
           } catch (e) {
             window.ATARI = undefined;
             console.log(e);

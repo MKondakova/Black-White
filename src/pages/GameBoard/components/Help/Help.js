@@ -97,9 +97,12 @@ const Help = ({
       <HelpWrapper>
         <Atari id="atari" className="atari-sel"
           onClick={(e) => {
-            window.Atari = window.ATARI_ENABLED ? false : true;
+            window.ATARI_DISABLED = window.ATARI_DISABLED ? false : true;
             e.currentTarget.classList.toggle('atari-sel')
             e.currentTarget.classList.toggle('atari-unsel')
+            
+            if (!window.ATARI_DISABLED)
+              scores && handleHelp({ type: "atari" });
           }}
         >
           Атари
