@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import Logo from "../../../assets/img/logo.png";
 import { ButtonCustom } from "../../../components/ButtonCustom";
 import { Input } from "../../../components/InputCustom";
 import { regSubmit, loginSubmit } from "../../../store/Auth/actions";
@@ -15,7 +14,8 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 513px;
+  width: 40%;
+  min-width: 300px;
   margin: 0 auto;
 `;
 

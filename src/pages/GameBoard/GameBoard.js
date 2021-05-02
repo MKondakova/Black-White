@@ -1,4 +1,3 @@
-import { put } from 'redux-saga/effects';
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Board from "./components/Board/Board";
@@ -29,8 +28,10 @@ import {
   HEATMAP_ZONE_QUARTER,
 } from "./components/Help/types";
 import { ATARI_HELP, _7x7_HELP } from "../../store/Board/types";
+import Loader from "react-loader-spinner";
 
 const Wrapper = styled.div`
+  min-width: 800px;
   max-width: 1377px;
   margin: 0 auto;
 `;
@@ -48,9 +49,14 @@ const Wrap = styled.div`
   left: 0;
   top: 0;
   background-color: rgba(255,255,255,0.5);
-  z-index: 99999999;
+  z-index: 9;
 `;
-
+const Spinner = styled.div`
+position: absolute;
+left: 45%;
+top: 45%;
+z-index: 10;
+`;
 const GameBoard = ({ history }) => {
 
   const game_id = useSelector((state) => state.createGame.id);
@@ -366,8 +372,12 @@ const GameBoard = ({ history }) => {
   }
 
   const resign = () => {
-    dispatch(setBlocked(true))
-    client.send(JSON.stringify([7, "go/game", { command: "resign", token: token, game_id: game_id }]));
+    let isResign = window.confirm("Ты уверен? Дорогу осилит идущий...");
+
+    if (isResign){
+      dispatch(setBlocked(true));
+      client.send(JSON.stringify([7, "go/game", { command: "resign", token: token, game_id: game_id }]));
+    }
   }
 
   const handleHelp = ({ type, multipleHandleCount, id, count }) => {
@@ -457,7 +467,11 @@ const GameBoard = ({ history }) => {
       />
       <Flex>
         {blocked && (
-          <Wrap />
+          <Wrap>
+            <Spinner>
+              <Loader type="ThreeDots" color="black" height={126} width={126} />
+            </Spinner>
+          </Wrap>
         )}
         <Board
           lastMarkers={lastMarkers}

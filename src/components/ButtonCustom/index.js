@@ -6,8 +6,7 @@ const Btn = styled.button`
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : 400)};
   text-align: ${(props) => (props.textAlign ? props.textAlign : "center")};
   font-family: "Roboto", sans-serif;
-  padding: ${(props) => (props.padding ? props.padding : "0")};
-  height: ${(props) => (props.height ? props.height : "62px")};
+  padding: ${(props) => (props.padding ? props.padding : "10px")};
   display: block;
   outline: none;
   flex-shrink: 0;

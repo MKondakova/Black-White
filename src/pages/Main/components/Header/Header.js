@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import AvatarImage from "../../../../assets/img/avatar.png";
+import Pupa from "../../../../assets/img/magnifier_icon-icons.com_56922.svg";
 import { MAIN_URL, PROFILE_URL } from "../../../../constants/routes";
 import { ButtonCustom } from "../../../../components/ButtonCustom";
 import { Input } from "../../../../components/InputCustom";
@@ -113,7 +114,7 @@ export const Header = ({
         onClick={() => {
           history.push(MAIN_URL)
           setSearchType("")
-        }} padding="0 20px">
+        }} padding="10px 20px">
           Меню
         </ButtonCustom>
         <Input
@@ -123,7 +124,12 @@ export const Header = ({
           textAlign="left"
           placeholder="Введите ник или номер игрока"
         />
-      </RightSearch>
+        <img src={Pupa} 
+        onClick={() => {
+          history.push(MAIN_URL)
+          setSearchType("")
+        }}></img>
+      </RightSearch >
     )}
   </Wrapper>
 );

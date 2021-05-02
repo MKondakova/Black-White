@@ -6,12 +6,14 @@ import { Connect } from "../Connect";
 import { LoadingGame } from "../LoadingGame";
 import { Winner } from "../Winner";
 import { Error } from "../Error";
-import { INFO_URL } from "../../../../constants/routes";
+import { PROFILE_URL, LIDERS } from "../../../../constants/routes";
 import { createRandomGame, createGameWithAi } from "../../../../store/GameCreate/actions";
 import { useDispatch, useSelector } from "react-redux";
+import { siteUrl } from "../../../../constants/siteUrl";
 
 const Wrapper = styled.div`
-  width: 613px;
+  width: 50%;
+  min-width:350px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -34,6 +36,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
           text="Ожидание случайного соперника"
           setOpponent={setOpponent}
           searchType={searchType}
+          countText="Вместе с Вами готовы сыграть ..."
           />
       );
 
@@ -109,7 +112,12 @@ export const Content = ({ history, searchType, setSearchType }) => {
           <ButtonCustom onClick={() => setSearchType("Code")} mb={30} >
             Закрытая игра
           </ButtonCustom>
-          <ButtonCustom mb={30} onClick={() => history.push('/liders')}>Рейтинг игроков</ButtonCustom>{" "}
+          <ButtonCustom mb={30} onClick={() => history.push(LIDERS)}>
+            Рейтинг игроков
+          </ButtonCustom>
+          <ButtonCustom mb={30} onClick={() => history.push(PROFILE_URL)}>
+           Профиль
+          </ButtonCustom>{" "}
         </>
       ) : null}
       {ContentMainBoard(setSearchType, searchType, history, gameId)}

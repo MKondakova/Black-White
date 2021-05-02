@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Logo from "../../../../assets/img/logo_game.png";
-import {MAIN_URL} from '../../../../constants/routes'
 
 const Wrapper = styled.div`
   display: flex;
@@ -24,13 +22,6 @@ const Menu = styled.div`
 const Left = styled.div`
   display: flex;
   align-items: center;
-`;
-const LogoWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-`;
-const Logotype = styled.img`
 `;
 const Text = styled.p`
   font-size: 24px;
@@ -57,6 +48,7 @@ const TextSdf = styled.p`
 `;
 const GameId = styled.p`
   font-size: 24px;
+  margin-right: 50px;
   line-height: 28px;
 `;
 const Timer = styled.p`
