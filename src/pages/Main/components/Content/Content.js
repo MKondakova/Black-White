@@ -6,7 +6,7 @@ import { Connect } from "../Connect";
 import { LoadingGame } from "../LoadingGame";
 import { Winner } from "../Winner";
 import { Error } from "../Error";
-import { PROFILE_URL, LIDERS } from "../../../../constants/routes";
+import { PROFILE_URL, LIDERS, RULES } from "../../../../constants/routes";
 import { createRandomGame, createGameWithAi } from "../../../../store/GameCreate/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { siteUrl } from "../../../../constants/siteUrl";
@@ -117,6 +117,9 @@ export const Content = ({ history, searchType, setSearchType }) => {
           </ButtonCustom>
           <ButtonCustom mb={30} onClick={() => history.push(PROFILE_URL)}>
            Профиль
+          </ButtonCustom>
+          <ButtonCustom mb={30} onClick={() => history.push(RULES)}>
+           Правила
           </ButtonCustom>{" "}
         </>
       ) : null}
