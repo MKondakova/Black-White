@@ -101,7 +101,7 @@ const Help = ({
   return (
     <Wrapper>
       <HelpWrapper>
-        <Atari id="atari" className={classListAtari}
+        <Atari id="atari" title='Показывает последние дыхание у камня или группы камней (стоимость 0)' className={classListAtari}
           onClick={(e) => {
             window.ATARI_DISABLED = window.ATARI_DISABLED ? false : true;
             e.currentTarget.classList.toggle('atari-sel')
@@ -116,7 +116,7 @@ const Help = ({
         >
           Атари
         </Atari>
-        <HelpItem title="Стоимость - 2"
+          <HelpItem title="Показывает лучший из заданных трех ходов (стоимость 2)"
           active={activeHelpId === 16}
           onClick={() =>
             scores &&
@@ -125,29 +125,29 @@ const Help = ({
         >
           Показать лучший из заданных 3 ходов
         </HelpItem>
-        <HelpItem title="Стоимость - 2"
+          <HelpItem title="Показывает четверть доски в которой есть лучший ход (стоимость 1)"
           active={activeHelpId === HEATMAP_ZONE_QUARTER}
           onClick={() =>
             scores && handleHelp({ type: "map", id: HEATMAP_ZONE_QUARTER })
           }
-        >
+          >
           В какой четверти доски сейчас лучший ход?
         </HelpItem>
-        <HelpItem title="Стоимость - 2"
+          <HelpItem title="Показывает кто побеждает на данный момент (стоимость 1)"
           active={activeHelpId === 34}
           onClick={() => scores && handleHelp({ type: "score", id: 34 })}
         >
           Кто побеждает на данный момент?
         </HelpItem>
-        <HelpItem
+        <HelpItem title="Показывает область размером 7х7 в которой есть максимальное количество удачных ходов (стоимость 2)"
           onClick={() => scores && handleHelp({ type: "map", id: _7X7_HELP })}
         >
           В какой области хороший ход?
         </HelpItem>
-        <HelpItem
+        <HelpItem title="Показывает область в которой есть лучший ход, если пользователь не угадывает этот ход зона уменьшается (стоимость 3)"
           onClick={() => scores && handleHelp({ type: "battle", id: BATTLE_ROYALE_HELP })}
         >
-          Королевская битва!
+          Лучший ход
         </HelpItem>
       </HelpWrapper>
     </Wrapper>
