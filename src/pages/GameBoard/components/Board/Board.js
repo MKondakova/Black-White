@@ -113,6 +113,7 @@ const Board = ({
   return (
     <Wrapper className={className}>
         <Goban
+          theme="paper"
           stones={coordinates}
           markers={markers}
           lastMarkers={lastMarkers}
