@@ -34,7 +34,7 @@ const TextHint = styled.p`
   line-height: 28px;
   margin-right: 32px;
   cursor: pointer;
-  color: ${(props) => (props.hint ? "#D8AD63" : "#000")};
+  color: ${(props) => (props.hint ? "#686868" : "#000")};
 `;
 
 const TextSdf = styled.p`
@@ -73,6 +73,7 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
             {view && (
               <TextHint onClick={() => setHint(!hint)} hint={hint}>Взять подсказку</TextHint>
             )}
+            <Text onClick={()=>window.open('https://ufgo.org/Rules9x9/Go%20Rules%209x9.htm','_blank')}>Правила</Text>
           </Menu>
         </Left>
         <GameId>ID игры: {gameId}</GameId>

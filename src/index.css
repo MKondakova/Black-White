@@ -538,12 +538,12 @@ code {
 }
 .atari-sel {
     color: #fff;
-    background-color: #343a40;
-    border-color: #343a40;
+    background-color: #222233;
+    border-color: #222233;
 }
 .atari-unsel{
-    color: #343a40;
-    border-color: #343a40;
+    color: #222233;
+    border-color: #222233;
     background-color: transparent;
 }
 

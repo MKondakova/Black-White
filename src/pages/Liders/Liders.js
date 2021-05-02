@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Header } from "../Main/components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getLiders } from "../../store/Profile/actions";
+import  image  from "../../assets/img/up-arrow-svgrepo-com.svg"
 
 const Wrapper = styled.div`
   max-width: 1300px;
@@ -132,6 +133,11 @@ export const Liders = ({ history }) => {
         setSearchType={() => console.log()}
         setNicknameFunc={(val) => setNickname(val)}
       />
+      <a href="#" title="Вернуться к началу">
+      <img src={image} style={{position:'fixed',
+  bottom:50,
+  right:50
+  }} ></img></a>
       <LidersCont>
         {
           list.map((item, i) => {

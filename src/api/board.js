@@ -1,5 +1,5 @@
 import { GET } from "./base";
-const CENTAUR_TOKEN = 'test1'
+const CENTAUR_TOKEN = 'wid2I8SPD14qy2jx'
 
 export const helpBestMoves = (token, game_id, count) => {
   return GET(`hints/best-moves?token=${token}&game_id=${game_id}&centaur_token=${CENTAUR_TOKEN}&count=${count}`, {}, token);

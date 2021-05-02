@@ -61,7 +61,7 @@ const Name = styled.p`
   line-height: 28px;
 `;
 const Pts = styled.p`
-  color: #343a40;
+  color: #222233;
   font-size: 12px;
   line-height: 14px;
 `;
@@ -69,20 +69,20 @@ const Span = styled.p`
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
-  color: #343a40;
+  color: #222233;
 `;
 const ScoreLeft = styled.p`
   font-size: 24px;
   line-height: 28px;
   font-weight: bold;
-  color: #343a40;
+  color: #222233;
   margin-right: 5px;
 `;
 const ScoreRight = styled.p`
   font-size: 24px;
   line-height: 28px;
   font-weight: bold;
-  color: #343a40;
+  color: #222233;
   margin-left: 5px;
   margin-right: 16px;
 `;
@@ -102,7 +102,7 @@ const ButtonDownloadFile = styled.div`
   -webkit-flex-shrink: 0;
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  background-color: #343a40;
+  background-color: #222233;
   border-radius: 5px;
   color: white;
   padding: 5px;
@@ -128,8 +128,8 @@ const InfoText = styled.div `
 const GameHistoryItem = styled.div`
   height: 120px;
   width: 100%;
-  color: #343a40;
-  border-color: #343a40;
+  color: #222233;
+  border-color: #222233;
   border-radius: 5px;
   border-style: solid;
   border-width: 1px;
