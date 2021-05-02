@@ -1,5 +1,6 @@
 import {
   SINGLE_HELP,
+  BATTLE_ROYALE_HELP,
   MARKERS_CLEAR,
   MULTIPLE_HELP,
   MAP_HELP,
@@ -30,6 +31,14 @@ export const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         markers: action.payload,
+        blocked: false
+      };
+    case BATTLE_ROYALE_HELP:
+      let best_move = action.payload[0].move;
+      let j_c = 'ABCDEFGHJKLMNOPQRSTUV'.search(best_move[0]);
+      let i_c = 0; 
+      return {
+        ...state,
         blocked: false
       };
     case SET_BLOCKED:
@@ -68,7 +77,7 @@ export const boardReducer = (state = initialState, action) => {
       } else {
         var mapStones = {};
         var classNamesMapStones = {};
-        let alpha = 'ABCDEFGHJKLMNOPQRSTUV'
+        let alpha = 'ABCDEFGHJKLMNOPQRSTUV';
         action.payload.map((row, rowId) => {
           row.map((cell, colId) => {
             if (parseInt(cell) !== 0) {
@@ -137,7 +146,7 @@ export const boardReducer = (state = initialState, action) => {
           map[rowId].push(cell);
         });
       });
-      
+
       let max_i, max_j, max_score = -1;
       for (let i = 0; i < 6; i++)
         for (let j = 0; j < 6; j++) {

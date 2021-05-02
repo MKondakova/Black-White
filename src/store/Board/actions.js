@@ -12,6 +12,7 @@ import {
   GET_HINT_HEATMAP_FULL,
   GET_HINT_HEATMAP,
   GET_HINT_HEATMAP_ZONE,
+  GET_HINT_BATTLE_ROYALE,
   SET_BLOCKED,
   MAP_STONES,
   GET_SCORES_WINNER
@@ -76,6 +77,11 @@ export const hintBestMoves = (game_id, count) => ({
 export const hintShowBest = (game_id, moves) => ({
   type: GET_HINT_SHOW_BEST,
   payload: {game_id: game_id, moves: moves}
+});
+
+export const hintBattleRoyale = (game_id) => ({
+  type: GET_HINT_BATTLE_ROYALE,
+  payload: {game_id: game_id, }
 });
 
 export const hintHeatmap = (game_id) => ({
