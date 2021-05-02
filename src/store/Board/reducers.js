@@ -64,7 +64,7 @@ export const boardReducer = (state = initialState, action) => {
             let sign = alpha[i];
             let coord = `${sign}${(j + 1)}`;
             mapStones[coord] = "circle"
-            classNamesMapStones[coord] = `redstone size-${80}`
+            classNamesMapStones[coord] = `redstone size-${70}`
           }
         }
       } else {
@@ -116,7 +116,7 @@ export const boardReducer = (state = initialState, action) => {
             let sign = alpha[i];
             let coord = `${sign}${(j + 1)}`;
             mapStones[coord] = "circle"
-            classNamesMapStones[coord] = `redstone size-${80}`
+            classNamesMapStones[coord] = `redstone size-${70}`
           }
         }
       }
