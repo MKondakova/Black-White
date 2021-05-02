@@ -33,13 +33,15 @@ const Avatar = styled.img`
   border-radius: 100px;
   width: 95px;
   margin-right: 15px;
-  border: 6px solid white;
+  border: ${(props) => (props.winner ? "4px solid green" : "6px solid white")};
+
 `;
 const AvatarRight = styled.img`
   border-radius: 100px;
   width: 95px;
   margin-left: 15px;
-  border: 6px solid #222233;
+  border: ${(props) => (props.winner ? "4px solid green" : "6px solid #222233")};
+
 `;
 const Info = styled.div``;
 const Name = styled.p`
@@ -189,7 +191,8 @@ const Players = ({ yourColor, enemyPass, stepColor, you, opponent, stepMain, ste
   return (
     <Wrapper>
       <Player active={yourColor === "black"} winner={winner && (winner.winner === 'B')}>
-        <Avatar alt="avatar" src={yourColor === 'black' ? you.avatar : opponent.avatar} />
+        <Avatar alt="avatar" src={yourColor === 'black' ? you.avatar : opponent.avatar} 
+                      winner={winner && (winner.winner === 'B')} />
         <Info>
           <Name>{yourColor === 'black' ? you.nickname : opponent.nickname}</Name>
           <Pts>{yourColor === 'black' ? you.pts : opponent.pts}/{yourColor === 'black' ? you.position+'th' : opponent.position+'th'}</Pts>
@@ -217,7 +220,8 @@ const Players = ({ yourColor, enemyPass, stepColor, you, opponent, stepMain, ste
         { enemyPass && yourColor !== 'white' && (<PassRight>Пас</PassRight>)}
         <TimeRight>{timerParseTwo}</TimeRight>
         <ScoreRight>{stepTwo}</ScoreRight>
-        <AvatarRight alt="avatar" src={yourColor !== 'white' ? opponent.avatar : you.avatar} />
+        <AvatarRight alt="avatar" src={yourColor !== 'white' ? opponent.avatar : you.avatar}
+         winner={winner && (winner.winner === 'W')} />
         <TreangleRight active={stepColor === "white"} />
       </PlayerRight>
     </Wrapper>
