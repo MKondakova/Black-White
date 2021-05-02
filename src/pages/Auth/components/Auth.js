@@ -14,7 +14,8 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 513px;
+  width: 40%;
+  min-width: 300px;
   margin: 0 auto;
 `;
 

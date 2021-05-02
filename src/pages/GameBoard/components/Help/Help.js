@@ -23,9 +23,31 @@ const HelpWrapper = styled.div`
 `;
 
 const HelpItem = styled.div`
+text-align: ${(props) => (props.textAlign ? props.textAlign : "center")};
+font-family: "Roboto", sans-serif;
+display: block;
+outline: none;
+flex-shrink: 0;
+border-radius: 5px;
+color: #343a40;
+border-color: #343a40;
+background-color: transparent;
+background-image: none;
+border-style: solid;
+border-width: 1px;
+cursor: pointer;
+font-size: ${(props) => (props.fontSize ? props.fontSize : "28px")};
+&:hover {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}
+&:focus {
+  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
+}
+
   width: 48%;
   margin-bottom: 10px;
-  background: ${(props) => (props.active ? "#D8AD63" : "#f6f6f6")};
   padding: 10px;
   cursor: pointer;
 `;
@@ -56,15 +78,7 @@ const Help = ({
         times={times}
       />
       <HelpWrapper>
-        <HelpItem
-          active={activeHelpId === 1}
-          onClick={() =>
-            scores && handleHelp({ type: "single", id: 1, count: 1 })
-          }
-        >
-          Лучший ход
-        </HelpItem>
-        <HelpItem
+        <HelpItem title="Стоимость - 2"
           active={activeHelpId === HEATMAP_FULL}
           onClick={() =>
             scores && handleHelp({ type: "map", id: HEATMAP_FULL })
@@ -72,7 +86,7 @@ const Help = ({
         >
           Тепловая карта всей доски. Детализированная
         </HelpItem>
-        <HelpItem
+        <HelpItem 
           active={activeHelpId === 16}
           onClick={() =>
             scores &&
@@ -94,6 +108,14 @@ const Help = ({
           onClick={() => scores && handleHelp({ type: "score", id: 34 })}
         >
           Кто побеждает на данный момент?
+        </HelpItem>
+        <HelpItem
+          active={activeHelpId === 1}
+          onClick={() =>
+            scores && handleHelp({ type: "single", id: 1, count: 1 })
+          }
+        >
+          Лучший ход
         </HelpItem>
       </HelpWrapper>
     </Wrapper>

@@ -14,6 +14,7 @@ const Player = styled.div`
   background: ${(props) => (props.active ? "#222233" : "#F5F5DC")};
   color: ${(props) => (props.active ? "#F5F5DC" : "#222233")};
   border: ${(props) => (props.winner ? "4px solid green" : "0px")};
+  margin-top:30px;
   position: relative;
 `;
 const PlayerRight = styled(Player)`
