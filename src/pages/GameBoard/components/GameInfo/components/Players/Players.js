@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
   display: flex;
+  min-width:550px;
+  min-height: 150px;
   grid-area: players;
 `;
 const Player = styled.div`
@@ -15,10 +17,17 @@ const Player = styled.div`
   border: 2px solid #222233;
   margin-top:40px;
   position: relative;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 5px;
 `;
 const PlayerRight = styled(Player)`
   justify-content: flex-end;
+  border-top-left-radius: 0;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 0;
 `;
 const Avatar = styled.img`
   border-radius: 100px;
@@ -34,11 +43,13 @@ const AvatarRight = styled.img`
 `;
 const Info = styled.div``;
 const Name = styled.p`
+  z-index:2;
   color: white;
   font-size: 24px;
 `;
 
 const NameRight = styled.p`
+  z-index:2;
   color: #222233;
   font-size: 24px;
 `;
@@ -79,7 +90,7 @@ const TreangleRight = styled.div`
   content: "";
   left: 2px;
   top: 36px;
-  border: 28px solid white;
+  border: 28px solid transparent;
   border-left: 38px solid #222233;
 `;
 const Scores = styled.div`

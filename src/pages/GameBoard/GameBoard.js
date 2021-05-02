@@ -39,8 +39,8 @@ const Wrapper = styled.div`
   @media (max-width: 1000px) {
     grid-template-areas:
     "header"
-    "board"
     "players"  
+    "board"
     "help"
     "info";
   }

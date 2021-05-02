@@ -118,7 +118,7 @@ export const Content = ({ history, searchType, setSearchType }) => {
           <ButtonCustom mb={30} onClick={() => history.push(PROFILE_URL)}>
            Профиль
           </ButtonCustom>
-          <ButtonCustom mb={30} onClick={() => history.push(RULES)}>
+          <ButtonCustom mb={30} onClick={()=>window.open('https://ufgo.org/Rules9x9/Go%20Rules%209x9.htm','_blank')}>
            Правила
           </ButtonCustom>{" "}
         </>
