@@ -23,7 +23,7 @@ const HelpWrapper = styled.div`
   align-items: flex-start;
   flex-wrap: nowrap;
 `;
-const Checkbox = styled.div `
+const Checkbox = styled.div`
 text-align: ${(props) => (props.textAlign ? props.textAlign : "center")};
 font-family: "Roboto", sans-serif;
 display: block;
@@ -88,21 +88,30 @@ background-color: transparent;
 `;
 
 const Help = ({
-    handleHelp,
-    activeHelpId,
-    scores,
-  }) => {
+  handleHelp,
+  activeHelpId,
+  scores,
+}) => {
+  let classListAtari = "";
+  if (!window.ATARI_DISABLED) {
+    classListAtari = "atari-sel"
+  } else {
+    classListAtari = "atari-unsel"
+  }
   return (
     <Wrapper>
       <HelpWrapper>
-        <Atari id="atari" className="atari-sel"
+        <Atari id="atari" className={classListAtari}
           onClick={(e) => {
             window.ATARI_DISABLED = window.ATARI_DISABLED ? false : true;
             e.currentTarget.classList.toggle('atari-sel')
             e.currentTarget.classList.toggle('atari-unsel')
-            
+
             if (!window.ATARI_DISABLED)
               scores && handleHelp({ type: "atari" });
+            else
+              handleHelp({ type: "atari_clear" });
+
           }}
         >
           Атари

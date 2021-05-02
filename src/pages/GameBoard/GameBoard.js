@@ -292,10 +292,11 @@ const GameBoard = ({ history }) => {
 
           setCoordinates(mapMap(jsonData.payload.currentMap));
           try {
-            let moves = get_last_moves(game_id, token);
-            window.ATARI = check_atari(moves, window.PLAYING_COLOR);
-            if (window.ATARI_DISABLED)
+            if (!window.ATARI_DISABLED) {
+              let moves = get_last_moves(game_id, token);
+              window.ATARI = check_atari(moves, window.PLAYING_COLOR);
               handleHelp({ type: "atari" });
+            }
           } catch (e) {
             window.ATARI = undefined;
             console.log(e);
@@ -389,7 +390,7 @@ const GameBoard = ({ history }) => {
   const resign = () => {
     let isResign = window.confirm("Ты уверен? Дорогу осилит идущий...");
 
-    if (isResign){
+    if (isResign) {
       dispatch(setBlocked(true));
       client.send(JSON.stringify([7, "go/game", { command: "resign", token: token, game_id: game_id }]));
     }
@@ -492,54 +493,54 @@ const GameBoard = ({ history }) => {
         timeOut={() => alert('End Time')}
         timer={stepColor === yourColor}
       />
-        {blocked && (
-          <Wrap>
-            <Spinner>
-              <Loader type="ThreeDots" color="black" height={126} width={126} />
-            </Spinner>
-          </Wrap>
-        )}
-        <Board
-          lastMarkers={lastMarkers}
-          hint={hint}
-          setHint={setHint}
-          currentColor={stepColor}
-          setCurrentColor={setStepColor}
-          yourColor={yourColor}
-          helpType={helpType}
-          setMultipleHint={(val) => setMultipleHintFunc(val)}
-          multipleHint={multipleHint}
-          multipleCount={multipleCount}
-          coordinates={coordinates}
-          setStonePosition={move}
-          setHelpType={setHelpType}
-          setMapType={setMapType}
-          setMultipleType={setMultipleType}
-          setActiveHelpId={setActiveHelpId}
-          classNames={classNames}
-          mapStones={mapStones}
+      {blocked && (
+        <Wrap>
+          <Spinner>
+            <Loader type="ThreeDots" color="black" height={126} width={126} />
+          </Spinner>
+        </Wrap>
+      )}
+      <Board
+        lastMarkers={lastMarkers}
+        hint={hint}
+        setHint={setHint}
+        currentColor={stepColor}
+        setCurrentColor={setStepColor}
+        yourColor={yourColor}
+        helpType={helpType}
+        setMultipleHint={(val) => setMultipleHintFunc(val)}
+        multipleHint={multipleHint}
+        multipleCount={multipleCount}
+        coordinates={coordinates}
+        setStonePosition={move}
+        setHelpType={setHelpType}
+        setMapType={setMapType}
+        setMultipleType={setMultipleType}
+        setActiveHelpId={setActiveHelpId}
+        classNames={classNames}
+        mapStones={mapStones}
+      />
+      <Players
+        enemyPass={enemyPass}
+        opponent={opponent}
+        you={you}
+        stepColor={stepColor}
+        yourColor={yourColor}
+        stepMain={stepMain}
+        stepTwo={stepTwo}
+        times={times}
+      />
+
+      {!hint ? (
+        <GameInfo
+          turns={turns} />
+      ) : (
+        <Help
+          handleHelp={handleHelp}
+          activeHelpId={activeHelpId}
+          scores={stepColor !== yourColor ? false : true}
         />
-        <Players
-          enemyPass={enemyPass} 
-          opponent={opponent} 
-          you={you} 
-          stepColor={stepColor} 
-          yourColor={yourColor} 
-          stepMain={stepMain} 
-          stepTwo={stepTwo} 
-          times={times}
-        />
-        
-        {!hint ? (
-          <GameInfo
-            turns={turns} />
-        ) : (
-          <Help
-            handleHelp={handleHelp}
-            activeHelpId={activeHelpId}
-            scores={stepColor !== yourColor ? false : true}
-          />
-        )}
+      )}
     </Wrapper>
   );
 };
