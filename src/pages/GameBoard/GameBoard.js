@@ -278,7 +278,7 @@ const GameBoard = ({ history }) => {
             window.ATARI = check_atari(moves, window.PLAYING_COLOR);
             dispatch(atariHelp());
           } catch (e) {
-            window.ATARI = null;
+            window.ATARI = undefined;
             console.log(e);
           }
           // dispatch(_7x7Help(game_id));
