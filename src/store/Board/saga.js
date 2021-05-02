@@ -44,11 +44,14 @@ function* fetchGetHintBestMoves_saga(action) {
 function* fetchGetHintBattleRoyale_saga(action) {
   const { payload } = action;
   try {
-    const res = yield call(helpBestMoves, getToken(), payload.game_id, 1);
-    console.log('Я тут!!!');
-    if (res.hint) {
-      yield put({ type: BATTLE_ROYALE_HELP, payload: res.hint })
-    }
+    if (window.BEST_MOVE_GRID_SIZE_I === undefined) {
+      console.log('Получаю лучший ход');
+      const res = yield call(helpBestMoves, getToken(), payload.game_id, 1);
+      if (res.hint) {
+        yield put({ type: BATTLE_ROYALE_HELP, payload: res.hint })
+      }
+    } else
+      yield put({ type: BATTLE_ROYALE_HELP, payload: {} })
   } catch (e) {
     //throw e;
   }
@@ -86,7 +89,7 @@ function* fetchGetHintHeatmapZone_saga(action) {
   try {
     const res = yield call(helpHeatmapZone, getToken(), payload.game_id, payload.isQuarter);
     if (res.hint) {
-      yield put({ type: MAP_HELP, payload: { zone: res.hint, isQuarter: payload.isQuarter}})
+      yield put({ type: MAP_HELP, payload: { zone: res.hint, isQuarter: payload.isQuarter } })
     }
   } catch (e) {
     //throw e;
@@ -119,7 +122,7 @@ function* fetchGetHintScoresWinner_saga(action) {
   try {
     const res = yield call(scoresWinner, getToken(), payload.game_id);
     if (res.hint) {
-      yield put({ type: SCORES_WINNER, payload: res.hint})
+      yield put({ type: SCORES_WINNER, payload: res.hint })
     }
   } catch (e) {
     //throw e;
