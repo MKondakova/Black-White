@@ -7,8 +7,13 @@ import { client } from "../../../../Socket";
 
 const Wrapper = styled.div`
   grid-area: board;
-  width: 100%;
-`;
+  @media (min-width: 1000px) {
+    width: calc(100vh - 80px);
+  }
+  @media (max-width: 1000px) {
+    width: 100vw;
+  }
+  `;
 
 const Board = ({
   lastMarkers,

@@ -122,7 +122,6 @@ export const Winner = ({setSearchType}) => {
       >
         В меню
       </ButtonCustom>
-      <ButtonCustom width="327px" onClick={()=>setSearchType("")}>Играть еще</ButtonCustom>
     </>
   );
 };

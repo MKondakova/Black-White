@@ -19,9 +19,10 @@ const HelpWrapper = styled.div`
   overflow: scroll;
   overflow-x: hidden;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 `;
 const Checkbox = styled.div `
 text-align: ${(props) => (props.textAlign ? props.textAlign : "center")};
@@ -78,7 +79,7 @@ font-size: ${(props) => (props.fontSize ? props.fontSize : "28px")};
   box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
 
-  width: 48%;
+  width: 100%;
   margin-bottom: 10px;
   padding: 10px;
   cursor: pointer;
@@ -92,13 +93,10 @@ const Help = ({
   return (
     <Wrapper>
       <HelpWrapper>
-      <HelpItem title="Стоимость - 2"
-          active={activeHelpId === HEATMAP_FULL}
-          onClick={() =>
-            scores && handleHelp({ type: "map", id: HEATMAP_FULL })
-          }
+        <HelpItem
+          onClick={() => scores && handleHelp({ type: "atari", id: ATARI_HELP })}
         >
-          Тепловая карта всей доски. Детализированная
+          Атари
         </HelpItem>
         <HelpItem title="Стоимость - 2"
           active={activeHelpId === 16}
@@ -123,33 +121,12 @@ const Help = ({
         >
           Кто побеждает на данный момент?
         </HelpItem>
-        <HelpItem title="Стоимость - 2"
-          active={activeHelpId === 1}
-          onClick={() =>
-            scores && handleHelp({ type: "single", id: 1, count: 1 })
-          }
-        >
-          Лучший ход
-        </HelpItem>
-        <Checkbox>
-          <input type="checkbox" id="scales" name="atari"
-                style={{width: 24 , height: 24, marginRight: 5 }}/>
-          <label for="atari">Atari</label>
-        </Checkbox>
         <HelpItem
-          // active={activeHelpId === 34}
-          onClick={() => scores && handleHelp({ type: "atari", id: ATARI_HELP })}
-        >
-          Атари
-        </HelpItem>
-        <HelpItem
-          // active={activeHelpId === 34}
           onClick={() => scores && handleHelp({ type: "map", id: _7X7_HELP })}
         >
           В какой области хороший ход?
         </HelpItem>
         <HelpItem
-          // active={activeHelpId === 34}
           onClick={() => scores && handleHelp({ type: "battle", id: BATTLE_ROYALE_HELP })}
         >
           Королевская битва!

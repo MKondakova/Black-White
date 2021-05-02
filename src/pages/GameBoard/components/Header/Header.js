@@ -4,9 +4,8 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   grid-area: header;
   display: flex;
-  height: 66px;
   align-items: center;
-  margin-bottom: 34px;
+  margin-bottom: 20px;
   padding-top: 29px;
 `;
 const Content = styled.div`
