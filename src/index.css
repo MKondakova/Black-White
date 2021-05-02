@@ -536,6 +536,16 @@ code {
     stroke: none !important;
     opacity: 0.5;
 }
+.atari-sel {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #343a40;
+}
+.atari-unsel{
+    color: #343a40;
+    border-color: #343a40;
+    background-color: transparent;
+}
 
 .grid_layer path{
   stroke-width: 1!important;

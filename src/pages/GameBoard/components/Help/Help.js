@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { ATARI_HELP, BATTLE_ROYALE_HELP } from "../../../../store/Board/types";
-import Players from "../GameInfo/components/Players/Players";
 import {
   HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
@@ -54,27 +53,19 @@ font-size: ${(props) => (props.fontSize ? props.fontSize : "28px")};
   cursor: pointer;
 
 `
-
-const HelpItem = styled.div`
+const Atari = styled.div`
 text-align: ${(props) => (props.textAlign ? props.textAlign : "center")};
 font-family: "Roboto", sans-serif;
 display: block;
 outline: none;
 flex-shrink: 0;
 border-radius: 5px;
-color: #343a40;
-border-color: #343a40;
-background-color: transparent;
 background-image: none;
 border-style: solid;
 border-width: 1px;
 cursor: pointer;
 font-size: ${(props) => (props.fontSize ? props.fontSize : "28px")};
-&:hover {
-  color: #fff;
-  background-color: #343a40;
-  border-color: #343a40;
-}
+
 &:focus {
   box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
@@ -83,6 +74,17 @@ font-size: ${(props) => (props.fontSize ? props.fontSize : "28px")};
   margin-bottom: 10px;
   padding: 10px;
   cursor: pointer;
+`
+const HelpItem = styled(Atari)`
+color: #343a40;
+border-color: #343a40;
+background-color: transparent;
+
+&:hover {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}
 `;
 
 const Help = ({
@@ -93,11 +95,15 @@ const Help = ({
   return (
     <Wrapper>
       <HelpWrapper>
-        <HelpItem
-          onClick={() => scores && handleHelp({ type: "atari", id: ATARI_HELP })}
+        <Atari id="atari" className="atari-sel"
+          onClick={(e) => {
+            window.Atari = window.ATARI_ENABLED ? false : true;
+            e.currentTarget.classList.toggle('atari-sel')
+            e.currentTarget.classList.toggle('atari-unsel')
+          }}
         >
           Атари
-        </HelpItem>
+        </Atari>
         <HelpItem title="Стоимость - 2"
           active={activeHelpId === 16}
           onClick={() =>
