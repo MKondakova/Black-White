@@ -9,13 +9,15 @@ import Info from "./pages/Info/Info";
 import PrivateRoute from "./components/Routes/PrivateRoute/PrivateRoute";
 import LoginRoute from "./components/Routes/LoginRoute/LoginRoute";
 import Liders from "./pages/Liders/Liders";
+import Rules from './pages/Rules/Rules';
 import {
   AUTH_URL,
   GAME_URL,
   MAIN_URL,
   PROFILE_URL,
   INFO_URL,
-  LIDERS
+  LIDERS,
+  RULES
 } from "./constants/routes";
 
 const Routes = () => (
@@ -27,6 +29,7 @@ const Routes = () => (
         <PrivateRoute exact path={PROFILE_URL} component={Profile} />
         <PrivateRoute exact path={INFO_URL} component={Info} />
         <PrivateRoute exact path={LIDERS} component={Liders} />
+        <PrivateRoute exact path={RULES} component={Rules} />
         <Redirect to={AUTH_URL}/>
       </Switch>
   </Router>

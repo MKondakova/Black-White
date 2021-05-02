@@ -11,11 +11,12 @@ const Player = styled.div`
   display: flex;
   width: 50%;
   padding: 19px 10px;
-  background: ${(props) => (props.active ? "#222233" : "#F5F5DC")};
-  color: ${(props) => (props.active ? "#F5F5DC" : "#222233")};
-  border: ${(props) => (props.winner ? "4px solid green" : "0px")};
+  background: ${(props) => (props.active ? "#222233" : "white")};
+  color: ${(props) => (props.active ? "white" : "#222233")};
+  border: 2px solid #222233;
   margin-top:30px;
   position: relative;
+  border-radius: 5px;
 `;
 const PlayerRight = styled(Player)`
   justify-content: flex-end;
@@ -24,7 +25,7 @@ const Avatar = styled.img`
   border-radius: 100px;
   width: 95px;
   margin-right: 15px;
-  border: 6px solid #F5F5DC;
+  border: 6px solid white;
 `;
 const AvatarRight = styled.img`
   border-radius: 100px;
@@ -34,7 +35,7 @@ const AvatarRight = styled.img`
 `;
 const Info = styled.div``;
 const Name = styled.p`
-  color: #F5F5DC;
+  color: white;
   font-size: 24px;
 `;
 
@@ -47,11 +48,11 @@ const PtsRight = styled.p`
   font-size: 18px;
 `;
 const Pts = styled.p`
-  color: #F5F5DC;
+  color: white;
   font-size: 18px;
 `;
 const Score = styled.p`
-  color: #F5F5DC;
+  color: white;
   font-size: 18px;
   position: absolute;
   bottom: 10px;
@@ -71,16 +72,16 @@ const Treangle = styled.div`
   right: 0;
   top: 36px;
   border: 28px solid transparent;
-  border-right: 38px solid #a4a4a4;
+  border-right: 38px solid white;
 `;
 const TreangleRight = styled.div`
   display: ${(props) => (props.active ? "block" : "none")};
   position: absolute;
   content: "";
-  left: 0;
+  left: 2px;
   top: 36px;
-  border: 28px solid transparent;
-  border-left: 38px solid #a4a4a4;
+  border: 28px solid white;
+  border-left: 38px solid #222233;
 `;
 const Scores = styled.div`
   font-size: 20px;
@@ -109,14 +110,14 @@ const PassRight = styled.div`
 `;
 
 const Time = styled.div`
-  color: #aaaaaa;
+  color:white;
   font-size: 18px;
   position: absolute;
   bottom: 10px;
   right: 50px;
 `;
 const TimeRight = styled.p`
-  color: #aaaaaa;
+  color: #222233;
   font-size: 18px;
   position: absolute;
   bottom: 10px;

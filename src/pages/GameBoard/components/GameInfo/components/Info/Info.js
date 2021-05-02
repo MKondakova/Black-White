@@ -12,8 +12,9 @@ const TextBlock = styled.div`
 `;
 const TextWhite = styled.p`
   font-size: 18px;
-  background: #F5F5DC;
+  background: transparent;
   border-radius:10px;
+  border: 2px solid #222233;
   margin:5px;
   padding: 10px;
   color: #222233;
