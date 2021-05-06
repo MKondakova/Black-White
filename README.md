@@ -1,102 +1,65 @@
-# Репозиторий команды Black&white
+# Репозиторий команды black&white
+## Запуск проекта
+`npm i`
+
+`yarn start`
 ## Участники:
- - [Гарин Егор](https://github.com/garinegor)
- - [Айгистова Диана](https://github.com/Mcotea)
- - [Кондакова Милана](https://github.com/MKondakova)
- - [Поцелуев Андрей](https://github.com/pAndrey200)
- - [Нуруллаев Игорь](https://github.com/Tennessium)
- ## Структура проекта
-index.js - Входная точка проекта 
+ - [Гарин Егор Олегович](https://github.com/garinegor) технический консультант, идейный вдохновитель
+ - [Айгистова Диана Руслановна](https://github.com/Mcotea) тимлид, дизайнер, идейный вдохновитель
+ - [Кондакова Милана Дмитриевна](https://github.com/MKondakova) фронтенд-разработчик, идейный вдохновитель
+ - [Поцелуев Андрей Михайлович](https://github.com/pAndrey200) дизайнер, идейный вдохновитель, фронтенд-разработчик
+ - [Нуруллаев Игорь Александрович](https://github.com/Tennessium) разработчик логики подсказок и взаимодействия с api, идейный вдохновитель
+## Описание решения
+![Страница игры](https://user-images.githubusercontent.com/46626161/117366509-82bcc180-aec9-11eb-8c68-e872658ae368.png)
 
-routes.js - Роутинг,все роты приватные, выкидывают на логин, если нет токена
+[Видео-демонстрация](https://drive.google.com/file/d/11Yind8gOQRZ81gaSvPR-aWFMw1mcf5F-/view?usp=sharing) на 2,5 минуты, так как сервер после хакатона был недоступен.
 
-Папка src/api - содержит запросы для работы с сервером
+Наша команда переработала дизайн базового решения, сделала его более минималистичным, чтобы игрок не отвлекался на лишние элементы. 
+Была выбрана черно-белая цветовая гамма. 
+Добавлены удобные улучшения, такие как отображение игроков, находящихся в поиске игры, ссылка на правила, кнопка выхода, предупреждение при нажатии на кнопку "сдаться" и тд.
+Реализована базовая мобильная версия.
+Также у проекта есть планы на будущее:
+ - Распознование доски по фото
+ - Ссылка для подключения к игре
+ - Окончательная мобильная версия
+Цель нашего Кентавра - помочь находить лучший выход из ситуации, поэтому разработанные подсказки были направлены именно на обучение и лишь подталкивание в нужном направлении.
+### Подсказки
+- [x] Лучший из трех ходов
+- [x] В какой четверти лучший ход
+- [x] Кто побеждает на данный момент 
+- [x] Подсветка atari.
+- [x] "Лучший ход"
+- [x] "Хорошая область"
+- [ ] "Хороший ход"
 
-Папка src/assests - Иконки, картинки 
+Первые две подсказки взяты из базового решения, так как они не диктуют следующий ход, а направляют мысль игрока.
+Третья подсказка для новичков, так как для определения победителя их навыков недостаточно. 
+Четвертая подсказка также для новичков, которые пока не видят всю доску целиком и могут не заметить, что их камни под угрозой.
+Подсказку "лучший ход" мы переработали. При использовании выделяется область 7x7, в которой находится лучший ход, если игрок не попал в лучший ход, область сужается(откидывается полоса по горизонтали или вертикали).
+При использовании подсказки "хорошая область" выделяется область 7x7, в которой содержится наибольшее количество хороших ходов(хороший ход лучше остальных 90% ходов)
+Подсказка хороший ход пока не была реализована. Игроку предоставляется несколько попыток выбрать ход, если выбранный ход нельзя назвать хорошим, пользователю дается еще одна попытка.
+## Структура проекта
+Проект разрабатывался с помощью библиотеки (React)[https://ru.reactjs.org/].
 
-Папка src/components -  Содержит компоненты, например кастомные кнопки и т.д
+`index.js` - Входная точка проекта 
 
-Папка src/constants -  константы проекта
+`routes.js` - Роутинг,все роты приватные, выкидывают на логин, если нет токена
 
-Папка src/helpers - вспомогательные функции, которые используются на проекте
+Папка `src/api` - содержит запросы для работы с сервером
 
-Папка src/pages - страницы проекта, могут содержать в себе компоненты, необходимые для страницы
+Папка `src/assests` - Иконки, картинки 
 
-Папка src/scss - Общие стили проекта
+Папка `src/components` -  Содержит компоненты, например кастомные кнопки и т.д
 
-Папка src/store - Работа с тором проекта, используется redux + redux-saga, redux-saga используется для работы с api.
+Папка `src/constants` -  константы проекта
 
-На проекте используется библиотека styled-components, предназначена для работы со стилями. 
+Папка `src/helpers` - вспомогательные функции, которые используются на проекте
 
-# Getting Started with Create React App
+Папка `src/pages` - страницы проекта, могут содержать в себе компоненты, необходимые для страницы
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Папка `src/scss` - Общие стили проекта
 
-## Available Scripts
+Папка `src/store` - Работа с тором проекта, используется redux + redux-saga, redux-saga используется для работы с api.
 
-In the project directory, you can run:
+В проекте используется библиотека styled-components, предназначена для работы со стилями. 
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
