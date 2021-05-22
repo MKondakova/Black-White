@@ -17,8 +17,8 @@ import {
   hintShowBest,
   setScoresWinner,
   hintBestMoves,
-  _7x7Help,
-  hintBattleRoyale
+  maxGoodMoves,
+  hintBattleRoyal
 } from "../../store/Board/actions";
 
 import { clearGameId } from "../../store/GameCreate/actions";
@@ -27,9 +27,8 @@ import { client, token } from '../../Socket.js'
 import {
   HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
-  _7X7_HELP
+  MAX_GOOD_MOVES
 } from "./components/Help/types";
-import { ATARI_HELP, _7x7_HELP } from "../../store/Board/types";
 import Loader from "react-loader-spinner";
 import Players from "./components/GameInfo/components/Players/Players";
 
@@ -301,8 +300,8 @@ const GameBoard = ({ history }) => {
             window.ATARI = undefined;
             console.log(e);
           }
-          // dispatch(_7x7Help(game_id));
-          // handleHelp({ type: "map", id: _7x7Help });
+          // dispatch(maxGoodMoves(game_id));
+          // handleHelp({ type: "map", id: maxGoodMoves });
         }
         if (jsonData.payload.player) {
           if (typeof jsonData.payload.player === 'string') {
@@ -421,8 +420,8 @@ const GameBoard = ({ history }) => {
         case HEATMAP_ZONE_QUARTER:
           dispatch(hintHeatmapZone(game_id, true));
           break;
-        case _7X7_HELP:
-          dispatch(_7x7Help(game_id));
+        case MAX_GOOD_MOVES:
+          dispatch(maxGoodMoves(game_id));
           break;
       }
     }
@@ -440,7 +439,7 @@ const GameBoard = ({ history }) => {
       dispatch(setBlocked(true));
       setHelpType("map");
       setMapType("map");
-      dispatch(hintBattleRoyale(game_id));
+      dispatch(hintBattleRoyal(game_id));
     }
   };
 

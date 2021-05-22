@@ -1,11 +1,11 @@
 import {
   SINGLE_HELP,
-  BATTLE_ROYALE_HELP,
+  BATTLE_ROYAL_HELP,
   MARKERS_CLEAR,
   MULTIPLE_HELP,
   MAP_HELP,
   ATARI_HELP,
-  _7x7_HELP,
+  MAX_GOOD_MOVES,
   WINNER_USER,
   LOSER_USER,
   SET_BLOCKED,
@@ -34,7 +34,7 @@ export const boardReducer = (state = initialState, action) => {
         markers: action.payload,
         blocked: false
       };
-    case BATTLE_ROYALE_HELP:
+    case BATTLE_ROYAL_HELP:
       var mapStones = {};
       var classNamesMapStones = {};
 
@@ -86,6 +86,7 @@ export const boardReducer = (state = initialState, action) => {
             case 4:
               window.BEST_MOVE_GRID_SIZE_J--;
               break;
+              default:
           }
           if (window.BEST_MOVE_GRID_I <= window.BEST_MOVE[0] && window.BEST_MOVE[0] < window.BEST_MOVE_GRID_I + window.BEST_MOVE_GRID_SIZE_I &&
             window.BEST_MOVE_GRID_J <= window.BEST_MOVE[1] && window.BEST_MOVE[1] < window.BEST_MOVE_GRID_J + window.BEST_MOVE_GRID_SIZE_J) {
@@ -106,6 +107,7 @@ export const boardReducer = (state = initialState, action) => {
               case 4:
                 window.BEST_MOVE_GRID_SIZE_J++;
                 break;
+                default:
             }
           }
         }
@@ -212,7 +214,7 @@ export const boardReducer = (state = initialState, action) => {
         window.ATARI.forEach(function (c) {
           let sign = alpha[c[0]];
           let coord = `${sign}${(c[1] + 1)}`;
-          mapStones[coord] = "circle";
+          mapStones[coord] = "square";
           classNamesMapStones[coord] = `redstone size-40`;
         });
       }
@@ -223,7 +225,7 @@ export const boardReducer = (state = initialState, action) => {
         classNamesMapStones,
         blocked: false
       };
-    case _7x7_HELP:
+    case MAX_GOOD_MOVES:
       let map = [];
       action.payload.map((row, rowId) => {
         map.push([]);
@@ -266,6 +268,7 @@ export const boardReducer = (state = initialState, action) => {
         classNamesMapStones,
         blocked: false
       };
+    
     default:
       return { ...state };
   }

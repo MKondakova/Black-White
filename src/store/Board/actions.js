@@ -8,11 +8,11 @@ import {
   GET_HINT_SHOW_BEST,
   ATARI_HELP,
   GET_HINT_7x7,
-  _7x7_HELP,
+  MAX_GOOD_MOVES,
   GET_HINT_HEATMAP_FULL,
   GET_HINT_HEATMAP,
   GET_HINT_HEATMAP_ZONE,
-  GET_HINT_BATTLE_ROYALE,
+  GET_HINT_BATTLE_ROYAL,
   SET_BLOCKED,
   MAP_STONES,
   GET_SCORES_WINNER
@@ -27,7 +27,7 @@ export const atariHelp = () => ({
   type: ATARI_HELP,
 });
 
-export const _7x7Help = (game_id) => ({
+export const maxGoodMoves = (game_id) => ({
   type: GET_HINT_7x7,
   payload: {game_id: game_id}
 });
@@ -79,8 +79,8 @@ export const hintShowBest = (game_id, moves) => ({
   payload: {game_id: game_id, moves: moves}
 });
 
-export const hintBattleRoyale = (game_id) => ({
-  type: GET_HINT_BATTLE_ROYALE,
+export const hintBattleRoyal = (game_id) => ({
+  type: GET_HINT_BATTLE_ROYAL,
   payload: {game_id: game_id, }
 });
 

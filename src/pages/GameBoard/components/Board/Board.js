@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Goban } from "react-goban";
 import styled from "styled-components";
-import { markersClear, setMapStones, hintBattleRoyale } from "../../../../store/Board/actions";
+import { markersClear, setMapStones, hintBattleRoyal } from "../../../../store/Board/actions";
 import { client } from "../../../../Socket";
 
 const Wrapper = styled.div`
@@ -69,7 +69,7 @@ const Board = ({
           setActiveHelpId("");
           setMultipleType(false);
           setMapType(false);
-          dispatch(hintBattleRoyale(window.GAME_ID));
+          dispatch(hintBattleRoyal(window.GAME_ID));
           window.CAN_MAKE_MOVE = false;
         }
       }

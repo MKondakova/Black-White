@@ -8,11 +8,11 @@ import {
   GET_HINT_HEATMAP_FULL,
   GET_HINT_7x7,
   GET_HINT_HEATMAP_ZONE,
-  GET_HINT_BATTLE_ROYALE,
-  BATTLE_ROYALE_HELP,
+  GET_HINT_BATTLE_ROYAL,
+  BATTLE_ROYAL_HELP,
   MAP_HELP,
   ATARI_HELP,
-  _7x7_HELP,
+  MAX_GOOD_MOVES,
   SCORES_WINNER,
   GET_SCORES_WINNER
 } from "./types";
@@ -41,17 +41,17 @@ function* fetchGetHintBestMoves_saga(action) {
   }
 }
 
-function* fetchGetHintBattleRoyale_saga(action) {
+function* fetchGetHintBattleRoyal_saga(action) {
   const { payload } = action;
   try {
     if (window.BEST_MOVE_GRID_SIZE_I === undefined) {
       console.log('Получаю лучший ход');
       const res = yield call(helpBestMoves, getToken(), payload.game_id, 1);
       if (res.hint) {
-        yield put({ type: BATTLE_ROYALE_HELP, payload: res.hint })
+        yield put({ type: BATTLE_ROYAL_HELP, payload: res.hint })
       }
     } else
-      yield put({ type: BATTLE_ROYALE_HELP, payload: {} })
+      yield put({ type: BATTLE_ROYAL_HELP, payload: {} })
   } catch (e) {
     //throw e;
   }
@@ -110,7 +110,7 @@ function* fetchGetHint_7x7_saga(action) {
   try {
     const res = yield call(help7x7, getToken(), payload.game_id);
     if (res.hint) {
-      yield put({ type: _7x7_HELP, payload: res.hint })
+      yield put({ type: MAX_GOOD_MOVES, payload: res.hint })
     }
   } catch (e) {
     //throw e;
@@ -135,7 +135,7 @@ export function* boardSaga() {
     takeLatest(GET_HINT_SHOW_BEST, fetchGetHintShowBest_saga),
     takeLatest(GET_HINT_ATARI, fetchGetHintAtari_saga),
     takeLatest(GET_HINT_7x7, fetchGetHint_7x7_saga),
-    takeLatest(GET_HINT_BATTLE_ROYALE, fetchGetHintBattleRoyale_saga),
+    takeLatest(GET_HINT_BATTLE_ROYAL, fetchGetHintBattleRoyal_saga),
     takeLatest(GET_HINT_HEATMAP_FULL, fetchGetHintHeatmapFull_saga),
     takeLatest(GET_HINT_HEATMAP_ZONE, fetchGetHintHeatmapZone_saga),
     takeLatest(GET_SCORES_WINNER, fetchGetHintScoresWinner_saga),
