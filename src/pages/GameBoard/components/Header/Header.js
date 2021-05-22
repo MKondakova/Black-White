@@ -66,7 +66,7 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
       <Content>
         <Left>
           <Menu>
-            {viewPass && (
+            {view && (
               <Text onClick={() => setPass()}>Пас</Text>
             )}
             <Text onClick={() => setResign()}>Сдаться</Text>

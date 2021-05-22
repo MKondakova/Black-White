@@ -19,6 +19,7 @@ const Board = ({
   lastMarkers,
   socket,
   setHint,
+  setPass,
   currentColor,
   setCurrentColor,
   yourColor,
@@ -64,6 +65,7 @@ const Board = ({
           window.CAN_MAKE_MOVE = true;
         } else {
           setHint(false);
+          setPass(false);
           dispatch(markersClear());
           setHelpType("");
           setActiveHelpId("");
