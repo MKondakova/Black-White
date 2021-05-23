@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
+  justify-content: center;
   display: flex;
   min-width:550px;
   min-height: 150px;

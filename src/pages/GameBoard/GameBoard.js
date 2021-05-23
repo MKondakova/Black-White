@@ -44,6 +44,7 @@ const Wrapper = styled.div`
     "board"
     "help"
     "info";
+    align-items: center;
   }
   @media (min-width: 1000px) {
     grid-template-columns: 3fr 2fr;

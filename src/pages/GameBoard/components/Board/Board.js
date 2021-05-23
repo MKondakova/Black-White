@@ -8,11 +8,12 @@ import { client } from "../../../../Socket";
 const Wrapper = styled.div`
   grid-area: board;
   @media (min-width: 1000px) {
-    width: calc(100vh - 80px);
+    width: 100%;
   }
   @media (max-width: 1000px) {
-    width: 100vw;
+    width: 90%;
   }
+  margin: auto;
   `;
 
 const Board = ({
