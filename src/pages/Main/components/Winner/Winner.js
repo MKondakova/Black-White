@@ -52,16 +52,6 @@ const ScoreAfter = styled(Score)`
     bottom: 0;
   }
 `;
-const ScoreBefore = styled(Score)`
-  &:before {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 3px;
-    background: #dd3f65;
-    bottom: 0;
-  }
-`;
 
 const ScoreWrapper = styled.div`
   display: flex;
@@ -109,10 +99,10 @@ export const Winner = ({setSearchType}) => {
           </ScoreWrapper>
         </Info>
       </Enemy>
-      <Text>{winner?.id === userId ? 'Победил!' : 'Проиграл!'}</Text>
-      <ScoreText>Счет: <ScoreAfter>{player?.finalScore}</ScoreAfter>{/*/ <ScoreBefore>10</ScoreBefore>*/}</ScoreText>
-      <ScoreText>Очки по подсказкам: <ScoreAfter>{player?.hintScore}</ScoreAfter></ScoreText>
-      <ScoreText>Итоговые очки: <ScoreAfter>{player?.rpScore}</ScoreAfter></ScoreText>
+      <Text>{winner?.id === userId ? strings.youWin : strings.youLose}</Text>
+      <ScoreText>{strings.score}: <ScoreAfter>{player?.finalScore}</ScoreAfter></ScoreText>
+      <ScoreText>{strings.scoreByHints}: <ScoreAfter>{player?.hintScore}</ScoreAfter></ScoreText>
+      <ScoreText>{strings.scoreFinal}: <ScoreAfter>{player?.rpScore}</ScoreAfter></ScoreText>
       <ButtonCustom
         width="327px"
         mt={30}

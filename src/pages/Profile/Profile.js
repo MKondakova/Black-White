@@ -248,7 +248,7 @@ const Profile = ({ history }) => {
               if (localStorage.getItem("language") === 'ru')
               localStorage.setItem("language", 'en')
               else localStorage.setItem("language", 'ru')
-              //location.reload();
+              window.location.reload();
             }}>
               {strings.lang}
         </ButtonCustom>

@@ -220,7 +220,7 @@ const Players = ({ yourColor, enemyPass, stepColor, you, opponent, stepMain, ste
             </Scores>
           )}
         </Info>
-        { enemyPass && yourColor !== 'white' && (<PassRight>Пас</PassRight>)}
+        { enemyPass && yourColor !== 'white' && (<PassRight>{strings.pass}</PassRight>)}
         <TimeRight>{timerParseTwo}</TimeRight>
         <ScoreRight>{stepTwo}</ScoreRight>
         <AvatarRight alt="avatar" src={yourColor !== 'white' ? opponent.avatar : you.avatar}

@@ -41,7 +41,7 @@ export const Error = ({ setSearchType, error }) => {
       >
         {strings.menu}
       </ButtonCustom>
-      <ButtonCustom width="327px">Попробовать еще раз</ButtonCustom>
+      <ButtonCustom width="327px">{strings.tryAgainTitle}</ButtonCustom>
     </>
   );
 };

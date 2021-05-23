@@ -74,7 +74,7 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
             {view && (
               <TextHint onClick={() => setHint(!hint)} hint={hint}>{strings.takeHints}</TextHint>
             )}
-            <Text onClick={()=>window.open('https://ufgo.org/Rules9x9/Go%20Rules%209x9.htm','_blank')}>{strings.rules}</Text>
+            <Text onClick={()=>window.open(strings.rulesLink,'_blank')}>{strings.rules}</Text>
           </Menu>
         </Left>
         <GameId>{strings.id}: {gameId}</GameId>

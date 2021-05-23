@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { strings } from "../../../../language";
 import { ATARI_HELP, BATTLE_ROYALE_HELP } from "../../../../store/Board/types";
 import {
   HEATMAP_FULL,
@@ -101,7 +102,7 @@ const Help = ({
   return (
     <Wrapper>
       <HelpWrapper>
-        <Atari id="atari" title='Показывает последние дыхание у камня или группы камней (стоимость 0)' className={classListAtari}
+        <Atari id="atari" title={strings.hintTitleAtari} className={classListAtari}
           onClick={(e) => {
             window.ATARI_DISABLED = window.ATARI_DISABLED ? false : true;
             e.currentTarget.classList.toggle('atari-sel')
@@ -114,40 +115,40 @@ const Help = ({
 
           }}
         >
-          Атари
+          {strings.hintAtari}
         </Atari>
-          <HelpItem title="Показывает лучший из заданных трех ходов (стоимость 2)"
+          <HelpItem title={strings.hintTitleBestOf3}
           active={activeHelpId === 16}
           onClick={() =>
             scores &&
             handleHelp({ type: "multiple", multipleHandleCount: 4, id: 16 })
           }
         >
-          Показать лучший из заданных 3 ходов
+          {strings.hintBestOf3}
         </HelpItem>
-          <HelpItem title="Показывает четверть доски в которой есть лучший ход (стоимость 1)"
+          <HelpItem title={strings.hintTitleBestMoveQuarter}
           active={activeHelpId === HEATMAP_ZONE_QUARTER}
           onClick={() =>
             scores && handleHelp({ type: "map", id: HEATMAP_ZONE_QUARTER })
           }
           >
-          В какой четверти доски сейчас лучший ход?
+          {strings.hintBestMoveQuarter}
         </HelpItem>
-          <HelpItem title="Показывает кто побеждает на данный момент (стоимость 1)"
+          <HelpItem title={strings.hintTitleWinner}
           active={activeHelpId === 34}
           onClick={() => scores && handleHelp({ type: "score", id: 34 })}
         >
-          Кто побеждает на данный момент?
+          {strings.hintWinner}
         </HelpItem>
-        <HelpItem title="Показывает область размером 7х7 в которой есть максимальное количество удачных ходов (стоимость 2)"
+        <HelpItem title={strings.hintTitleGoodMovesArea}
           onClick={() => scores && handleHelp({ type: "map", id: _7X7_HELP })}
         >
-          В какой области хороший ход?
+          {strings.hintGoodMovesArea}
         </HelpItem>
-        <HelpItem title="Показывает область в которой есть лучший ход, если пользователь не угадывает этот ход зона уменьшается (стоимость 3)"
+        <HelpItem title={strings.hintTitleBestMove}
           onClick={() => scores && handleHelp({ type: "battle", id: BATTLE_ROYALE_HELP })}
         >
-          Лучший ход
+        {strings.hintBestMove}
         </HelpItem>
       </HelpWrapper>
     </Wrapper>

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { ButtonCustom } from "../../../components/ButtonCustom";
 import { Input } from "../../../components/InputCustom";
+import { strings } from "../../../language";
 import { regSubmit, loginSubmit } from "../../../store/Auth/actions";
 
 const Wrapper = styled.div`
@@ -54,7 +55,7 @@ const Auth = () => {
     e.preventDefault();
     if (activeTab === "reg") {
       if (!email || !nickname) {
-        setError("Заполните все поля");
+        setError(strings.enterAll);
       } else {
         setError("");
         await dispatch(regSubmit(nickname, email));
@@ -62,7 +63,7 @@ const Auth = () => {
     }
     if (activeTab === "auth") {
       if (!email || !password) {
-        setError("Заполните все поля");
+        setError(strings.enterAll);
       } else {
         setError("");
         // setToken(register(email, nickname)
@@ -80,14 +81,14 @@ const Auth = () => {
               onClick={() => setActiveTab("reg")}
               active={activeTab === "reg"}
             >
-              Зарегистрироваться
+              {strings.register}
             </Tab>
             <Span>\</Span>
             <Tab
               onClick={() => setActiveTab("auth")}
               active={activeTab === "auth"}
             >
-              Войти
+              {strings.auth}
             </Tab>
           </Tabs>
           <Input
@@ -120,7 +121,7 @@ const Auth = () => {
               type="password"
             />
           )}
-          <ButtonCustom type="submit">Далее</ButtonCustom>
+          <ButtonCustom type="submit">{strings.submit}</ButtonCustom>
         </Form>
       </Container>
     </Wrapper>

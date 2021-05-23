@@ -62,7 +62,7 @@ export const LoadingGame = ({ text, setSearchType, setOpponent, searchType, game
   }
   const codeBlock = () => {
     if (codeGame) {
-      return <Input value={codeGame || 'Ожидайте'} textAlign="center" disabled mt={40} mb={30} />
+      return <Input value={codeGame || strings.wait} textAlign="center" disabled mt={40} mb={30} />
     }
   }
   const isWaiting = () => {

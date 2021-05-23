@@ -6,10 +6,9 @@ import { Connect } from "../Connect";
 import { LoadingGame } from "../LoadingGame";
 import { Winner } from "../Winner";
 import { Error } from "../Error";
-import { PROFILE_URL, LIDERS, RULES } from "../../../../constants/routes";
+import { PROFILE_URL, LIDERS } from "../../../../constants/routes";
 import { createRandomGame, createGameWithAi } from "../../../../store/GameCreate/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { siteUrl } from "../../../../constants/siteUrl";
 import { strings } from "../../../../language";
 
 const Wrapper = styled.div`
@@ -34,7 +33,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
         <LoadingGame
           gameId={gameId}
           setSearchType={setSearchType}
-          text={strings.wait1}
+          text={strings.waitRandom}
           setOpponent={setOpponent}
           searchType={searchType}
           countText={strings.together}
@@ -48,7 +47,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
           setSearchType={setSearchType}
           setOpponent={setOpponent}
           code={code}
-          text="Ожидание второго игрока"
+          text={strings.waitSecond}
           searchType={searchType}
         />
       );
@@ -59,7 +58,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
           history={history}
           opponent={opponent}
           setSearchType={setSearchType}
-          text="Противник найден!"
+          text={strings.opponentFound}
         />
       );
 
@@ -69,7 +68,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
           history={history}
           opponent={opponent}
           setSearchType={setSearchType}
-          text="Игрок подключился!"
+          text={strings.opponentConnected}
         />
       );
 
@@ -79,7 +78,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
     case "Error":
       return (
         <Error
-          error="Не удалось подключиться к запрашиваемой игре"
+          error={strings.connectionFailed}
           setSearchType={setSearchType}
         />
       );
@@ -119,7 +118,7 @@ export const Content = ({ history, searchType, setSearchType }) => {
           <ButtonCustom mb={30} onClick={() => history.push(PROFILE_URL)}>
             {strings.profile}
           </ButtonCustom>
-          <ButtonCustom mb={30} onClick={()=>window.open('https://ufgo.org/Rules9x9/Go%20Rules%209x9.htm','_blank')}>
+          <ButtonCustom mb={30} onClick={()=>window.open(strings.rulesLink,'_blank')}>
             {strings.rules}
           </ButtonCustom>{" "}
         </>
