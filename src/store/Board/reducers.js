@@ -236,7 +236,6 @@ export const boardReducer = (state = initialState, action) => {
       };
     case PICK_GOOD_MOVES:
       if (window.GOOD_MOVES_MAP === undefined) {
-        alert("У вас есть 5 попыток")
         window.GOOD_MOVES_MAP = action.payload
         window.GOOD_MOVES_TRY = []
         window.GOOD_MOVES_COUNT = 0

@@ -126,10 +126,10 @@ const Help = ({
         {strings.hintBestMove}
         </HelpItem>
 
-        <HelpItem title="Дает возможность выбирать ход, пока не выберите 'хороший' (стоимость 3)"
+        <HelpItem title={strings.hintTitlePickGoodMove}
           onClick={() => scores && handleHelp({ type: "map", id: PICK_GOOD_MOVES })}
         >
-          Хороший ход
+          {strings.hintPickGoodMove}
         </HelpItem>
       </HelpWrapper>
     </Wrapper>
