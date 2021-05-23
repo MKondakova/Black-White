@@ -1,17 +1,18 @@
 import {
   SINGLE_HELP,
-  BATTLE_ROYALE_HELP,
+  BATTLE_ROYAL_HELP,
   MARKERS_CLEAR,
   MULTIPLE_HELP,
   MAP_HELP,
   ATARI_HELP,
-  _7x7_HELP,
+  MAX_GOOD_MOVES,
   WINNER_USER,
   LOSER_USER,
   SET_BLOCKED,
   MAP_STONES,
   SCORES,
-  SCORES_WINNER
+  SCORES_WINNER,
+  PICK_GOOD_MOVES
 } from "./types";
 import { MAP_HALF, MAP_QUARTERS } from "../../pages/GameBoard/components/Help/types";
 
@@ -34,12 +35,20 @@ export const boardReducer = (state = initialState, action) => {
         markers: action.payload,
         blocked: false
       };
-    case BATTLE_ROYALE_HELP:
+    case BATTLE_ROYAL_HELP:
       var mapStones = {};
       var classNamesMapStones = {};
 
       if (window.BEST_MOVE_GRID_SIZE_I === undefined) {
         let best_move = action.payload[0].move;
+        if (best_move === 'pass') {
+          return {
+            ...state,
+            mapStones,
+            classNamesMapStones,
+            blocked: false
+          };
+        }
         let i_c = 'ABCDEFGHJKLMNOPQRSTUV'.search(best_move[0]);
         let j_c = parseInt(best_move.replace(best_move[0], '')) - 1;
         console.log(i_c, j_c);
@@ -86,6 +95,7 @@ export const boardReducer = (state = initialState, action) => {
             case 4:
               window.BEST_MOVE_GRID_SIZE_J--;
               break;
+              default:
           }
           if (window.BEST_MOVE_GRID_I <= window.BEST_MOVE[0] && window.BEST_MOVE[0] < window.BEST_MOVE_GRID_I + window.BEST_MOVE_GRID_SIZE_I &&
             window.BEST_MOVE_GRID_J <= window.BEST_MOVE[1] && window.BEST_MOVE[1] < window.BEST_MOVE_GRID_J + window.BEST_MOVE_GRID_SIZE_J) {
@@ -106,6 +116,7 @@ export const boardReducer = (state = initialState, action) => {
               case 4:
                 window.BEST_MOVE_GRID_SIZE_J++;
                 break;
+                default:
             }
           }
         }
@@ -212,7 +223,7 @@ export const boardReducer = (state = initialState, action) => {
         window.ATARI.forEach(function (c) {
           let sign = alpha[c[0]];
           let coord = `${sign}${(c[1] + 1)}`;
-          mapStones[coord] = "circle";
+          mapStones[coord] = "square";
           classNamesMapStones[coord] = `redstone size-40`;
         });
       }
@@ -223,7 +234,36 @@ export const boardReducer = (state = initialState, action) => {
         classNamesMapStones,
         blocked: false
       };
-    case _7x7_HELP:
+    case PICK_GOOD_MOVES:
+      if (window.GOOD_MOVES_MAP === undefined) {
+        alert("У вас есть 5 попыток")
+        window.GOOD_MOVES_MAP = action.payload
+        window.GOOD_MOVES_TRY = []
+        window.GOOD_MOVES_COUNT = 0
+        let goodMove = window.GOOD_MOVES_MAP.reduce((acc, v) => acc.concat(v)).sort()[140]
+        window.GOOD_MOVE = goodMove
+      }
+      console.log(window.GOOD_MOVE, "что-то считаю", window.GOOD_MOVES_TRY)
+      
+      window.GOOD_MOVES_COUNT = window.GOOD_MOVES_TRY.length
+      mapStones = {};
+      classNamesMapStones = {};
+      if (window.GOOD_MOVES_MAP  !== undefined) {
+        let alpha = 'ABCDEFGHJKLMNOPQRSTUV'
+        window.GOOD_MOVES_TRY.forEach(function (c) {
+          let sign = alpha[c[0]];
+          let coord = `${sign}${(c[1] + 1)}`;
+          mapStones[coord] = "cross";
+          classNamesMapStones[coord] = `redstone size-40`;
+        });
+      }
+      return {
+        ...state,
+        mapStones,
+        classNamesMapStones,
+        blocked: false
+      };
+    case MAX_GOOD_MOVES:
       let map = [];
       action.payload.map((row, rowId) => {
         map.push([]);
@@ -266,6 +306,7 @@ export const boardReducer = (state = initialState, action) => {
         classNamesMapStones,
         blocked: false
       };
+    
     default:
       return { ...state };
   }

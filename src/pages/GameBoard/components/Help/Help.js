@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { ATARI_HELP, BATTLE_ROYALE_HELP } from "../../../../store/Board/types";
+import { ATARI_HELP, BATTLE_ROYAL_HELP, } from "../../../../store/Board/types";
 import {
-  HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
-  _7X7_HELP
+  MAX_GOOD_MOVES,
+  PICK_GOOD_MOVES,
 } from "./types";
 
 const Wrapper = styled.div`
@@ -23,36 +23,7 @@ const HelpWrapper = styled.div`
   align-items: flex-start;
   flex-wrap: nowrap;
 `;
-const Checkbox = styled.div`
-text-align: ${(props) => (props.textAlign ? props.textAlign : "center")};
-font-family: "Roboto", sans-serif;
-display: block;
-outline: none;
-flex-shrink: 0;
-border-radius: 5px;
-color: #222233;
-border-color: #222233;
-background-color: transparent;
-background-image: none;
-border-style: solid;
-border-width: 1px;
-cursor: pointer;
-font-size: ${(props) => (props.fontSize ? props.fontSize : "28px")};
-&:hover {
-  color: #fff;
-  background-color: #222233;
-  border-color: #222233;
-}
-&:focus {
-  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
-}
 
-  width: 48%;
-  margin-bottom: 10px;
-  padding: 10px;
-  cursor: pointer;
-
-`
 const Atari = styled.div`
 text-align: ${(props) => (props.textAlign ? props.textAlign : "center")};
 font-family: "Roboto", sans-serif;
@@ -116,7 +87,8 @@ const Help = ({
         >
           Атари
         </Atari>
-          <HelpItem title="Показывает лучший из заданных трех ходов (стоимость 2)"
+        
+        <HelpItem title="Показывает лучший из заданных трех ходов (стоимость 2)"
           active={activeHelpId === 16}
           onClick={() =>
             scores &&
@@ -125,7 +97,8 @@ const Help = ({
         >
           Показать лучший из заданных 3 ходов
         </HelpItem>
-          <HelpItem title="Показывает четверть доски в которой есть лучший ход (стоимость 1)"
+        
+        <HelpItem title="Показывает четверть доски в которой есть лучший ход (стоимость 1)"
           active={activeHelpId === HEATMAP_ZONE_QUARTER}
           onClick={() =>
             scores && handleHelp({ type: "map", id: HEATMAP_ZONE_QUARTER })
@@ -133,21 +106,30 @@ const Help = ({
           >
           В какой четверти доски сейчас лучший ход?
         </HelpItem>
-          <HelpItem title="Показывает кто побеждает на данный момент (стоимость 1)"
+        
+        <HelpItem title="Показывает кто побеждает на данный момент (стоимость 1)"
           active={activeHelpId === 34}
           onClick={() => scores && handleHelp({ type: "score", id: 34 })}
         >
           Кто побеждает на данный момент?
         </HelpItem>
+        
         <HelpItem title="Показывает область размером 7х7 в которой есть максимальное количество удачных ходов (стоимость 2)"
-          onClick={() => scores && handleHelp({ type: "map", id: _7X7_HELP })}
+          onClick={() => scores && handleHelp({ type: "map", id: MAX_GOOD_MOVES })}
         >
           В какой области хороший ход?
         </HelpItem>
+        
         <HelpItem title="Показывает область в которой есть лучший ход, если пользователь не угадывает этот ход зона уменьшается (стоимость 3)"
-          onClick={() => scores && handleHelp({ type: "battle", id: BATTLE_ROYALE_HELP })}
+          onClick={() => scores && handleHelp({ type: "battle", id: 0 })}
         >
           Лучший ход
+        </HelpItem>
+
+        <HelpItem title="Дает возможность выбирать ход, пока не выберите 'хороший' (стоимость 3)"
+          onClick={() => scores && handleHelp({ type: "map", id: PICK_GOOD_MOVES })}
+        >
+          Хороший ход
         </HelpItem>
       </HelpWrapper>
     </Wrapper>

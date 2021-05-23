@@ -44,7 +44,7 @@ const Info = ({turns}) => {
             const text = item.slice(0,colorIndex)+item.slice(colorIndex+'белые) '.length)
             return <TextWhite>{text}</TextWhite>
           }
-        })}
+        }).reverse()}
       </TextBlock>
     </Wrapper>
   );
