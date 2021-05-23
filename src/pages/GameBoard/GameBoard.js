@@ -59,18 +59,18 @@ const Wrapper = styled.div`
 `;
 
 const Wrap = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 300vw;
+  height: 1000vh;
   position: absolute;
-  left: 0;
+  left: -100vw;
   top: 0;
   background-color: rgba(255,255,255,0.5);
   z-index: 9;
 `;
 const Spinner = styled.div`
 position: absolute;
-left: 45%;
-top: 45%;
+left: 145vw;
+top: 45vh;
 z-index: 10;
 `;
 const GameBoard = ({ history }) => {
@@ -483,7 +483,11 @@ const GameBoard = ({ history }) => {
       setMultipleHint(mapStones)
     }
   }
-
+  if (blocked) {
+    document.body.style.overflowY = "hidden";
+  } else {
+    document.body.style.overflowY = "auto";
+  }
   return (
     <Wrapper>
       <Header
