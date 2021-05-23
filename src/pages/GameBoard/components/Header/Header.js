@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { strings } from "../../../../language"
 
 const Wrapper = styled.div`
   grid-area: header;
@@ -68,16 +69,16 @@ export const Header = ({ history, gameId, setHint, hint, setResign, helpType, se
         <Left>
           <Menu>
             {view && (
-              <Text onClick={() => setPass()}>Пас</Text>
+              <Text onClick={() => setPass()}>{strings.pass}</Text>
             )}
-            <Text onClick={() => setResign()}>Сдаться</Text>
+            <Text onClick={() => setResign()}>{ strings.giveup }</Text>
             {view && (
-              <TextHint onClick={() => setHint(!hint)} hint={hint}>Взять подсказку</TextHint>
+              <TextHint onClick={() => setHint(!hint)} hint={hint}>{strings.takeHints}</TextHint>
             )}
-            <Text onClick={()=>window.open('https://ufgo.org/Rules9x9/Go%20Rules%209x9.htm','_blank')}>Правила</Text>
+            <Text onClick={()=>window.open(strings.rulesLink,'_blank')}>{strings.rules}</Text>
           </Menu>
         </Left>
-        <GameId>ID игры: {gameId}</GameId>
+        <GameId>{strings.id}: {gameId}</GameId>
       </Content>
     </Wrapper>
   );

@@ -5,6 +5,7 @@ import { ButtonCustom } from "../../components/ButtonCustom";
 import { removeToken } from "../../helpers/session.js"
 import { MAIN_URL } from "../../constants/routes";
 import { getProfile, getSgf, getFullLog } from "../../store/Profile/actions";
+import { strings } from "../../language";
 
 const Wrapper = styled.div`
   display: grid;
@@ -179,15 +180,15 @@ const Profile = ({ history }) => {
               </InfoHistory>
             </Left>
             <Right>
-              <Span winner>Победа</Span>
+              <Span winner>{strings.win}</Span>
               <ScoreRight winner>{"+"+item.score}</ScoreRight>
             </Right>
             <ButtonRow>
               <ButtonDownloadFile onClick={()=>dispatch(getSgf(item.game_id))}>
-                Файл
+                {strings.file}
               </ButtonDownloadFile>
               <ButtonDownloadFile onClick={()=>dispatch(getFullLog(item.game_id))}>
-                Лог
+              {strings.log}
               </ButtonDownloadFile>
             </ButtonRow>
           </GameHistoryItem>) : (
@@ -200,15 +201,15 @@ const Profile = ({ history }) => {
               </InfoHistory>
             </Left>
             <Right>
-              <Span>Поражение</Span>
+              <Span>{strings.defeat}</Span>
               <ScoreRight>{item.score}</ScoreRight>
             </Right>
             <ButtonRow>
               <ButtonDownloadFile onClick={()=>dispatch(getSgf(item.game_id))}>
-                Файл
+              {strings.file}
               </ButtonDownloadFile>
               <ButtonDownloadFile onClick={()=>dispatch(getFullLog(item.game_id))}>
-                Лог
+              {strings.log}
               </ButtonDownloadFile>
             </ButtonRow>
           </GameHistoryItem>
@@ -225,7 +226,7 @@ const Profile = ({ history }) => {
               history.push(MAIN_URL);
             }}
           >
-            Назад
+            {strings.back}
         </ButtonCustom>
         <Avatar alt="avatar" src={playerInfo?.avatar} />
         <InfoPlayer>
@@ -236,10 +237,10 @@ const Profile = ({ history }) => {
             { playerInfo?.email }
           </InfoText>
           <InfoText>
-            Cчет: { playerInfo?.pts }
+            {strings.score}: { playerInfo?.pts }
           </InfoText>
           <InfoText>
-            Рейтинг: { playerInfo?.position }
+            {strings.place}: { playerInfo?.position }
           </InfoText>
         </InfoPlayer>
         <ButtonCustom
@@ -251,7 +252,19 @@ const Profile = ({ history }) => {
               history.push(MAIN_URL);
             }}
           >
-            Выход
+            {strings.exit}
+        </ButtonCustom>
+        <ButtonCustom 
+            width="400px"
+            textAlign="center"
+            mb="20"
+            onClick={() => {
+              if (localStorage.getItem("language") === 'ru')
+              localStorage.setItem("language", 'en')
+              else localStorage.setItem("language", 'ru')
+              window.location.reload();
+            }}>
+              {strings.lang}
         </ButtonCustom>
       </Info>
       <GameHistory>

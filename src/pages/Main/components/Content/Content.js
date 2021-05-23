@@ -6,10 +6,10 @@ import { Connect } from "../Connect";
 import { LoadingGame } from "../LoadingGame";
 import { Winner } from "../Winner";
 import { Error } from "../Error";
-import { PROFILE_URL, LIDERS, RULES } from "../../../../constants/routes";
+import { PROFILE_URL, LIDERS } from "../../../../constants/routes";
 import { createRandomGame, createGameWithAi } from "../../../../store/GameCreate/actions";
 import { useDispatch, useSelector } from "react-redux";
-import { siteUrl } from "../../../../constants/siteUrl";
+import { strings } from "../../../../language";
 
 const Wrapper = styled.div`
   width: 50%;
@@ -33,10 +33,10 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
         <LoadingGame
           gameId={gameId}
           setSearchType={setSearchType}
-          text="Ожидание случайного соперника"
+          text={strings.waitRandom}
           setOpponent={setOpponent}
           searchType={searchType}
-          countText="Вместе с Вами готовы сыграть ..."
+          countText={strings.together}
           />
       );
 
@@ -47,7 +47,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
           setSearchType={setSearchType}
           setOpponent={setOpponent}
           code={code}
-          text="Ожидание второго игрока"
+          text={strings.waitSecond}
           searchType={searchType}
         />
       );
@@ -58,7 +58,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
           history={history}
           opponent={opponent}
           setSearchType={setSearchType}
-          text="Противник найден!"
+          text={strings.opponentFound}
         />
       );
 
@@ -68,7 +68,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
           history={history}
           opponent={opponent}
           setSearchType={setSearchType}
-          text="Игрок подключился!"
+          text={strings.opponentConnected}
         />
       );
 
@@ -78,7 +78,7 @@ const ContentMainBoard = (setSearchType, searchType, history, gameId) => {
     case "Error":
       return (
         <Error
-          error="Не удалось подключиться к запрашиваемой игре"
+          error={strings.connectionFailed}
           setSearchType={setSearchType}
         />
       );
@@ -104,22 +104,22 @@ export const Content = ({ history, searchType, setSearchType }) => {
       {!searchType ? (
         <>
           <ButtonCustom mb={30} onClick={() => setSearchType("Random")} >
-            Игра со случайным соперником
+            {strings.randPlay}
           </ButtonCustom>
           <ButtonCustom mb={30} onClick={() => setSearchType("WithAi")} >
-            Игра с ИИ
+            {strings.aiPlay}
           </ButtonCustom>
           <ButtonCustom onClick={() => setSearchType("Code")} mb={30} >
-            Закрытая игра
+            {strings.closePlay}
           </ButtonCustom>
           <ButtonCustom mb={30} onClick={() => history.push(LIDERS)}>
-            Рейтинг игроков
+            {strings.rating}
           </ButtonCustom>
           <ButtonCustom mb={30} onClick={() => history.push(PROFILE_URL)}>
-           Профиль
+            {strings.profile}
           </ButtonCustom>
-          <ButtonCustom mb={30} onClick={()=>window.open('https://ufgo.org/Rules9x9/Go%20Rules%209x9.htm','_blank')}>
-           Правила
+          <ButtonCustom mb={30} onClick={()=>window.open(strings.rulesLink,'_blank')}>
+            {strings.rules}
           </ButtonCustom>{" "}
         </>
       ) : null}

@@ -9,6 +9,7 @@ import { client, token } from '../../../../Socket.js'
 import { clearGameId } from "../../../../store/GameCreate/actions";
 import { Input } from "../../../../components/InputCustom";
 import { siteUrl } from "../../../../constants/siteUrl";
+import { strings } from "../../../../language";
 
 const Text = styled.p`
   font-size: 36px;
@@ -61,7 +62,7 @@ export const LoadingGame = ({ text, setSearchType, setOpponent, searchType, game
   }
   const codeBlock = () => {
     if (codeGame) {
-      return <Input value={codeGame || 'Ожидайте'} textAlign="center" disabled mt={40} mb={30} />
+      return <Input value={codeGame || strings.wait} textAlign="center" disabled mt={40} mb={30} />
     }
   }
   const isWaiting = () => {
@@ -73,7 +74,7 @@ export const LoadingGame = ({ text, setSearchType, setOpponent, searchType, game
         console.log(data);
         const counter = document.getElementById('counter')
         if (counter) {
-          counter.innerHTML = "Вместе с Вами готовы сыграть: " + data.searching;
+          counter.innerHTML = countText + " " + data.searching;
         }
       });
       return <Text id='counter'>{countText}</Text> 
@@ -91,7 +92,7 @@ export const LoadingGame = ({ text, setSearchType, setOpponent, searchType, game
       {isWaiting()}
       {codeBlock()}
       <ButtonCustom onClick={() => cancelGame()}>
-        Отмена
+        {strings.cancel}
       </ButtonCustom>
     </>
   );

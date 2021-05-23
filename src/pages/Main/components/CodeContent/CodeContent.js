@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector, useStore } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import { ButtonCustom } from "../../../../components/ButtonCustom";
 import { Input } from "../../../../components/InputCustom";
 import { clearGameId, createGameCode, joinGameWithCode } from "../../../../store/GameCreate/actions";
 import { client, token } from "../../../../Socket";
+import { strings } from "../../../../language";
 
 const Text = styled.p`
   font-size: 36px;
@@ -14,40 +15,40 @@ const Text = styled.p`
 
 const CustomCodeContent = ({ setSearchType, setContentType }) => (
   <>
-    <Text>«Закрытая игра»</Text>
+    <Text>«{strings.closePlay}»</Text>
     <ButtonCustom mt={40} mb={30} onClick={() => setContentType("CreateGame")}>
-      Создать игру
+      {strings.create}
     </ButtonCustom>
     <ButtonCustom mb={30} onClick={() => setContentType("JoinGame")}>
-      Присоединиться
+      {strings.join}
     </ButtonCustom>
-    <ButtonCustom onClick={() => setSearchType("")}>Отмена</ButtonCustom>
+    <ButtonCustom onClick={() => setSearchType("")}>{strings.cancel}</ButtonCustom>
   </>
 );
 
 const CreateGame = ({ setSearchType, cancelGame, code }) => (
   <>
-    <Text>Код вашей игры:</Text>
-    <Input value={code || 'Ожидайте'} textAlign="center" disabled mt={40} mb={30} />
+    <Text>{strings.gameCodeTitle}:</Text>
+    <Input value={code || strings.wait} textAlign="center" disabled mt={40} mb={30} />
     <ButtonCustom mb={30} onClick={() => setSearchType("CodeEnter")}>
-      Начать игру
+      {strings.startGame}
     </ButtonCustom>
-    <ButtonCustom onClick={() => cancelGame()}>Отмена</ButtonCustom>
+    <ButtonCustom onClick={() => cancelGame()}>{strings.cancel}</ButtonCustom>
   </>
 );
 
 const JoinGame = ({ setSearchType, cancelGame, code, setCode }) => (
   <>
-    <Text>Укажите код игры:</Text>
+    <Text>{strings.gameCodeField}:</Text>
     <Input mt={30} mb={30} onChange={setCode} name="code" />
     <ButtonCustom
       mb={30}
       disabled={!code}
       onClick={() => code && setSearchType("CodeEnter")}
     >
-      Присоединиться
+      {strings.join}
     </ButtonCustom>
-    <ButtonCustom onClick={() => cancelGame()}>Отмена</ButtonCustom>
+    <ButtonCustom onClick={() => cancelGame()}>{strings.cancel}</ButtonCustom>
   </>
 );
 

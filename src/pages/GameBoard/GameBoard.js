@@ -33,6 +33,7 @@ import {
 } from "./components/Help/types";
 import Loader from "react-loader-spinner";
 import Players from "./components/GameInfo/components/Players/Players";
+import { strings } from "../../language";
 
 
 const Wrapper = styled.div`
@@ -390,7 +391,7 @@ const GameBoard = ({ history }) => {
   }
 
   const resign = () => {
-    let isResign = window.confirm("Ты уверен? Дорогу осилит идущий...");
+    let isResign = window.confirm(strings.giveUpPhrase);
 
     if (isResign) {
       dispatch(setBlocked(true));

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ButtonCustom } from "../../../../components/ButtonCustom";
 import { useSelector } from "react-redux";
+import { strings } from "../../../../language"
 
 const Text = styled.p`
   font-size: 36px;
@@ -48,16 +49,6 @@ const ScoreAfter = styled(Score)`
     width: 100%;
     height: 3px;
     background: #ffc164;
-    bottom: 0;
-  }
-`;
-const ScoreBefore = styled(Score)`
-  &:before {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 3px;
-    background: #dd3f65;
     bottom: 0;
   }
 `;
@@ -108,10 +99,10 @@ export const Winner = ({setSearchType}) => {
           </ScoreWrapper>
         </Info>
       </Enemy>
-      <Text>{winner?.id === userId ? 'Победил!' : 'Проиграл!'}</Text>
-      <ScoreText>Счет: <ScoreAfter>{player?.finalScore}</ScoreAfter>{/*/ <ScoreBefore>10</ScoreBefore>*/}</ScoreText>
-      <ScoreText>Очки по подсказкам: <ScoreAfter>{player?.hintScore}</ScoreAfter></ScoreText>
-      <ScoreText>Итоговые очки: <ScoreAfter>{player?.rpScore}</ScoreAfter></ScoreText>
+      <Text>{winner?.id === userId ? strings.youWin : strings.youLose}</Text>
+      <ScoreText>{strings.score}: <ScoreAfter>{player?.finalScore}</ScoreAfter></ScoreText>
+      <ScoreText>{strings.scoreByHints}: <ScoreAfter>{player?.hintScore}</ScoreAfter></ScoreText>
+      <ScoreText>{strings.scoreFinal}: <ScoreAfter>{player?.rpScore}</ScoreAfter></ScoreText>
       <ButtonCustom
         width="327px"
         mt={30}
@@ -120,7 +111,7 @@ export const Winner = ({setSearchType}) => {
           setSearchType("");
         }}
       >
-        В меню
+      {strings.menu}
       </ButtonCustom>
     </>
   );

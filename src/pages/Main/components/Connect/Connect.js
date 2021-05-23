@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ButtonCustom } from "../../../../components/ButtonCustom";
 import AvatarImage from "../../../../assets/img/avatar-2.png";
 import { GAME_URL } from "../../../../constants/routes";
+import {strings} from "../../../../language"
 
 const Text = styled.p`
   font-size: 36px;
@@ -71,7 +72,7 @@ export const Connect = ({ text, history, opponent }) => {
         </Info>
       </Enemy>
       <Text>{text}</Text>
-      <ButtonCustom width={'350px'} disabled>Отмена</ButtonCustom>
+      <ButtonCustom width={'350px'} disabled>{strings.cancel}</ButtonCustom>
     </>
   );
 };

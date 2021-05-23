@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { strings } from "../../../../../../language";
 
 const Wrapper = styled.div`
   justify-content: center;
@@ -205,7 +206,7 @@ const Players = ({ yourColor, enemyPass, stepColor, you, opponent, stepMain, ste
             </Scores>
           )}
         </Info>
-        { enemyPass && yourColor !== 'black' && (<Pass>Пас</Pass>)}
+        { enemyPass && yourColor !== 'black' && (<Pass>{strings.pass}</Pass>)}
         <Time>{timerParseOne}</Time>
         <Score>{stepMain}</Score>
         <Treangle active={stepColor === "black"} />
@@ -220,7 +221,7 @@ const Players = ({ yourColor, enemyPass, stepColor, you, opponent, stepMain, ste
             </Scores>
           )}
         </Info>
-        { enemyPass && yourColor !== 'white' && (<PassRight>Пас</PassRight>)}
+        { enemyPass && yourColor !== 'white' && (<PassRight>{strings.pass}</PassRight>)}
         <TimeRight>{timerParseTwo}</TimeRight>
         <ScoreRight>{stepTwo}</ScoreRight>
         <AvatarRight alt="avatar" src={yourColor !== 'white' ? opponent.avatar : you.avatar}
