@@ -18,7 +18,8 @@ import {
   setScoresWinner,
   hintBestMoves,
   maxGoodMoves,
-  hintBattleRoyal
+  hintBattleRoyal,
+  pickGoodMoves
 } from "../../store/Board/actions";
 
 import { clearGameId } from "../../store/GameCreate/actions";
@@ -27,7 +28,8 @@ import { client, token } from '../../Socket.js'
 import {
   HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
-  MAX_GOOD_MOVES
+  MAX_GOOD_MOVES,
+  PICK_GOOD_MOVES
 } from "./components/Help/types";
 import Loader from "react-loader-spinner";
 import Players from "./components/GameInfo/components/Players/Players";
@@ -423,6 +425,10 @@ const GameBoard = ({ history }) => {
         case MAX_GOOD_MOVES:
           dispatch(maxGoodMoves(game_id));
           break;
+        case PICK_GOOD_MOVES:
+          dispatch(pickGoodMoves(game_id));
+          break;
+        default:
       }
     }
     if (type === "score") {

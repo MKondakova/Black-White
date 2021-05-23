@@ -7,15 +7,15 @@ import {
   GET_HINT_BEST_MOVES,
   GET_HINT_SHOW_BEST,
   ATARI_HELP,
-  GET_HINT_7x7,
-  MAX_GOOD_MOVES,
+  GET_HINT_MAX_GOOD_MOVES,
   GET_HINT_HEATMAP_FULL,
   GET_HINT_HEATMAP,
   GET_HINT_HEATMAP_ZONE,
   GET_HINT_BATTLE_ROYAL,
   SET_BLOCKED,
   MAP_STONES,
-  GET_SCORES_WINNER
+  GET_SCORES_WINNER,
+  GET_HINT_PICK_GOOD_MOVES
 } from "./types";
 
 export const hintHeatmapFull = (game_id) => ({
@@ -28,7 +28,12 @@ export const atariHelp = () => ({
 });
 
 export const maxGoodMoves = (game_id) => ({
-  type: GET_HINT_7x7,
+  type: GET_HINT_MAX_GOOD_MOVES,
+  payload: {game_id: game_id}
+});
+
+export const pickGoodMoves = (game_id) => ({
+  type: GET_HINT_PICK_GOOD_MOVES,
   payload: {game_id: game_id}
 });
 

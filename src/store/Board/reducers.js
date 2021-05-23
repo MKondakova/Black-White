@@ -11,7 +11,8 @@ import {
   SET_BLOCKED,
   MAP_STONES,
   SCORES,
-  SCORES_WINNER
+  SCORES_WINNER,
+  PICK_GOOD_MOVES
 } from "./types";
 import { MAP_HALF, MAP_QUARTERS } from "../../pages/GameBoard/components/Help/types";
 
@@ -40,6 +41,14 @@ export const boardReducer = (state = initialState, action) => {
 
       if (window.BEST_MOVE_GRID_SIZE_I === undefined) {
         let best_move = action.payload[0].move;
+        if (best_move === 'pass') {
+          return {
+            ...state,
+            mapStones,
+            classNamesMapStones,
+            blocked: false
+          };
+        }
         let i_c = 'ABCDEFGHJKLMNOPQRSTUV'.search(best_move[0]);
         let j_c = parseInt(best_move.replace(best_move[0], '')) - 1;
         console.log(i_c, j_c);
@@ -219,6 +228,35 @@ export const boardReducer = (state = initialState, action) => {
         });
       }
 
+      return {
+        ...state,
+        mapStones,
+        classNamesMapStones,
+        blocked: false
+      };
+    case PICK_GOOD_MOVES:
+      if (window.GOOD_MOVES_MAP === undefined) {
+        alert("У вас есть 5 попыток")
+        window.GOOD_MOVES_MAP = action.payload
+        window.GOOD_MOVES_TRY = []
+        window.GOOD_MOVES_COUNT = 0
+        let goodMove = window.GOOD_MOVES_MAP.reduce((acc, v) => acc.concat(v)).sort()[140]
+        window.GOOD_MOVE = goodMove
+      }
+      console.log(window.GOOD_MOVE, "что-то считаю", window.GOOD_MOVES_TRY)
+      
+      window.GOOD_MOVES_COUNT = window.GOOD_MOVES_TRY.length
+      mapStones = {};
+      classNamesMapStones = {};
+      if (window.GOOD_MOVES_MAP  !== undefined) {
+        let alpha = 'ABCDEFGHJKLMNOPQRSTUV'
+        window.GOOD_MOVES_TRY.forEach(function (c) {
+          let sign = alpha[c[0]];
+          let coord = `${sign}${(c[1] + 1)}`;
+          mapStones[coord] = "cross";
+          classNamesMapStones[coord] = `redstone size-40`;
+        });
+      }
       return {
         ...state,
         mapStones,

@@ -6,13 +6,15 @@ import {
   GET_HINT_BEST_MOVES,
   GET_HINT_SHOW_BEST,
   GET_HINT_HEATMAP_FULL,
-  GET_HINT_7x7,
+  GET_HINT_MAX_GOOD_MOVES,
+  GET_HINT_PICK_GOOD_MOVES,
   GET_HINT_HEATMAP_ZONE,
   GET_HINT_BATTLE_ROYAL,
   BATTLE_ROYAL_HELP,
   MAP_HELP,
   ATARI_HELP,
   MAX_GOOD_MOVES,
+  PICK_GOOD_MOVES,
   SCORES_WINNER,
   GET_SCORES_WINNER
 } from "./types";
@@ -20,7 +22,6 @@ import {
   helpBestMoves,
   helpShowBest,
   helpHeatmapFull,
-  help7x7,
   helpHeatmapZone,
   scoresWinner
 } from "../../api/board";
@@ -97,20 +98,27 @@ function* fetchGetHintHeatmapZone_saga(action) {
 }
 
 function* fetchGetHintAtari_saga(action) {
+  yield put({ type: ATARI_HELP })
+}
+
+function* fetchGetHintMaxGoodMoves_saga(action) {
   const { payload } = action;
   try {
-    yield put({ type: ATARI_HELP })
+    const res = yield call(helpHeatmapFull, getToken(), payload.game_id);
+    if (res.hint) {
+      yield put({ type: MAX_GOOD_MOVES, payload: res.hint })
+    }
   } catch (e) {
     //throw e;
   }
 }
 
-function* fetchGetHint_7x7_saga(action) {
+function* fetchGetHintPickGoodMoves_saga(action) {
   const { payload } = action;
   try {
-    const res = yield call(help7x7, getToken(), payload.game_id);
+    const res = yield call(helpHeatmapFull, getToken(), payload.game_id);
     if (res.hint) {
-      yield put({ type: MAX_GOOD_MOVES, payload: res.hint })
+      yield put({ type: PICK_GOOD_MOVES, payload: res.hint })
     }
   } catch (e) {
     //throw e;
@@ -134,7 +142,8 @@ export function* boardSaga() {
     takeLatest(GET_HINT_BEST_MOVES, fetchGetHintBestMoves_saga),
     takeLatest(GET_HINT_SHOW_BEST, fetchGetHintShowBest_saga),
     takeLatest(GET_HINT_ATARI, fetchGetHintAtari_saga),
-    takeLatest(GET_HINT_7x7, fetchGetHint_7x7_saga),
+    takeLatest(GET_HINT_MAX_GOOD_MOVES, fetchGetHintMaxGoodMoves_saga),
+    takeLatest(GET_HINT_PICK_GOOD_MOVES, fetchGetHintPickGoodMoves_saga),
     takeLatest(GET_HINT_BATTLE_ROYAL, fetchGetHintBattleRoyal_saga),
     takeLatest(GET_HINT_HEATMAP_FULL, fetchGetHintHeatmapFull_saga),
     takeLatest(GET_HINT_HEATMAP_ZONE, fetchGetHintHeatmapZone_saga),
