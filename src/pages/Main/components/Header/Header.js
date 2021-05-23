@@ -5,6 +5,7 @@ import Pupa from "../../../../assets/img/magnifier_icon-icons.com_56922.svg";
 import { MAIN_URL, PROFILE_URL } from "../../../../constants/routes";
 import { ButtonCustom } from "../../../../components/ButtonCustom";
 import { Input } from "../../../../components/InputCustom";
+import { strings } from "../../../../language"
 
 const Wrapper = styled.div`
   max-width: 1300px;
@@ -115,14 +116,14 @@ export const Header = ({
           history.push(MAIN_URL)
           setSearchType("")
         }} padding="10px 20px">
-          Меню
+            {strings.menu}
         </ButtonCustom>
         <Input
           onChange={(e) => setNicknameFunc(e)}
           width="500px"
           mr={40}
           textAlign="left"
-          placeholder="Введите ник или номер игрока"
+          placeholder={strings.search}
         />
         <img src={Pupa} 
         onClick={() => {

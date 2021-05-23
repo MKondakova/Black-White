@@ -5,6 +5,7 @@ import { ButtonCustom } from "../../../../components/ButtonCustom";
 import { Input } from "../../../../components/InputCustom";
 import { clearGameId, createGameCode, joinGameWithCode } from "../../../../store/GameCreate/actions";
 import { client, token } from "../../../../Socket";
+import { strings } from "../../../../language";
 
 const Text = styled.p`
   font-size: 36px;
@@ -14,14 +15,14 @@ const Text = styled.p`
 
 const CustomCodeContent = ({ setSearchType, setContentType }) => (
   <>
-    <Text>«Закрытая игра»</Text>
+    <Text>«{strings.closePlay}»</Text>
     <ButtonCustom mt={40} mb={30} onClick={() => setContentType("CreateGame")}>
-      Создать игру
+      {strings.create}
     </ButtonCustom>
     <ButtonCustom mb={30} onClick={() => setContentType("JoinGame")}>
-      Присоединиться
+      {strings.join}
     </ButtonCustom>
-    <ButtonCustom onClick={() => setSearchType("")}>Отмена</ButtonCustom>
+    <ButtonCustom onClick={() => setSearchType("")}>{strings.cancel}</ButtonCustom>
   </>
 );
 
@@ -32,7 +33,7 @@ const CreateGame = ({ setSearchType, cancelGame, code }) => (
     <ButtonCustom mb={30} onClick={() => setSearchType("CodeEnter")}>
       Начать игру
     </ButtonCustom>
-    <ButtonCustom onClick={() => cancelGame()}>Отмена</ButtonCustom>
+    <ButtonCustom onClick={() => cancelGame()}>{strings.cancel}</ButtonCustom>
   </>
 );
 
@@ -45,9 +46,9 @@ const JoinGame = ({ setSearchType, cancelGame, code, setCode }) => (
       disabled={!code}
       onClick={() => code && setSearchType("CodeEnter")}
     >
-      Присоединиться
+      {strings.join}
     </ButtonCustom>
-    <ButtonCustom onClick={() => cancelGame()}>Отмена</ButtonCustom>
+    <ButtonCustom onClick={() => cancelGame()}>{strings.cancel}</ButtonCustom>
   </>
 );
 

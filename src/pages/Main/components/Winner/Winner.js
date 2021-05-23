@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ButtonCustom } from "../../../../components/ButtonCustom";
 import { useSelector } from "react-redux";
+import { strings } from "../../../../language"
 
 const Text = styled.p`
   font-size: 36px;
@@ -120,7 +121,7 @@ export const Winner = ({setSearchType}) => {
           setSearchType("");
         }}
       >
-        В меню
+      {strings.menu}
       </ButtonCustom>
     </>
   );
