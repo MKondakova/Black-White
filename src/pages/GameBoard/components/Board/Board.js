@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Goban } from "react-goban";
 import styled from "styled-components";
-import { markersClear, setMapStones, hintBattleRoyale } from "../../../../store/Board/actions";
+import { markersClear, setMapStones, hintBattleRoyal, pickGoodMoves } from "../../../../store/Board/actions";
 import { client } from "../../../../Socket";
 
 const Wrapper = styled.div`
   grid-area: board;
   @media (min-width: 1000px) {
-    width: calc(100vh - 80px);
+    width: 100%;
   }
   @media (max-width: 1000px) {
-    width: 100vw;
+    width: 90%;
   }
+  margin: auto;
   `;
 
 const Board = ({
@@ -51,6 +52,7 @@ const Board = ({
     }
 
     if (valid && currentColor === yourColor) {
+      //========================= BATTLE =================
       if (window.BEST_MOVE_GRID_SIZE_I !== undefined && window.BEST_MOVE_GRID_SIZE_I !== null) {
         let i_c = 'ABCDEFGHJKLMNOPQRSTUV'.search(stonePosition[0]);
         let j_c = parseInt(stonePosition.replace(stonePosition[0], '')) - 1;
@@ -69,10 +71,36 @@ const Board = ({
           setActiveHelpId("");
           setMultipleType(false);
           setMapType(false);
-          dispatch(hintBattleRoyale(window.GAME_ID));
+          dispatch(hintBattleRoyal(window.GAME_ID));
           window.CAN_MAKE_MOVE = false;
         }
       }
+      //========================= BATTLE =================
+      //========================= PICK_GOOD_MOVES =================
+      
+      if (window.GOOD_MOVES_MAP !== undefined) {
+        window.CAN_MAKE_MOVE = false;
+        let i_c = 'ABCDEFGHJKLMNOPQRSTUV'.search(stonePosition[0]);
+        let j_c = parseInt(stonePosition.replace(stonePosition[0], '')) - 1;
+        if (window.GOOD_MOVES_COUNT > 4 || window.GOOD_MOVE <= window.GOOD_MOVES_MAP[i_c][j_c]) {
+          window.GOOD_MOVES_MAP = undefined
+          window.GOOD_MOVES_COUNT = 0
+          window.CAN_MAKE_MOVE = true;
+        } else {
+          setHint(false);
+          dispatch(markersClear());
+          setHelpType("");
+          setActiveHelpId("");
+          setMultipleType(false);
+          setMapType(false);
+          if (window.GOOD_MOVES_TRY.find((e)=>e[0] === i_c && e[1] === j_c) === undefined){
+            window.GOOD_MOVES_TRY.push([i_c, j_c])
+          }
+          dispatch(pickGoodMoves(window.GAME_ID));
+          window.CAN_MAKE_MOVE = false;
+        }
+      }
+      //========================= PICK_GOOD_MOVES =================
 
       if (window.CAN_MAKE_MOVE === undefined || window.CAN_MAKE_MOVE === true) {
         setStonePosition(stonePosition)

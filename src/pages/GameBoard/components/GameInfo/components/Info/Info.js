@@ -60,8 +60,7 @@ const Info = ({turns}) => {
             return <TextBlack>{nickAndTime}{strings.makeMove}{pos}</TextBlack>
           }
           return <TextWhite>{nickAndTime}{strings.makeMove}{pos}</TextWhite>
-
-        })}
+        }).reverse()}
       </TextBlock>
     </Wrapper>
   );

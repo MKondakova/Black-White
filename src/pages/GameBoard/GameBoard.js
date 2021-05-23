@@ -17,8 +17,9 @@ import {
   hintShowBest,
   setScoresWinner,
   hintBestMoves,
-  _7x7Help,
-  hintBattleRoyale
+  maxGoodMoves,
+  hintBattleRoyal,
+  pickGoodMoves
 } from "../../store/Board/actions";
 
 import { clearGameId } from "../../store/GameCreate/actions";
@@ -27,9 +28,9 @@ import { client, token } from '../../Socket.js'
 import {
   HEATMAP_FULL,
   HEATMAP_ZONE_QUARTER,
-  _7X7_HELP
+  MAX_GOOD_MOVES,
+  PICK_GOOD_MOVES
 } from "./components/Help/types";
-import { ATARI_HELP, _7x7_HELP } from "../../store/Board/types";
 import Loader from "react-loader-spinner";
 import Players from "./components/GameInfo/components/Players/Players";
 import { strings } from "../../language";
@@ -44,6 +45,7 @@ const Wrapper = styled.div`
     "board"
     "help"
     "info";
+    align-items: center;
   }
   @media (min-width: 1000px) {
     grid-template-columns: 3fr 2fr;
@@ -58,18 +60,18 @@ const Wrapper = styled.div`
 `;
 
 const Wrap = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 300vw;
+  height: 1000vh;
   position: absolute;
-  left: 0;
+  left: -100vw;
   top: 0;
   background-color: rgba(255,255,255,0.5);
   z-index: 9;
 `;
 const Spinner = styled.div`
 position: absolute;
-left: 45%;
-top: 45%;
+left: 145vw;
+top: 45vh;
 z-index: 10;
 `;
 const GameBoard = ({ history }) => {
@@ -302,8 +304,8 @@ const GameBoard = ({ history }) => {
             window.ATARI = undefined;
             console.log(e);
           }
-          // dispatch(_7x7Help(game_id));
-          // handleHelp({ type: "map", id: _7x7Help });
+          // dispatch(maxGoodMoves(game_id));
+          // handleHelp({ type: "map", id: maxGoodMoves });
         }
         if (jsonData.payload.player) {
           if (typeof jsonData.payload.player === 'string') {
@@ -422,9 +424,13 @@ const GameBoard = ({ history }) => {
         case HEATMAP_ZONE_QUARTER:
           dispatch(hintHeatmapZone(game_id, true));
           break;
-        case _7X7_HELP:
-          dispatch(_7x7Help(game_id));
+        case MAX_GOOD_MOVES:
+          dispatch(maxGoodMoves(game_id));
           break;
+        case PICK_GOOD_MOVES:
+          dispatch(pickGoodMoves(game_id));
+          break;
+        default:
       }
     }
     if (type === "score") {
@@ -441,7 +447,7 @@ const GameBoard = ({ history }) => {
       dispatch(setBlocked(true));
       setHelpType("map");
       setMapType("map");
-      dispatch(hintBattleRoyale(game_id));
+      dispatch(hintBattleRoyal(game_id));
     }
   };
 
@@ -478,7 +484,11 @@ const GameBoard = ({ history }) => {
       setMultipleHint(mapStones)
     }
   }
-
+  if (blocked) {
+    document.body.style.overflowY = "hidden";
+  } else {
+    document.body.style.overflowY = "auto";
+  }
   return (
     <Wrapper>
       <Header

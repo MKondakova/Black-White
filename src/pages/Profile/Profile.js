@@ -8,22 +8,30 @@ import { getProfile, getSgf, getFullLog } from "../../store/Profile/actions";
 import { strings } from "../../language";
 
 const Wrapper = styled.div`
+  display: grid;
+  @media (max-width: 1000px) {
+    grid-template-areas:
+    "info"
+    "history";
+  }
+  @media (min-width: 1000px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+    "info history";
+  }
   height: 100vh;
   position: relative;
-  justify-content: center;
-  flex-direction: row;
-  display: flex;
-  align-items: start;
+  align-items: center;
   width: 100%;
   padding: 20px 0;
 `;
 const Info = styled.div`
+  grid-area: info;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   min-width: 150px;
-  width: 50%;
   margin-bottom: 70px;
 `;
 const InfoPlayer = styled.div``;
@@ -39,15 +47,21 @@ const Right = styled.div`
 `;
 
 const GameHistory = styled.div`
-  height: 90vh;
-  min-height: 200px;
-  overflow: hidden;
-  overflow-y: scroll;
+  grid-area: history;
+  @media (max-width: 1000px) {
+    height: fit-content;
+    min-height: 200px;
+  }
+  @media (min-width: 1000px) {
+    height: 90vh;
+    min-height: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+  }
+  margin: 0 15px 0 15px;
   min-width: 150px;
-  width: 50%;
-  margin-bottom: 70px;
-  display: flex;
-  flex-direction: column;
 `;
 
 const Avatar = styled.img`

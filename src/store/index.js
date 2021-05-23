@@ -13,6 +13,7 @@ export const createReduxStore = () => {
     profile: profileReducer,
     createGame: createGameReducer
   });
+  
   const sagaMiddleware = createSagaMiddleware();
   const middleware = [sagaMiddleware];
   const store = createStore(reducer, compose(applyMiddleware(...middleware)));

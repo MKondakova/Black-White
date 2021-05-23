@@ -1,4 +1,4 @@
-import { GET_PROFILE, GET_PROFILE_BY_ID, SET_LIDERS, GET_SGF, GET_FULL_LOG, GET_LIDERS } from "./types";
+import { GET_PROFILE, GET_PROFILE_BY_ID, GET_SGF, GET_FULL_LOG, GET_LIDERS } from "./types";
 
 export const getProfile = () => ({
   type: GET_PROFILE,

@@ -8,6 +8,7 @@ const Wrapper = styled.div`
   align-items: center;
   margin-bottom: 20px;
   padding-top: 29px;
+  min-height: 85px;
 `;
 const Content = styled.div`
   display: flex;

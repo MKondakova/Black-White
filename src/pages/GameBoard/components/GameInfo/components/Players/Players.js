@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { strings } from "../../../../../../language";
 
 const Wrapper = styled.div`
+  justify-content: center;
   display: flex;
   min-width:550px;
   min-height: 150px;

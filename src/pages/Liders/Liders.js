@@ -120,7 +120,7 @@ export const Liders = ({ history }) => {
 
   useEffect(() => {
     if (nickname && (nickname !== '')) {
-      setList(liders.filter(item => item.nickname.indexOf(nickname) !== -1 || item.id.toString().indexOf(nickname) !== -1));
+      setList(liders.filter(item => item.nickname.indexOf(nickname) !== -1 || item.position === Number.parseInt(nickname)));
     } else {
       setList(liders)
     }
@@ -134,11 +134,14 @@ export const Liders = ({ history }) => {
         setSearchType={() => console.log()}
         setNicknameFunc={(val) => setNickname(val)}
       />
+
       <a href="#" title={strings.upTitle}>
-      <img src={image} style={{position:'fixed',
-  bottom:50,
-  right:50
-  }} ></img></a>
+          <img src={image} style={{position:'fixed',
+              bottom:50,
+              right:50
+              }} >
+          </img>
+      </a>
       <LidersCont>
         {
           list.map((item, i) => {
