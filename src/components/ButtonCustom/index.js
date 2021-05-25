@@ -14,7 +14,7 @@ const Btn = styled.button`
   margin-left: ${(props) => (props.ml ? `${props.ml}px` : "0")};
   margin-top: ${(props) => (props.mt ? `${props.mt}px` : "0")};
   margin-bottom: ${(props) => (props.mb ? `${props.mb}px` : "0")};
-  border-radius: 5px;
+  border-radius: ${(props) => (props.borderRadius ? props.borderRadius : "5px")};
   color: #222233;
   background-color: transparent;
   background-image: none;
@@ -48,6 +48,7 @@ export const ButtonCustom = ({
   textColor,
   disabled,
   type,
+  borderRadius,
   onClick
 }) => (
   <Btn
@@ -61,6 +62,7 @@ export const ButtonCustom = ({
     ml={ml}
     mt={mt}
     mb={mb}
+    borderRadius={borderRadius}
     backgroundColor={backgroundColor}
     textColor={textColor}
     disabled={disabled}

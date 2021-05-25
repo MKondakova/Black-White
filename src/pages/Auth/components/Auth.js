@@ -75,6 +75,19 @@ const Auth = () => {
   return (
     <Wrapper>
       <Container>
+      <ButtonCustom 
+            width="70px"
+            textAlign="center"
+            mb="20"
+            borderRadius="100%"
+            onClick={() => {
+              if (localStorage.getItem("language") === 'ru')
+              localStorage.setItem("language", 'en')
+              else localStorage.setItem("language", 'ru')
+              window.location.reload();
+            }}>
+              {strings.lang}
+        </ButtonCustom>
         <Form onSubmit={handleAuth}>
           <Tabs>
             <Tab

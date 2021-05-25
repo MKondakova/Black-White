@@ -103,6 +103,19 @@ export const Content = ({ history, searchType, setSearchType }) => {
     <Wrapper>
       {!searchType ? (
         <>
+        <ButtonCustom 
+            width="70px"
+            textAlign="center"
+            mb="20"
+            borderRadius="100%"
+            onClick={() => {
+              if (localStorage.getItem("language") === 'ru')
+              localStorage.setItem("language", 'en')
+              else localStorage.setItem("language", 'ru')
+              window.location.reload();
+            }}>
+              {strings.lang}
+        </ButtonCustom>
           <ButtonCustom mb={30} onClick={() => setSearchType("Random")} >
             {strings.randPlay}
           </ButtonCustom>

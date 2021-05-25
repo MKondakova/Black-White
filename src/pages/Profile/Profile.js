@@ -254,18 +254,6 @@ const Profile = ({ history }) => {
           >
             {strings.exit}
         </ButtonCustom>
-        <ButtonCustom 
-            width="400px"
-            textAlign="center"
-            mb="20"
-            onClick={() => {
-              if (localStorage.getItem("language") === 'ru')
-              localStorage.setItem("language", 'en')
-              else localStorage.setItem("language", 'ru')
-              window.location.reload();
-            }}>
-              {strings.lang}
-        </ButtonCustom>
       </Info>
       <GameHistory>
         {gameHistoryItems}
