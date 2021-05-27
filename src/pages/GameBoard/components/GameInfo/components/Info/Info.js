@@ -5,11 +5,11 @@ import { strings } from "../../../../../../language";
 const Wrapper = styled.div`
   margin-top: 8px;
   min-height: 508px;
-  max-height: 68vh;
+  max-height: 58vh;
   overflow-y: auto;
 `;
 const TextBlock = styled.div`
-  max-height: 68vh;
+  max-height: 58vh;
   background: transparent;
   padding: 20px 40px;
   overflow-y: auto;
