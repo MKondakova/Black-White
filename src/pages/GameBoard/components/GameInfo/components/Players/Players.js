@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   justify-content: center;
   display: flex;
   min-width:550px;
-  min-height: 150px;
   grid-area: players;
 `;
 const Player = styled.div`
@@ -17,7 +16,6 @@ const Player = styled.div`
   background:#222233;
   color: white;
   border: 2px solid #222233;
-  margin-top:40px;
   position: relative;
   border-top-left-radius: 5px;
   border-top-right-radius: 0;
@@ -49,6 +47,9 @@ const AvatarRight = styled.img`
 `;
 const Info = styled.div``;
 const Name = styled.p`
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis;
   z-index:2;
   color: white;
   font-size: 24px;

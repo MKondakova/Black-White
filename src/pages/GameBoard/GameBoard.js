@@ -39,6 +39,7 @@ import { strings } from "../../language";
 const Wrapper = styled.div`
   display: grid;
   @media (max-width: 1000px) {
+    justify-items: center;
     grid-template-areas:
     "header"
     "players"  
@@ -48,15 +49,27 @@ const Wrapper = styled.div`
     align-items: center;
   }
   @media (min-width: 1000px) {
+    align-items: start;
+    height: 100vh;
+    grid-template-rows: min-content min-content 70vh;
     grid-template-columns: 3fr 2fr;
     grid-template-areas:
-      "header     header"
-      "board      players"
-      "board      help"
-      "board      info";
+      "header     header"  
+      "board      players" 
+      "board      info"     
     }
   max-width: 1377px;
   margin: 0 auto;
+`;
+
+const InfoWrapper = styled.div`
+  max-height: 70vh;
+  grid-area: info;
+  margin:0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-self: normal
+
 `;
 
 const Wrap = styled.div`
@@ -68,6 +81,7 @@ const Wrap = styled.div`
   background-color: rgba(255,255,255,0.5);
   z-index: 9;
 `;
+
 const Spinner = styled.div`
 position: absolute;
 left: 145vw;
@@ -171,7 +185,7 @@ const GameBoard = ({ history }) => {
       let finished = false;
       for (let i = 0; i < group.length; i++) {
         let coords = [[group[i][1] - 1, group[i][0]], [group[i][1] + 1, group[i][0]], [group[i][1], group[i][0] - 1], [group[i][1], group[i][0] + 1]];
-        coords.forEach(function (c) {
+        coords.forEach((c) => {
           if (c[0] >= 0 && c[0] < size && c[1] >= 0 && c[1] < size && !finished)
             if (_set[c[0]][c[1]] === 0)
               finished = true;
@@ -542,7 +556,8 @@ const GameBoard = ({ history }) => {
         times={times}
       />
 
-      {!hint ? (
+      <InfoWrapper>
+        {!hint ? (
         <GameInfo
           turns={turns} />
       ) : (
@@ -552,6 +567,7 @@ const GameBoard = ({ history }) => {
           scores={stepColor !== yourColor ? false : true}
         />
       )}
+      </InfoWrapper>
     </Wrapper>
   );
 };

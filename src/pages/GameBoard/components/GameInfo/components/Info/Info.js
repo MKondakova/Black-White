@@ -3,14 +3,16 @@ import styled from "styled-components";
 import { strings } from "../../../../../../language";
 
 const Wrapper = styled.div`
-  grid-area: info;
-  margin-top: 23px;
+  margin-top: 8px;
   min-height: 508px;
-  overflow-y: scroll;
+  max-height: 58vh;
+  overflow-y: auto;
 `;
 const TextBlock = styled.div`
+  max-height: 58vh;
   background: transparent;
   padding: 20px 40px;
+  overflow-y: auto;
 `;
 const TextWhite = styled.p`
   font-size: 18px;

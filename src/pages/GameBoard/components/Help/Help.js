@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { strings } from "../../../../language";
-import { ATARI_HELP, BATTLE_ROYAL_HELP, } from "../../../../store/Board/types";
 import {
   HEATMAP_ZONE_QUARTER,
   MAX_GOOD_MOVES,
@@ -9,14 +8,14 @@ import {
 } from "./types";
 
 const Wrapper = styled.div`
+  grid-area: help;
   margin:0 10px;
 `;
 
 const HelpWrapper = styled.div`
-  grid-area: help;
   margin-top: 23px;
   max-height: 508px;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;

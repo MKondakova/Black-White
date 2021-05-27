@@ -5,7 +5,8 @@ import Info from './components/Info/Info'
 const Wrapper = styled.div`
   margin:0 10px;
   display: flex;
-  flex-direction: column;
+  max-height:70vh;
+  flex-direction: column
 `;
 
 
