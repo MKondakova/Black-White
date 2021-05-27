@@ -5,7 +5,7 @@ import Info from './components/Info/Info'
 const Wrapper = styled.div`
   margin:0 10px;
   display: flex;
-  max-height:100%;
+  max-height:70vh;
   flex-direction: column
 `;
 

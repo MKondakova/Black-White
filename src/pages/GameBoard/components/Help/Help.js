@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 const HelpWrapper = styled.div`
   margin-top: 23px;
   max-height: 508px;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
   display: flex;
   flex-direction: column;

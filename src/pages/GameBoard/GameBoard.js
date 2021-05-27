@@ -81,6 +81,7 @@ const Wrap = styled.div`
   background-color: rgba(255,255,255,0.5);
   z-index: 9;
 `;
+
 const Spinner = styled.div`
 position: absolute;
 left: 145vw;
