@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import { store } from "../../../App";
 import { ButtonCustom } from "../../../components/ButtonCustom";
 import { Input } from "../../../components/InputCustom";
 import { strings } from "../../../language";
@@ -59,6 +60,14 @@ const Auth = () => {
       } else {
         setError("");
         await dispatch(regSubmit(nickname, email));
+
+        let unsub = store.subscribe(() => {
+          let state = store.getState();
+          if (state.auth.error) {
+            setError(state.auth.error);
+            unsub();
+          }
+        })
       }
     }
     if (activeTab === "auth") {
@@ -66,8 +75,14 @@ const Auth = () => {
         setError(strings.enterAll);
       } else {
         setError("");
-        // setToken(register(email, nickname)
         await dispatch(loginSubmit(password, email));
+        let unsub = store.subscribe(() => {
+          let state = store.getState();
+          if (state.auth.error) {
+            setError(state.auth.error);
+            unsub();
+          }
+        })
       }
     }
   };
@@ -120,6 +135,7 @@ const Auth = () => {
               onChange={setNickname}
               value={nickname}
               errorMessage={error}
+              noError={!error}
               name="nickname"
             />
           ) : (
@@ -130,6 +146,7 @@ const Auth = () => {
               onChange={setPassword}
               value={password}
               errorMessage={error}
+              noError={!error}
               name="password"
               type="password"
             />

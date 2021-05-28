@@ -10,14 +10,14 @@ export const authReducer = (state = initialState, action) => {
     case REG_ERROR:
       return {
         ...state,
-        error: null,
+        error: action.error,
       };
     case LOGIN_ERROR:
       return {
         ...state,
-        error: null,
+        error: action.error,
       };
     default:
-      return { ...state };
+      return { ...state, error: null };
   }
 };

@@ -76,6 +76,6 @@ export const Input = ({
       textAlign={textAlign}
       onChange={(event) => onChange(event.target.value, event)}
     />
-    {noError ? <ErrorText>{errorMessage}</ErrorText> : null}
+    {!noError ? <ErrorText>{errorMessage}</ErrorText> : null}
   </InputWrapper>
 );

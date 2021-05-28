@@ -3,7 +3,7 @@ import './scss/main.scss'
 import { Provider } from "react-redux";
 import { createReduxStore } from "./store";
 import Routes from './routes';
-const store = createReduxStore();
+export const store = createReduxStore();
 
 const App = () => {
 
