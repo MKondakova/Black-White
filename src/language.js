@@ -63,7 +63,8 @@ export const strings = new LocalizedStrings({
    auth: 'Войти',
    submit: 'Далее',
    makeMove: ' сделал ход ',
-   playerPassed: ' спасовал '
+   playerPassed: ' спасовал ',
+   pupa: 'Картинка поиска'
  },
  en: {
   randPlay:"Play with a random opponent",
@@ -124,9 +125,10 @@ export const strings = new LocalizedStrings({
    upTitle:'Go up',
    enterAll: 'Fill in all the fields',
    register: 'Sign up',
-   auth: 'sign in',
+   auth: 'Sign in',
    submit: 'Submit',
    makeMove: ' make move ',
    playerPassed: ' passed ',
+   pupa: 'Search image'
  }
 });

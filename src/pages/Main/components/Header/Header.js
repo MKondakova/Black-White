@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import AvatarImage from "../../../../assets/img/avatar.png";
 import Pupa from "../../../../assets/img/magnifier_icon-icons.com_56922.svg";
 import { MAIN_URL, PROFILE_URL } from "../../../../constants/routes";
 import { ButtonCustom } from "../../../../components/ButtonCustom";
@@ -9,12 +8,10 @@ import { strings } from "../../../../language"
 
 const Wrapper = styled.div`
   max-width: 1300px;
-  margin: 20px auto;
+  margin: 20px 8px;
   display: flex;
   justify-content: flex-start;
-  position: absolute;
   width: 100%;
-  top: 0;
 `;
 
 const Right = styled.div`
@@ -36,7 +33,6 @@ const RightSearch = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: no-wrap;
-  cursor: pointer;
   width: 100%;
 `;
 
@@ -70,12 +66,6 @@ const Avatar = styled.img`
   width: 60px;
 
   filter: grayscale(100%);
-`;
-
-const Search = styled.img`
-  border-radius: 100px;
-  margin-left: 20px;
-  width: 115px;
 `;
 
 export const Header = ({
@@ -120,16 +110,15 @@ export const Header = ({
         </ButtonCustom>
         <Input
           onChange={(e) => setNicknameFunc(e)}
-          width="500px"
-          mr={40}
+          mr={20}
           textAlign="left"
           placeholder={strings.search}
         />
         <img src={Pupa} 
         onClick={() => {
-          history.push(MAIN_URL)
           setSearchType("")
-        }}></img>
+        }}
+        alt={strings.pupa}></img>
       </RightSearch >
     )}
   </Wrapper>

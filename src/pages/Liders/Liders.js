@@ -10,15 +10,14 @@ const Wrapper = styled.div`
   max-width: 1300px;
   margin: 0 auto;
   height: 100vh;
-  position: relative;
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  padding-top: 10%;
+  padding: 8px 0;
 `;
 
 const LidersCont = styled.div`
   width: 100%;
-  max-height: 590px;
   display: flex;
   flex-wrap: wrap;
 `;
@@ -135,11 +134,11 @@ export const Liders = ({ history }) => {
         setNicknameFunc={(val) => setNickname(val)}
       />
 
-      <a href="#" title={strings.upTitle}>
+      <a href="/#" title={strings.upTitle}>
           <img src={image} style={{position:'fixed',
               bottom:50,
               right:50
-              }} >
+              }} alt={strings.upTitle} >
           </img>
       </a>
       <LidersCont>
