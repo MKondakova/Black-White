@@ -62,6 +62,9 @@ const Place = styled.div `
 `;
 const SubName = styled.div`
   width: auto;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: bold;
   padding: 0 10px;
   font-size: 20px;
@@ -79,7 +82,6 @@ const Rating = styled.div`
     width: 100%;
     height: 0.5px;
     background: #000000;
-    position: absolute;
     left: 0;
     z-index: 0;
   }
