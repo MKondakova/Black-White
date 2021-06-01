@@ -2,7 +2,7 @@ import logger from '../helpers/logger';
 import {__DEV__ } from '../constants/env';
 
 const TIMEOUT = 20000; // 20 sec timeout
-const baseUrl = process.env.REACT_APP_PUBLIC_URL || 'https://go-backend-denis.ambersoft.llc';
+const baseUrl = process.env.REACT_APP_PUBLIC_URL || 'http://server.mindgamehack.ru';
 
 const fetchWithTimeout = (...args) => {
   // eslint-disable-next-line no-async-promise-executor

@@ -37,6 +37,7 @@ const Info = styled.div`
 const InfoPlayer = styled.div``;
 
 const Left = styled.div`
+  margin-right: 8px;
   display: flex;
   align-items: center;
 `;
@@ -65,12 +66,13 @@ const GameHistory = styled.div`
 `;
 
 const Avatar = styled.img`
-  
   border-radius: 100px;
   width: 200px;
   margin-bottom: 20px
 `;
 const Name = styled.p`
+  text-overflow: ellipsis;
+  overflow:hidden;
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
@@ -141,7 +143,7 @@ const InfoText = styled.div `
 `
 
 const GameHistoryItem = styled.div`
-  height: 120px;
+  min-height: 120px;
   width: 100%;
   color: #222233;
   border-color: #222233;
@@ -153,6 +155,8 @@ const GameHistoryItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  overflow-y: hidden;
+  overflow-x: auto;
 `;
 
 const InfoHistory = styled.div``;

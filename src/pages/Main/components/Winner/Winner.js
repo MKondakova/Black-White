@@ -11,6 +11,7 @@ const Text = styled.p`
 `;
 
 const ScoreText = styled.p`
+  white-space: nowrap;
   font-size: 36px;
   line-height: 42px;
   text-align: center;
@@ -29,6 +30,10 @@ const Info = styled.div`
 `;
 
 const Name = styled.p`
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  max-width: 50%;
   font-size: 48px;
   line-height: 56px;
   font-weight: 700;

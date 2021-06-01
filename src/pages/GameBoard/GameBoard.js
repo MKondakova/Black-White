@@ -34,6 +34,7 @@ import {
 import Loader from "react-loader-spinner";
 import Players from "./components/GameInfo/components/Players/Players";
 import { strings } from "../../language";
+import { siteUrl } from "../../constants/siteUrl.js"
 
 
 const Wrapper = styled.div`
@@ -280,7 +281,7 @@ const GameBoard = ({ history }) => {
   function get_last_moves(game_id, TOKEN) {
     let req = new XMLHttpRequest();
 
-    req.open('GET', 'https://go-backend-denis.ambersoft.llc/game/info/' + game_id.toString() + '?token=' + TOKEN, false);
+    req.open('GET', siteUrl + '/game/info/' + game_id.toString() + '?token=' + TOKEN, false);
     req.send();
     let moves = JSON.parse(JSON.parse(req.response).log);
 

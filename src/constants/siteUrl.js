@@ -1,1 +1,1 @@
-export const siteUrl = "https://go-backend-denis.ambersoft.llc"
+export const siteUrl = "http://server.mindgamehack.ru"
