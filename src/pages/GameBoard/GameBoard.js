@@ -74,18 +74,18 @@ const InfoWrapper = styled.div`
 `;
 
 const Wrap = styled.div`
-  width: 300vw;
-  height: 1000vh;
-  position: absolute;
-  left: -100vw;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
   top: 0;
   background-color: rgba(255,255,255,0.5);
   z-index: 9;
 `;
 
 const Spinner = styled.div`
-position: absolute;
-left: 145vw;
+position: fixed;
+left: 45vw;
 top: 45vh;
 z-index: 10;
 `;
