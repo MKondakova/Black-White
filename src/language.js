@@ -64,7 +64,9 @@ export const strings = new LocalizedStrings({
    submit: 'Далее',
    makeMove: ' сделал ход ',
    playerPassed: ' спасовал ',
-   pupa: 'Картинка поиска'
+   intro: "черное&белое",
+   authTitle:"Играйте в го, учитесь и взаимодействуйте с ИИ.",
+   authText:"На сайте есть три режима игры: закрытая игра, игра со случайным соперником и игра с ботом. Реализвано 7 подсказок, направленных на обучение.",
  },
  en: {
   randPlay:"Play with a random opponent",
@@ -129,6 +131,8 @@ export const strings = new LocalizedStrings({
    submit: 'Submit',
    makeMove: ' make move ',
    playerPassed: ' passed ',
-   pupa: 'Search image'
+   intro: "black&white",
+   authTitle:"Play go, learn and interact with AI.",
+   authText:"The site has three game modes: private game, game with a random opponent and game with a bot. Implemented 7 learning tips.",
  }
 });

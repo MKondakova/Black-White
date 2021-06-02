@@ -118,7 +118,7 @@ export const Header = ({
         onClick={() => {
           setSearchType("")
         }}
-        alt={strings.pupa}></img>
+        alt=""></img>
       </RightSearch >
     )}
   </Wrapper>

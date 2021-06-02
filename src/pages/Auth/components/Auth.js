@@ -8,11 +8,18 @@ import { strings } from "../../../language";
 import { regSubmit, loginSubmit } from "../../../store/Auth/actions";
 
 const Wrapper = styled.div`
+  @media (max-width: 1000px) {
+    flex-direction: column;  
+  }
+  @media (min-width: 1000px) {
+    flex-direction: row;
+  }
   height: 100vh;
   position: relative;
   padding: 230px 0;
   display: flex;
   align-items: center;
+
 `;
 
 const Container = styled.div`
@@ -43,6 +50,19 @@ const Span = styled.p`
   margin-left: 5px;
   margin-right: 5px;
 `;
+const Info = styled.div`
+  @media (max-width: 1000px) {
+    width: 80%  ;
+    margin: 0 auto 15% auto;
+  }
+  @media (min-width: 1000px) {
+    width: 40%;
+    margin: 0 auto;
+  }
+`;
+const Text = styled.p`
+  font-size: 24px;
+  margin-top:8px;`;
 
 const Auth = () => {
   const [activeTab, setActiveTab] = useState("reg");
@@ -89,6 +109,12 @@ const Auth = () => {
 
   return (
     <Wrapper>
+      <Info>
+        <h1>{strings.intro}</h1>
+        <Text>{strings.authTitle}</Text>
+        <Text>{strings.authText}
+        </Text>
+      </Info>
       <Container>
       <ButtonCustom 
             width="70px"
