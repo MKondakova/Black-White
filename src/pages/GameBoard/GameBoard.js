@@ -34,6 +34,7 @@ import {
 import Loader from "react-loader-spinner";
 import Players from "./components/GameInfo/components/Players/Players";
 import { strings } from "../../language";
+import { siteUrl } from "../../constants/siteUrl.js"
 
 
 const Wrapper = styled.div`
@@ -73,18 +74,18 @@ const InfoWrapper = styled.div`
 `;
 
 const Wrap = styled.div`
-  width: 300vw;
-  height: 1000vh;
-  position: absolute;
-  left: -100vw;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
   top: 0;
   background-color: rgba(255,255,255,0.5);
   z-index: 9;
 `;
 
 const Spinner = styled.div`
-position: absolute;
-left: 145vw;
+position: fixed;
+left: 45vw;
 top: 45vh;
 z-index: 10;
 `;
@@ -280,7 +281,7 @@ const GameBoard = ({ history }) => {
   function get_last_moves(game_id, TOKEN) {
     let req = new XMLHttpRequest();
 
-    req.open('GET', 'https://go-backend-denis.ambersoft.llc/game/info/' + game_id.toString() + '?token=' + TOKEN, false);
+    req.open('GET', siteUrl + '/game/info/' + game_id.toString() + '?token=' + TOKEN, false);
     req.send();
     let moves = JSON.parse(JSON.parse(req.response).log);
 

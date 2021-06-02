@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { strings } from "../../../../../../language";
 
 const Wrapper = styled.div`
+  max-width: 100vw;
   justify-content: center;
   display: flex;
   min-width:550px;
@@ -45,7 +46,9 @@ const AvatarRight = styled.img`
   border: ${(props) => (props.winner ? "4px solid green" : "6px solid #222233")};
 
 `;
-const Info = styled.div``;
+const Info = styled.div`
+  width:42%;
+`;
 const Name = styled.p`
   white-space: nowrap;
   overflow: hidden; 
@@ -56,6 +59,9 @@ const Name = styled.p`
 `;
 
 const NameRight = styled.p`
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis;
   z-index:2;
   color: #222233;
   font-size: 24px;
@@ -197,11 +203,11 @@ const Players = ({ yourColor, enemyPass, stepColor, you, opponent, stepMain, ste
     <Wrapper>
       <Player active={yourColor === "black"} winner={winner && (winner.winner === 'B')}>
         <Avatar alt="avatar" src={yourColor === 'black' ? you.avatar : opponent.avatar} 
-                      winner={winner && (winner.winner === 'B')} />
+                      winner={winner && (winner.winner !== 'W')} />
         <Info>
           <Name>{yourColor === 'black' ? you.nickname : opponent.nickname}</Name>
           <Pts>{yourColor === 'black' ? you.pts : opponent.pts}/{yourColor === 'black' ? you.position+'th' : opponent.position+'th'}</Pts>
-          {scores && (scores.winner === 'B') && (
+          {scores && (scores.winner !== 'B') && (
             <Scores>
               + {scores.score}
             </Scores>
