@@ -298,11 +298,13 @@ const GameBoard = ({ history }) => {
     if (typeof e.data === 'string') {
       let jsonData = JSON.parse(e.data);
       if (jsonData.payload) {
+        console.log(jsonData.payload);
         if (jsonData.payload.type === "currentMap") {
           if (jsonData.payload.player === 'b')
             window.PLAYING_COLOR = 1;
           else
             window.PLAYING_COLOR = -1;
+
           setYou(jsonData.payload.you)
           setOpponent(jsonData.payload.opponent)
         }

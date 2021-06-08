@@ -206,7 +206,7 @@ const Players = ({ yourColor, enemyPass, stepColor, you, opponent, stepMain, ste
                       winner={winner && (winner.winner !== 'W')} />
         <Info>
           <Name>{yourColor === 'black' ? you.nickname : opponent.nickname}</Name>
-          <Pts>{yourColor === 'black' ? you.pts : opponent.pts}/{yourColor === 'black' ? you.position+'th' : opponent.position+'th'}</Pts>
+          <Pts></Pts>
           {scores && (scores.winner !== 'B') && (
             <Scores>
               + {scores.score}
@@ -221,7 +221,7 @@ const Players = ({ yourColor, enemyPass, stepColor, you, opponent, stepMain, ste
       <PlayerRight active={yourColor === "white"} winner={winner && (winner.winner === 'W')}>
         <Info>
           <NameRight>{yourColor !== 'white' ? opponent.nickname : you.nickname}</NameRight>
-          <PtsRight>{yourColor !== 'white' ? opponent.pts : you.pts}/{yourColor !== 'white' ? opponent.position+'th' : you.position+'th'}</PtsRight>
+          <PtsRight></PtsRight>
           {scores && (scores.winner === 'W') && (
             <Scores>
               + {scores.score}
