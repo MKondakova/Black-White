@@ -136,7 +136,7 @@ export const Liders = ({ history }) => {
         setNicknameFunc={(val) => setNickname(val)}
       />
 
-      <a href="/#" title={strings.upTitle}>
+      <a href="#" title={strings.upTitle}>
           <img src={image} style={{position:'fixed',
               bottom:50,
               right:50
