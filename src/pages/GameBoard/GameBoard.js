@@ -354,9 +354,10 @@ const GameBoard = ({ history }) => {
           }
         }
         if (jsonData.payload.turnBlackEndedAt && jsonData.payload.turnWhiteEndedAt) {
+
           setTimes({
-            playerOne: Math.floor((Number(jsonData.payload.turnBlackEndedAt) - new Date().getTime()) / 1000),
-            playerTwo: Math.floor((Number(jsonData.payload.turnWhiteEndedAt) - new Date().getTime()) / 1000)
+            playerOne: Math.floor((Number(jsonData.payload.turnBlackEndedAt) -  jsonData.time) / 1000),
+            playerTwo: Math.floor((Number(jsonData.payload.turnWhiteEndedAt) -  jsonData.time) / 1000)
           })
         }
       }
